@@ -23,21 +23,26 @@ public class Usuario extends Persona implements Serializable {
     @JoinColumn(nullable = false)
     private  Ciudad ciudadUsuario;
 
+    //Relacion inversa entre usuario y comentario
     @OneToMany(mappedBy = "usuarioComentario")
     private List<Comentario>listaComentarios;
 
     @OneToMany(mappedBy = "usuarioSubasta")
     private List<SubastaUsuario>listaSubastasUsuarios;
 
-    @OneToMany(mappedBy = "usuarioProducto")
+    //Relacion inversa de la venta de un producto
+    @OneToMany(mappedBy = "usuarioVendedor")
     private List<Producto>listaProductos;
 
+    //Relacion inversi de compras de un producto
     @OneToMany(mappedBy = "UsuarioCompra")
     private  List<Compra>listaCompras;
 
+    //relacion inversa producto favorito
     @ManyToMany
     private List<Producto>listaProductoFavorito;
 
+    //Relacion inversa chat comprador
     @OneToMany(mappedBy = "usuarioComprador")
     private List<Chat>ListChatComprador;
 

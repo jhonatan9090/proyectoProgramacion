@@ -30,10 +30,12 @@ public class Subasta implements Serializable {
     @Column(nullable = false)
     private LocalDate fechaLimite;
 
+    //Relacion entre subasta y producto
     @ManyToOne
     @JoinColumn(nullable = false)
-    private  Subasta subastaProducto;
+    private  Producto subastaProducto;
 
+    //Relacion inversa de lista de usarios que sabastaran
     @OneToMany(mappedBy = "subastaUsuario")
     private List<SubastaUsuario>listaSubastaUsuarios;
 
@@ -41,7 +43,7 @@ public class Subasta implements Serializable {
     super();
     }
 
-    public Subasta(@Future LocalDate fechaLimite, Subasta subastaProducto, List<SubastaUsuario> listaSubastaUsuarios) {
+    public Subasta(@Future LocalDate fechaLimite, Producto subastaProducto, List<SubastaUsuario> listaSubastaUsuarios) {
         this.fechaLimite = fechaLimite;
         this.subastaProducto = subastaProducto;
         this.listaSubastaUsuarios = listaSubastaUsuarios;

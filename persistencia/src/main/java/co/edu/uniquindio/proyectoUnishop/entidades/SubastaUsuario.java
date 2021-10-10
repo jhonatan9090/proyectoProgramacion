@@ -23,10 +23,12 @@ public class SubastaUsuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer codSubastaUsuario;
 
+    //atributo que dicta el valor del producto
     @Positive
     @Column(nullable = false)
     private Double valor;
 
+    //atributo de la fecha de subasta del producto
     @Future
     @Column(nullable = false)
     private LocalDateTime fechaSubasta;
@@ -35,6 +37,7 @@ public class SubastaUsuario implements Serializable {
     @JoinColumn(nullable = false)
     private Usuario usuarioSubasta;
 
+    //Relacion de usarios que subastaran
     @ManyToOne
     @JoinColumn(nullable = false)
     private Subasta subastaUsuario;

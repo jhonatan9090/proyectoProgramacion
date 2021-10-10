@@ -19,7 +19,7 @@ public class Chat  implements Serializable {
     @EqualsAndHashCode.Include
     private String codChat;
 
-
+    //Relacion usurario comprador
     @ManyToOne
     @JoinColumn(nullable = false)
     private Usuario usuarioComprador;
@@ -28,6 +28,13 @@ public class Chat  implements Serializable {
     private List<Mensajes>listaMensajes;
 
 
+    @ManyToOne
+    private Producto chatProductoCompra;
+
+    public  Chat(){
+
+        super();
+    }
     public Chat(Usuario usuarioComprador, List<Mensajes> listaMensajes) {
         this.usuarioComprador = usuarioComprador;
         this.listaMensajes = listaMensajes;

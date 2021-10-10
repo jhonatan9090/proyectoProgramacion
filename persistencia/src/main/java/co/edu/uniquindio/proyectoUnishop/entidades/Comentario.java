@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 import javax.persistence.*;
 import javax.validation.constraints.Future;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -34,13 +35,16 @@ public class Comentario implements Serializable {
     private LocalDateTime fechaComentario;
 
     @Positive
+    @Max(5)
     @Column(nullable = false)
     private Integer calificacion;
 
+    //Relacion de comentarios y usuario
     @ManyToOne
     @JoinColumn(nullable = false)
     private Usuario usuarioComentario;
 
+    //Relacion del comentario sobre un producto
     @ManyToOne
     @JoinColumn(nullable = false)
     private Producto comentarioProducto;
@@ -51,7 +55,8 @@ public class Comentario implements Serializable {
     }
 
 
-    public Comentario(String mensaje, String respuesta, @Future LocalDateTime fechaComentario, @Positive Integer calificacion, Usuario usuarioComentario, Producto comentarioProducto) {
+    public Comentario(String mensaje, String respuesta, @Future LocalDateTime fechaComentario, @Positive Integer calificacion
+            , Usuario usuarioComentario, Producto comentarioProducto) {
         this.mensaje = mensaje;
         this.respuesta = respuesta;
         this.fechaComentario = fechaComentario;

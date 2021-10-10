@@ -29,6 +29,7 @@ public class Compra implements Serializable {
     @Column(length = 80,nullable = false)
     private String medioPago;
 
+    //Relacion compra de un producto
     @ManyToOne
     @JoinColumn(nullable = false)
     private Usuario UsuarioCompra;

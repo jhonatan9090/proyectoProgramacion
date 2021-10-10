@@ -23,7 +23,7 @@ public class Categoria implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer codCategoria;
 
-    @Column(length = 30,nullable = false)
+    @Column(length = 30,nullable = false,unique = true)
     private String nombre;
 
     @ManyToMany(mappedBy = "listaCategoria")

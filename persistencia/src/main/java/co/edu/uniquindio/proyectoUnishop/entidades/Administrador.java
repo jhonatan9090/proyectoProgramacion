@@ -7,22 +7,16 @@ import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import java.io.Serializable;
 import java.util.Map;
 
 
 @Entity
 @Getter @Setter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 public class Administrador extends Persona implements Serializable {
 
 
-    @Id
-    @EqualsAndHashCode.Include
-    String codigoAdmin;
 
 
 
@@ -32,8 +26,7 @@ public class Administrador extends Persona implements Serializable {
 
     }
 
-
-    public Administrador(String codigoAdmin) {
-        this.codigoAdmin = codigoAdmin;
+    public Administrador(String codPersona, String nombre, String email, String password, Map<String, String> telefono) {
+        super(codPersona, nombre, email, password, telefono);
     }
 }
