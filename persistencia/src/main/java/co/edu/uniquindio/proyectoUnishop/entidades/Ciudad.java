@@ -21,7 +21,7 @@ public class Ciudad implements Serializable {
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer codCiudad;
-
+    //nombre de la ciudad
     @Column(length = 80,nullable = false)
     private String nombre;
 

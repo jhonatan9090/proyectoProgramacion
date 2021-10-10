@@ -13,10 +13,8 @@ import java.util.Map;
 @Getter @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 @MappedSuperclass
-
 public class Persona implements Serializable {
 
     @Id

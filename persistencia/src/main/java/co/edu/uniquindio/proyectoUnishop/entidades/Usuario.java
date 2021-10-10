@@ -13,14 +13,12 @@ import java.util.Map;
 
 @Entity
 @Getter @Setter
-@ToString
-
 public class Usuario extends Persona implements Serializable {
 
 
-
+    //ciudad del usuario
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(nullable = true)
     private  Ciudad ciudadUsuario;
 
     //Relacion inversa entre usuario y comentario
@@ -60,5 +58,10 @@ public class Usuario extends Persona implements Serializable {
         this.listaCompras = listaCompras;
         this.listaProductoFavorito = listaProductoFavorito;
         ListChatComprador = listChatComprador;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString()+", ciudad=" + ciudadUsuario;
     }
 }
