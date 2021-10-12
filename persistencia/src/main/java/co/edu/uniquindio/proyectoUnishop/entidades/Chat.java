@@ -17,7 +17,8 @@ public class Chat  implements Serializable {
 
     @Id
     @EqualsAndHashCode.Include
-    private String codChat;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer codChat;
 
     //Relacion usurario comprador
     @ManyToOne
@@ -35,8 +36,9 @@ public class Chat  implements Serializable {
 
         super();
     }
-    public Chat(Usuario usuarioComprador, List<Mensajes> listaMensajes) {
+
+    public Chat(Usuario usuarioComprador, Producto chatProductoCompra) {
         this.usuarioComprador = usuarioComprador;
-        this.listaMensajes = listaMensajes;
+        this.chatProductoCompra = chatProductoCompra;
     }
 }
