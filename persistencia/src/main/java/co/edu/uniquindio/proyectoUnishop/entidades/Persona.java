@@ -1,9 +1,6 @@
 package co.edu.uniquindio.proyectoUnishop.entidades;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,6 +12,7 @@ import java.util.Map;
 @ToString
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 @MappedSuperclass
+@AllArgsConstructor
 public class Persona implements Serializable {
 
     @Id
@@ -35,13 +33,7 @@ public class Persona implements Serializable {
     super();
     }
 
-    public Persona(String codPersona, String nombre, String email, String password, Map<String, String> telefono) {
-        this.codPersona = codPersona;
-        this.nombre = nombre;
-        this.email = email;
-        this.password = password;
-        this.telefono = telefono;
-    }
+
 
 
 }

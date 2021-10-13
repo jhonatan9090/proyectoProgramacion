@@ -18,7 +18,7 @@ public class Usuario extends Persona implements Serializable {
 
     //ciudad del usuario
     @ManyToOne
-    @JoinColumn(nullable = true)
+    @JoinColumn(nullable = false)
     private  Ciudad ciudadUsuario;
 
     //Relacion inversa entre usuario y comentario
@@ -49,7 +49,7 @@ public class Usuario extends Persona implements Serializable {
     }
 
 
-    public Usuario(String codPersona, String nombre, String email, String password, Map<String, String> telefono, Ciudad ciudadUsuario, List<Comentario> listaComentarios, List<SubastaUsuario> listaSubastasUsuarios, List<Producto> listaProductos, List<Compra> listaCompras, List<Producto> listaProductoFavorito, List<Chat> listChatComprador) {
+    public Usuario(String codPersona, String nombre, String email, String password, Map<String, String> telefono, Ciudad ciudadUsuario) {
         super(codPersona, nombre, email, password, telefono);
         this.ciudadUsuario = ciudadUsuario;
         this.listaComentarios = listaComentarios;
@@ -57,7 +57,7 @@ public class Usuario extends Persona implements Serializable {
         this.listaProductos = listaProductos;
         this.listaCompras = listaCompras;
         this.listaProductoFavorito = listaProductoFavorito;
-        ListChatComprador = listChatComprador;
+
     }
 
     @Override

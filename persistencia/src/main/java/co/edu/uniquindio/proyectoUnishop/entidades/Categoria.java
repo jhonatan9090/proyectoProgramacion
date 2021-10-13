@@ -34,8 +34,8 @@ public class Categoria implements Serializable {
 
     }
 
-    public Categoria(String nombre, List<Producto> listaProductosCategorias) {
+    public Categoria(String nombre) {
         this.nombre = nombre;
-        this.listaProductosCategorias = listaProductosCategorias;
+
     }
 }

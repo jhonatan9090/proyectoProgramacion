@@ -42,7 +42,7 @@ public class Compra implements Serializable {
     }
 
 
-    public Compra(@Future LocalDateTime fechaPago, String medioPago, Usuario usuarioCompra, List<DetalleCompra> listaDetalleCompra) {
+    public Compra(@Future LocalDateTime fechaPago, String medioPago, Usuario usuarioCompra) {
         this.fechaPago = fechaPago;
         this.medioPago = medioPago;
         UsuarioCompra = usuarioCompra;

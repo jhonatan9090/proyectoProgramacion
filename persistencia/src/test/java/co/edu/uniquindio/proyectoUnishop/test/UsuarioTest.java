@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyectoUnishop.test;
 
 import co.edu.uniquindio.proyectoUnishop.entidades.Ciudad;
 import co.edu.uniquindio.proyectoUnishop.entidades.Usuario;
+import co.edu.uniquindio.proyectoUnishop.repositorios.CiudadRepo;
 import co.edu.uniquindio.proyectoUnishop.repositorios.UsuarioRepo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -21,22 +22,22 @@ public class UsuarioTest {
 
     @Autowired    //instancia variables componentes de springboot
     private UsuarioRepo miUsuarioRepo;
+    @Autowired
+    private CiudadRepo miCiudadRepo;
+
 
     //metodo para registrar un usuario
     @Test
     public void registroUsuarioTest(){
 
-        Ciudad ciudad1=new Ciudad();
-        ciudad1.setNombre("Armenia");
+        Ciudad ciudad1=new Ciudad("armenia");
+        miCiudadRepo.save(ciudad1);
 
-        Usuario usuario1=new Usuario();
-        usuario1.setCodPersona("111");
-        usuario1.setNombre("Luisa perez");
-        usuario1.setEmail("luisaPe@");
-        usuario1.setPassword("12345");
+
         Map<String,String>telefonos=new HashMap<>();
         telefonos.put("casa","321414");
         telefonos.put("celular","321452514");
+        Usuario usuario1=new Usuario("111","Luisa Perez","luisaPe@","12345",telefonos,ciudad1);
         usuario1.setTelefono(telefonos);
         usuario1.setCiudadUsuario(ciudad1);
         Usuario usuarioGuardado=miUsuarioRepo.save(usuario1);
@@ -48,20 +49,19 @@ public class UsuarioTest {
     @Test
     public void eliminarUsuario(){
 
-        Ciudad ciudad1=new Ciudad();
-        ciudad1.setNombre("Armenia");
+        Ciudad ciudad1=new Ciudad("armenia");
+        miCiudadRepo.save(ciudad1);
 
-        Usuario usuario1=new Usuario();
-        usuario1.setCodPersona("111");
-        usuario1.setNombre("Luisa perez");
-        usuario1.setEmail("luisaPe@");
-        usuario1.setPassword("12345");
+
         Map<String,String>telefonos=new HashMap<>();
         telefonos.put("casa","321414");
         telefonos.put("celular","321452514");
+        Usuario usuario1=new Usuario("111","Luisa Perez","luisaPe@","12345",telefonos,ciudad1);
         usuario1.setTelefono(telefonos);
         usuario1.setCiudadUsuario(ciudad1);
-        miUsuarioRepo.save(usuario1);
+        Usuario usuarioGuardado=miUsuarioRepo.save(usuario1);
+        Assertions.assertNotNull(usuarioGuardado);
+
 
         miUsuarioRepo.deleteById("111");
 
@@ -75,19 +75,20 @@ public class UsuarioTest {
     public void actualizarUsuario(){
 
     //se guarda usuario
-        Ciudad ciudad1=new Ciudad();
-        ciudad1.setNombre("Armenia");
-        Usuario usuario1=new Usuario();
-        usuario1.setCodPersona("111");
-        usuario1.setNombre("Luisa perez");
-        usuario1.setEmail("luisaPe@");
-        usuario1.setPassword("12345");
+
+        Ciudad ciudad1=new Ciudad("armenia");
+        miCiudadRepo.save(ciudad1);
+
+
         Map<String,String>telefonos=new HashMap<>();
         telefonos.put("casa","321414");
         telefonos.put("celular","321452514");
+        Usuario usuario1=new Usuario("111","Luisa Perez","luisaPe@","12345",telefonos,ciudad1);
         usuario1.setTelefono(telefonos);
         usuario1.setCiudadUsuario(ciudad1);
         Usuario usuarioGuardado=miUsuarioRepo.save(usuario1);
+        Assertions.assertNotNull(usuarioGuardado);
+
         //se modifiaca el dato a cambiar
         usuarioGuardado.setNombre("Claudia perez");
         //se vuelve a gurdar
@@ -101,19 +102,20 @@ public class UsuarioTest {
     @Test
     public void listarUsuariosTes(){
 
-        //Ciudad ciudad1=new Ciudad();
-        //ciudad1.setNombre("Armenia");
-        Usuario usuario1=new Usuario();
-        usuario1.setCodPersona("111");
-        usuario1.setNombre("Luisa perez");
-        usuario1.setEmail("luisaPe@");
-        usuario1.setPassword("12345");
+
+        Ciudad ciudad1=new Ciudad("armenia");
+        miCiudadRepo.save(ciudad1);
+
+
         Map<String,String>telefonos=new HashMap<>();
         telefonos.put("casa","321414");
         telefonos.put("celular","321452514");
+        Usuario usuario1=new Usuario("111","Luisa Perez","luisaPe@","12345",telefonos,ciudad1);
         usuario1.setTelefono(telefonos);
-        //usuario1.setCiudadUsuario(ciudad1);
-        miUsuarioRepo.save(usuario1);
+        usuario1.setCiudadUsuario(ciudad1);
+        Usuario usuarioGuardado=miUsuarioRepo.save(usuario1);
+        Assertions.assertNotNull(usuarioGuardado);
+
         List<Usuario>listaUsuarios=miUsuarioRepo.findAll();
         System.out.println(listaUsuarios);
 

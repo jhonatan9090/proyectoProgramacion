@@ -35,9 +35,8 @@ public class Ciudad implements Serializable {
     super();
     }
 
-    public Ciudad(String nombre, List<Usuario> listaUsuarios, List<Producto> listaProductos) {
+    public Ciudad(String nombre) {
         this.nombre = nombre;
-        this.listaUsuarios = listaUsuarios;
-        this.listaProductos = listaProductos;
+
     }
 }

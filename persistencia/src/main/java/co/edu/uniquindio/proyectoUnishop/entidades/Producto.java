@@ -94,8 +94,7 @@ public class Producto implements Serializable {
     }
 
 
-    public Producto(String nombre, @Positive Integer unidades, String descripcion, @Positive Double precio, @Future LocalDate fechaLimite, @Positive Double descuento, List<String> imagenes, Usuario usuarioProducto, Ciudad ciudadProducto, List<Subasta> listaSubasta, List<DetalleCompra> listaDetalles,
-                    List<Comentario> listaComentariosProductos, List<Usuario> listaUsuariosProductosFavoritos, List<Categoria> listaCategoria) {
+    public Producto(String nombre, @Positive Integer unidades, String descripcion, @Positive Double precio, @Future LocalDate fechaLimite, @Positive Double descuento, List<String> imagenes, Usuario usuarioProducto, Ciudad ciudadProducto            ) {
         this.nombre = nombre;
         this.unidades = unidades;
         this.descripcion = descripcion;
@@ -105,10 +104,6 @@ public class Producto implements Serializable {
         this.imagenes = imagenes;
         this.usuarioVendedor = usuarioProducto;
         this.ciudadProducto = ciudadProducto;
-        this.listaSubasta = listaSubasta;
-        this.listaDetalles = listaDetalles;
-        ListaComentariosProductos = listaComentariosProductos;
-        this.listaUsuariosProductosFavoritos = listaUsuariosProductosFavoritos;
-        this.listaCategoria = listaCategoria;
+
     }
 }
