@@ -94,7 +94,7 @@ public class Producto implements Serializable {
     }
 
 
-    public Producto(String nombre, @Positive Integer unidades, String descripcion, @Positive Double precio, @Future LocalDate fechaLimite, @Positive Double descuento, List<String> imagenes, Usuario usuarioProducto, Ciudad ciudadProducto            ) {
+    public Producto(String nombre, @Positive Integer unidades, String descripcion, @Positive Double precio, @Future LocalDate fechaLimite, @Positive Double descuento, List<String> imagenes, Usuario usuarioProducto, Ciudad ciudadProducto) {
         this.nombre = nombre;
         this.unidades = unidades;
         this.descripcion = descripcion;

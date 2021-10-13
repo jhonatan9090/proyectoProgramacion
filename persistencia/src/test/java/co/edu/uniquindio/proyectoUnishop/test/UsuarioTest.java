@@ -34,6 +34,7 @@ public class UsuarioTest {
         miCiudadRepo.save(ciudad1);
 
 
+
         Map<String,String>telefonos=new HashMap<>();
         telefonos.put("casa","321414");
         telefonos.put("celular","321452514");
@@ -47,7 +48,7 @@ public class UsuarioTest {
 
     //metodo que elimina un usuario
     @Test
-    public void eliminarUsuario(){
+    public void eliminarUsuarioTest(){
 
         Ciudad ciudad1=new Ciudad("armenia");
         miCiudadRepo.save(ciudad1);
@@ -72,7 +73,7 @@ public class UsuarioTest {
 
     //metodo que actualiza un usario
     @Test
-    public void actualizarUsuario(){
+    public void actualizarUsuarioTest(){
 
     //se guarda usuario
 
@@ -100,7 +101,7 @@ public class UsuarioTest {
     }
     //metodo que busca los usarios
     @Test
-    public void listarUsuariosTes(){
+    public void listarUsuariosTest(){
 
 
         Ciudad ciudad1=new Ciudad("armenia");

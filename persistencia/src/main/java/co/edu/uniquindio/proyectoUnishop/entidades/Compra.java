@@ -46,6 +46,6 @@ public class Compra implements Serializable {
         this.fechaPago = fechaPago;
         this.medioPago = medioPago;
         UsuarioCompra = usuarioCompra;
-        this.listaDetalleCompra = listaDetalleCompra;
+
     }
 }
