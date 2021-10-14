@@ -7,7 +7,7 @@ import lombok.ToString;
 import javax.persistence.*;
 import javax.validation.constraints.Future;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -22,9 +22,8 @@ public class Compra implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer codCompra;
 
-    @Future
     @Column(nullable = false,columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime fechaPago;
+    private @Future LocalDate fechaPago;
 
     @Column(length = 80,nullable = false)
     private String medioPago;
@@ -41,11 +40,11 @@ public class Compra implements Serializable {
     super();
     }
 
-
-    public Compra(@Future LocalDateTime fechaPago, String medioPago, Usuario usuarioCompra) {
+    public Compra(@Future LocalDate fechaPago, String medioPago, Usuario usuarioCompra) {
+        this.codCompra = codCompra;
         this.fechaPago = fechaPago;
         this.medioPago = medioPago;
         UsuarioCompra = usuarioCompra;
-
+        this.listaDetalleCompra = listaDetalleCompra;
     }
 }

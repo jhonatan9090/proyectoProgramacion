@@ -9,8 +9,7 @@ import javax.validation.constraints.Future;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Positive;
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.List;
+import java.time.LocalDate;
 
 
 @Entity
@@ -30,9 +29,8 @@ public class Comentario implements Serializable {
     @Column(length = 200)
     private String respuesta;
 
-    @Future
     @Column(nullable = false,columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime fechaComentario;
+    private @Future LocalDate fechaComentario;
 
     @Positive
     @Max(5)
@@ -55,7 +53,7 @@ public class Comentario implements Serializable {
     }
 
 
-    public Comentario(String mensaje, String respuesta, @Future LocalDateTime fechaComentario, @Positive Integer calificacion
+    public Comentario(String mensaje, String respuesta, @Future LocalDate fechaComentario, @Positive Integer calificacion
             , Usuario usuarioComentario, Producto comentarioProducto) {
         this.mensaje = mensaje;
         this.respuesta = respuesta;

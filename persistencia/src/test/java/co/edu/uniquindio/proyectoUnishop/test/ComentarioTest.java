@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import javax.validation.constraints.Future;
+import javax.validation.constraints.Positive;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -19,12 +21,10 @@ import java.util.Map;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 
-
-
-public class MensajesRepoTest {
+public class ComentarioTest {
 
     @Autowired
-    private ChatRepo miChatRepo;
+    private ComentarioRepo miComentarioRepo;
 
     @Autowired
     private ProductoRepo miProductoRepo;
@@ -36,11 +36,8 @@ public class MensajesRepoTest {
 
     private CiudadRepo miCiudadRepo;
 
-    @Autowired
-    private MensajesRepo miMensajesRepo;
-
     @Test
-    public void crearMensajeTest(){
+    public void crearComentarioTest(){
 
         Ciudad miCiudad = new Ciudad("Cali");
         miCiudadRepo.save(miCiudad);
@@ -62,34 +59,17 @@ public class MensajesRepoTest {
         Producto productoVender = miProductoRepo.save(miProducto);
 
 
-        //comprador producto
-        Ciudad miCiudad2 = new Ciudad("armenia");
-        miCiudadRepo.save(miCiudad2);
+        Comentario comentario = new Comentario("disponible?","yes", LocalDate.of(2022,6,25), 3
+                , usuario1, miProducto);
 
-        Map<String, String> telefonos2 = new HashMap<>();
-        telefonos2.put("casa", "32140014");
-        telefonos2.put("celular", "32100452514");
-        Usuario usuario2 = new Usuario("222", "carlos velez", "jiji@", "123485", telefonos2, miCiudad);
-        usuario2.setTelefono(telefonos2);
-        usuario2.setCiudadUsuario(miCiudad);
-
-        Usuario comprador = miUsuarioRepo.save(usuario2);
-
-
-        Chat miChat = new Chat(comprador, productoVender);
-        Chat miChatGuardado=miChatRepo.save(miChat);
-
-
-        Mensajes miMensajes=new Mensajes("hola","andres perez", LocalDateTime.now(),miChatGuardado);
-
-        Mensajes mensajeGuardado=miMensajesRepo.save(miMensajes);
-        Assertions.assertNotNull(mensajeGuardado);
+        Comentario comentarioGuardado=miComentarioRepo.save(comentario);
+        Assertions.assertNotNull(comentarioGuardado);
 
 
     }
 
     @Test
-    public void eliminarMensajeTest(){
+    public void eliminarComentarioTest(){
 
         Ciudad miCiudad = new Ciudad("Cali");
         miCiudadRepo.save(miCiudad);
@@ -110,39 +90,20 @@ public class MensajesRepoTest {
         Producto miProducto = new Producto("play 5", 10, "es bueno", 12.02, LocalDate.of(2022,6,25), 5.5, imagenes, usuario, miCiudad);
         Producto productoVender = miProductoRepo.save(miProducto);
 
+        Comentario comentario = new Comentario("disponible?","yes", LocalDate.of(2022,6,25), 3
+                , usuario1, miProducto);
 
-        //comprador producto
-        Ciudad miCiudad2 = new Ciudad("armenia");
-        miCiudadRepo.save(miCiudad2);
+        Comentario comentarioGuardado=miComentarioRepo.save(comentario);
 
-        Map<String, String> telefonos2 = new HashMap<>();
-        telefonos2.put("casa", "32140014");
-        telefonos2.put("celular", "32100452514");
-        Usuario usuario2 = new Usuario("222", "carlos velez", "jiji@", "123485", telefonos2, miCiudad);
-        usuario2.setTelefono(telefonos2);
-        usuario2.setCiudadUsuario(miCiudad);
-
-        Usuario comprador = miUsuarioRepo.save(usuario2);
-
-        //chat creado
-        Chat miChat = new Chat(comprador, productoVender);
-        Chat miChatGuardado=miChatRepo.save(miChat);
-        //mensaje creado
-        Mensajes miMensajes=new Mensajes("hola","andres perez", LocalDateTime.now(),miChatGuardado);
-        //eliminar mensaje
-        Mensajes mensajeGuardado=miMensajesRepo.save(miMensajes);
-        miMensajesRepo.delete(mensajeGuardado);
-        Mensajes mensajeBuscado=miMensajesRepo.findById(1).orElse(null);
-        Assertions.assertNull(mensajeBuscado);
-
+        miComentarioRepo.delete(comentarioGuardado);
+        Comentario comentarioBuscado=miComentarioRepo.findById(1).orElse(null);
+        Assertions.assertNull(comentarioBuscado);
 
     }
 
 
     @Test
-    public void actualizarMensajeTest(){
-
-
+    public void actualizarComentarioTest(){
         Ciudad miCiudad = new Ciudad("Cali");
         miCiudadRepo.save(miCiudad);
 
@@ -162,40 +123,20 @@ public class MensajesRepoTest {
         Producto miProducto = new Producto("play 5", 10, "es bueno", 12.02, LocalDate.of(2022,6,25), 5.5, imagenes, usuario, miCiudad);
         Producto productoVender = miProductoRepo.save(miProducto);
 
+        Comentario comentario = new Comentario("disponible?","yes", LocalDate.of(2022,6,25), 3
+                , usuario1, miProducto);
 
-        //comprador producto
-        Ciudad miCiudad2 = new Ciudad("armenia");
-        miCiudadRepo.save(miCiudad2);
+        Comentario comentarioGuardado=miComentarioRepo.save(comentario);
 
-        Map<String, String> telefonos2 = new HashMap<>();
-        telefonos2.put("casa", "32140014");
-        telefonos2.put("celular", "32100452514");
-        Usuario usuario2 = new Usuario("222", "carlos velez", "jiji@", "123485", telefonos2, miCiudad);
-        usuario2.setTelefono(telefonos2);
-        usuario2.setCiudadUsuario(miCiudad);
+        comentarioGuardado.setRespuesta("No");
+        Comentario comentarioBuscado = miComentarioRepo.save(comentarioGuardado);
 
-        Usuario comprador = miUsuarioRepo.save(usuario2);
-
-
-        Chat miChat = new Chat(comprador, productoVender);
-        Chat miChatGuardado=miChatRepo.save(miChat);
-
-
-        Mensajes miMensajes=new Mensajes("hola","andres perez", LocalDateTime.now(),miChatGuardado);
-
-        Mensajes mensajeGuardado=miMensajesRepo.save(miMensajes);
-
-        mensajeGuardado.setEmisor("jhonatan uribe");
-        miMensajesRepo.save(mensajeGuardado);
-
-        //se busca el mensaje
-        Mensajes mesajeBuscado=miMensajesRepo.findById(1).orElse(null);
-        Assertions.assertEquals("jhonatan uribe",mesajeBuscado.getEmisor());
+        Assertions.assertEquals("No", comentarioBuscado.getRespuesta());
 
     }
 
     @Test
-    public void listarMensajeTest(){
+    public void listarComentariosTest(){
 
 
         Ciudad miCiudad = new Ciudad("Cali");
@@ -217,33 +158,15 @@ public class MensajesRepoTest {
         Producto miProducto = new Producto("play 5", 10, "es bueno", 12.02, LocalDate.of(2022,6,25), 5.5, imagenes, usuario, miCiudad);
         Producto productoVender = miProductoRepo.save(miProducto);
 
+        Comentario comentario = new Comentario("disponible?","yes", LocalDate.of(2022,6,25), 3
+                , usuario1, miProducto);
 
-        //comprador producto
-        Ciudad miCiudad2 = new Ciudad("armenia");
-        miCiudadRepo.save(miCiudad2);
+        Comentario comentarioGuardado=miComentarioRepo.save(comentario);
 
-        Map<String, String> telefonos2 = new HashMap<>();
-        telefonos2.put("casa", "32140014");
-        telefonos2.put("celular", "32100452514");
-        Usuario usuario2 = new Usuario("222", "carlos velez", "jiji@", "123485", telefonos2, miCiudad);
-        usuario2.setTelefono(telefonos2);
-        usuario2.setCiudadUsuario(miCiudad);
+        List<Comentario>listaComentarios=miComentarioRepo.findAll();
 
-        Usuario comprador = miUsuarioRepo.save(usuario2);
-
-
-        Chat miChat = new Chat(comprador, productoVender);
-        Chat miChatGuardado=miChatRepo.save(miChat);
-
-
-        Mensajes miMensajes=new Mensajes("hola","andres perez", LocalDateTime.now(),miChatGuardado);
-        Mensajes mensajeGuardado=miMensajesRepo.save(miMensajes);
-
-
-        List<Mensajes>listaMensajes=miMensajesRepo.findAll();
-
-        for (Mensajes misMensajes : listaMensajes) {
-            System.out.println(misMensajes);
+        for (Comentario misComentarios : listaComentarios) {
+            System.out.println(misComentarios);
         }
     }
 }
