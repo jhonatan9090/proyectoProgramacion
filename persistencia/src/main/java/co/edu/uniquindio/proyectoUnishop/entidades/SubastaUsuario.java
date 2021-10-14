@@ -29,7 +29,7 @@ public class SubastaUsuario implements Serializable {
     private Double valor;
 
     //atributo de la fecha de subasta del producto
-    @Future
+   // @Future
     @Column(nullable = false)
     private LocalDateTime fechaSubasta;
 
@@ -47,7 +47,7 @@ public class SubastaUsuario implements Serializable {
 
     }
 
-    public SubastaUsuario(@Positive Double valor, @Future LocalDateTime fechaSubasta, Usuario usuarioSubasta, Subasta subastaUsuario) {
+    public SubastaUsuario(@Positive Double valor, LocalDateTime fechaSubasta, Usuario usuarioSubasta, Subasta subastaUsuario) {
         this.valor = valor;
         this.fechaSubasta = fechaSubasta;
         this.usuarioSubasta = usuarioSubasta;

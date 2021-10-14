@@ -52,11 +52,6 @@ public class Usuario extends Persona implements Serializable {
     public Usuario(String codPersona, String nombre, String email, String password, Map<String, String> telefono, Ciudad ciudadUsuario) {
         super(codPersona, nombre, email, password, telefono);
         this.ciudadUsuario = ciudadUsuario;
-        this.listaComentarios = listaComentarios;
-        this.listaSubastasUsuarios = listaSubastasUsuarios;
-        this.listaProductos = listaProductos;
-        this.listaCompras = listaCompras;
-        this.listaProductoFavorito = listaProductoFavorito;
 
     }
 

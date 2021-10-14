@@ -18,14 +18,14 @@ public class CiudadRepoTest {
     @Autowired
     private CiudadRepo miCiudad;
     @Test
-    public void CrearCiudad(){
+    public void CrearCiudadTest(){
         Ciudad ciudad1 = new Ciudad("Armenia");
         Ciudad guardarCiudad = miCiudad.save(ciudad1);
         Assertions.assertNotNull(guardarCiudad);
     }
 
     @Test
-    public void EliminarCiudad(){
+    public void EliminarCiudadTest(){
         Ciudad ciudad1 = new Ciudad("Armenia");
         Ciudad guardarCiudad = miCiudad.save(ciudad1);
         miCiudad.delete(guardarCiudad);
@@ -34,7 +34,7 @@ public class CiudadRepoTest {
     }
 
     @Test
-    public void ActualizarCiudad(){
+    public void ActualizarCiudadTest(){
         Ciudad ciudad1 = new Ciudad("Armenia");
         Ciudad guardarCiudad = miCiudad.save(ciudad1);
         guardarCiudad.setNombre("Calarca");
@@ -45,7 +45,7 @@ public class CiudadRepoTest {
     }
 
     @Test
-    public void ListarCiudad(){
+    public void ListarCiudadTest(){
         Ciudad ciudad1 = new Ciudad("Armenia");
         miCiudad.save(ciudad1);
         List<Ciudad> listaCiudad = miCiudad.findAll();

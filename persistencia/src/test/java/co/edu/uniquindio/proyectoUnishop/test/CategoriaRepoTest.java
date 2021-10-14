@@ -18,14 +18,14 @@ public class CategoriaRepoTest {
     @Autowired
     private CategoriaRepo miCategoria;
     @Test
-    public void CrearCatergoria( ){
+    public void CrearCatergoriaTest( ){
         Categoria categoria1 = new Categoria("Electrodomestico");
         Categoria guardarCategoria = miCategoria.save(categoria1);
         Assertions.assertNotNull(guardarCategoria);
 
     }
     @Test
-    public void  EliminarCategoria(){
+    public void  EliminarCategoriaTest(){
         Categoria categoria1 = new Categoria("Electrodomestico");
         Categoria guardarCategoria = miCategoria.save(categoria1);
         miCategoria.delete(guardarCategoria);
@@ -34,7 +34,7 @@ public class CategoriaRepoTest {
 
     }
     @Test
-    public void ActualizarCategoria() {
+    public void ActualizarCategoriaTest() {
         Categoria categoria1 = new Categoria("Electrodomestico");
         Categoria guardarCategoria = miCategoria.save(categoria1);
         guardarCategoria.setNombre("Video Juegos");
@@ -45,7 +45,7 @@ public class CategoriaRepoTest {
     }
 
     @Test
-    public void ListarCategoria() {
+    public void ListarCategoriaTest() {
         Categoria categoria1 = new Categoria("Electrodomestico");
         miCategoria.save(categoria1);
         List<Categoria> listaCategoria = miCategoria.findAll();
