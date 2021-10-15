@@ -182,10 +182,10 @@ public class ChatRepoTest {
 
         //se modifiaca el dato a cambiar
         chatGuardado.setChatProductoCompra(miProducto2);
-        //se vuelve a gurdar
+        //se vuelve a guardar
         miChatRepo.save(chatGuardado);
 
-        //se busca el prodcto
+        //se busca el producto
         Chat chatBuscado=miChatRepo.findById(1).orElse(null);
         Assertions.assertEquals("nevera",chatBuscado.getChatProductoCompra().getNombre());
 

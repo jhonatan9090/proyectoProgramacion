@@ -113,8 +113,8 @@ public class SubastaRepoTest {
         Subasta subastaGuardada = miSubasta.save(subasta1);
 
         subastaGuardada.setFechaLimite(LocalDate.of(2023,2,3));
-        miSubasta.save(subastaGuardada);
-        Subasta subastaBuscada = miSubasta.findById(1).orElse(null);
+        Subasta subastaBuscada=miSubasta.save(subastaGuardada);
+
         Assertions.assertEquals(LocalDate.of(2023,2,3),subastaBuscada.getFechaLimite());
     }
 

@@ -38,9 +38,9 @@ public class CiudadRepoTest {
         Ciudad ciudad1 = new Ciudad("Armenia");
         Ciudad guardarCiudad = miCiudad.save(ciudad1);
         guardarCiudad.setNombre("Calarca");
-        miCiudad.save(guardarCiudad);
-        Ciudad buscarCiudad = miCiudad.findById(1).orElse(null);
-        Assertions.assertEquals("Calarca",buscarCiudad.getNombre());
+       Ciudad ciudadBuscada= miCiudad.save(guardarCiudad);
+
+        Assertions.assertEquals("Calarca",ciudadBuscada.getNombre());
 
     }
 

@@ -1,16 +1,11 @@
-insert into ciudad values("Armenia");
-insert into ciudad1 values ("Cali");
-
-
-insert into usuario values("123", "Karla", "karla@gmail.com", "111", ciudad);
-insert into usuario values("435", "Maria", "maria@gmail.com", ciudad1);
-insert into usuario values("654", "Oscar", "oscar@gmail.com", "654", ciudad);
-
+insert into ciudad values(1,"Armenia");
+insert into ciudad values (2,"Cali");
+insert into usuario(cod_persona,email,nombre,password,ciudad_usuario_cod_ciudad) values("123", "karla@gmail.com", "karla", "111", 1);
+insert into usuario(cod_persona,email,nombre,password,ciudad_usuario_cod_ciudad) values("435", "maria@gmail.com", "maria","564", 2);
+insert into usuario(cod_persona,email,nombre,password,ciudad_usuario_cod_ciudad) values("654", "oscar@gmail.com", "oscar", "654", 2);
 insert into usuario_telefono values ("123", "31456", "casa");
 insert into usuario_telefono values ("123", "34567", "trabajo");
-
 insert into usuario_telefono values ("435", "3456", "casa");
 insert into usuario_telefono values ("435", "6533", "trabajo");
-
 insert into usuario_telefono values ("654", "4567", "casa");
 insert into usuario_telefono values ("654", "7543", "trabajo");

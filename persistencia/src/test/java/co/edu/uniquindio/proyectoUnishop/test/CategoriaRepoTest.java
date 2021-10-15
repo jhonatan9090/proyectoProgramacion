@@ -18,40 +18,76 @@ public class CategoriaRepoTest {
 
     @Autowired
     private CategoriaRepo miCategoria;
+
     @Test
-    public void CrearCatergoriaTest( ){
+    public void CrearCatergoriaTest() {
         Categoria categoria1 = new Categoria("Electrodomestico");
         Categoria guardarCategoria = miCategoria.save(categoria1);
         Assertions.assertNotNull(guardarCategoria);
 
     }
-    @Test
-    public void  EliminarCategoriaTest(){
+
+    /*@Test
+    public void EliminarCategoriaTest() {
         Categoria categoria1 = new Categoria("Electrodomestico");
         Categoria guardarCategoria = miCategoria.save(categoria1);
         miCategoria.delete(guardarCategoria);
         Categoria categoriaBuscada = miCategoria.findById(1).orElse(null);
         Assertions.assertNull(categoriaBuscada);
 
-    }
+    }*/
     @Test
+    @Sql("classpath:Categoria.sql")
+    public void EliminarCategoriaTestSql() {
+
+        miCategoria.deleteById(2);
+        Categoria categoriaBuscada = miCategoria.findById(2).orElse(null);
+        Assertions.assertNull(categoriaBuscada);
+
+    }
+
+  /*  @Test
     public void ActualizarCategoriaTest() {
         Categoria categoria1 = new Categoria("Electrodomestico");
         Categoria guardarCategoria = miCategoria.save(categoria1);
         guardarCategoria.setNombre("Video Juegos");
         miCategoria.save(guardarCategoria);
         Categoria categoriaBuscada = miCategoria.findById(1).orElse(null);
-        Assertions.assertEquals("Video Juegos",categoriaBuscada.getNombre());
+        Assertions.assertEquals("Video Juegos", categoriaBuscada.getNombre());
+
+    }*/
+    @Test
+    @Sql("classpath:Categoria.sql")
+    public void ActualizarCategoriaTestSql() {
+
+
+        Categoria categoriaGuardada = miCategoria.findById(1).orElse(null);
+        categoriaGuardada.setNombre("Video Juegos");
+        miCategoria.save(categoriaGuardada);
+        Categoria categoriaBuscada = miCategoria.findById(1).orElse(null);
+        Assertions.assertEquals("Video Juegos", categoriaBuscada.getNombre());
 
     }
 
-    @Test
+    /*@Test
     public void ListarCategoriaTest() {
         Categoria categoria1 = new Categoria("Electrodomestico");
         miCategoria.save(categoria1);
         List<Categoria> listaCategoria = miCategoria.findAll();
-        for (Categoria misCategorias: listaCategoria){
+        for (Categoria misCategorias : listaCategoria) {
+            System.out.println(misCategorias);
+        }
+    }*/
+    @Test
+    @Sql("classpath:Categoria.sql")
+    public void ListarCategoriaTestSql() {
+
+
+        List<Categoria> listaCategoria = miCategoria.findAll();
+        for (Categoria misCategorias : listaCategoria) {
             System.out.println(misCategorias);
         }
     }
+
+
 }

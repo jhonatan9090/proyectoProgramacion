@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.util.HashMap;
 import java.util.List;
@@ -33,8 +34,6 @@ public class UsuarioTest {
         Ciudad ciudad1=new Ciudad("armenia");
         miCiudadRepo.save(ciudad1);
 
-
-
         Map<String,String>telefonos=new HashMap<>();
         telefonos.put("casa","321414");
         telefonos.put("celular","321452514");
@@ -47,7 +46,7 @@ public class UsuarioTest {
     }
 
     //metodo que elimina un usuario
-    @Test
+   /* @Test
     public void eliminarUsuarioTest(){
 
         Ciudad ciudad1=new Ciudad("armenia");
@@ -68,11 +67,20 @@ public class UsuarioTest {
 
         Usuario usuarioBuscado= miUsuarioRepo.findById("111").orElse(null);
         Assertions.assertNull(usuarioBuscado);
+    }*/
+    @Test
+    @Sql("classpath:usuarios.sql")
+    public void eliminarUsuarioTestSql(){
+
+        miUsuarioRepo.deleteById("123");
+
+        Usuario usuarioBuscado= miUsuarioRepo.findById("123").orElse(null);
+        Assertions.assertNull(usuarioBuscado);
     }
 
 
     //metodo que actualiza un usario
-    @Test
+    /*@Test
     public void actualizarUsuarioTest(){
 
     //se guarda usuario
@@ -98,9 +106,20 @@ public class UsuarioTest {
         Usuario usuarioBuscado=miUsuarioRepo.findById("111").orElse(null);
         Assertions.assertEquals("Claudia perez",usuarioBuscado.getNombre());
 
+    }*/
+    @Test
+    @Sql("classpath:usuarios.sql")
+    public void actualizarUsuarioTestSql(){
+
+        Usuario usuarioGuardado=miUsuarioRepo.findById("123").orElse(null);
+        usuarioGuardado.setNombre("Claudia perez");
+        miUsuarioRepo.save(usuarioGuardado);
+        Usuario usuarioBuscado=miUsuarioRepo.findById("123").orElse(null);
+        Assertions.assertEquals("Claudia perez",usuarioBuscado.getNombre());
+
     }
     //metodo que busca los usarios
-    @Test
+    /*@Test
     public void listarUsuariosTest(){
 
 
@@ -120,6 +139,16 @@ public class UsuarioTest {
         List<Usuario>listaUsuarios=miUsuarioRepo.findAll();
         System.out.println(listaUsuarios);
 
+    }*/
+    @Test
+    @Sql("classpath:usuarios.sql")
+    public void listarUsuariosTestSql(){
+
+
+        List<Usuario>listaUsuarios=miUsuarioRepo.findAll();
+        for(Usuario miUsuario:listaUsuarios) {
+            System.out.println(miUsuario);
+        }
     }
 
 }

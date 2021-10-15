@@ -42,7 +42,7 @@ public class Producto implements Serializable {
     private Double precio;
 
     //Fecha limite del producto
-    @Future
+   // @Future
     @Column(nullable = false)
     private LocalDate fechaLimite;
 
@@ -67,24 +67,30 @@ public class Producto implements Serializable {
 
     //Relacion inversa entre subasta y producto
     @OneToMany(mappedBy = "subastaProducto")
+    @ToString.Exclude
     private List<Subasta>listaSubasta;
 
     //Relacion inversa de compra con detalle
     @OneToMany(mappedBy = "ProductoDetalle")
+    @ToString.Exclude
     private  List<DetalleCompra>listaDetalles;
 
     //Relacion inversa del comentario de un producto
     @OneToMany(mappedBy = "comentarioProducto")
+    @ToString.Exclude
     private List<Comentario>ListaComentariosProductos;
 
     //Relacion de productos favoritos
     @ManyToMany(mappedBy = "listaProductoFavorito")
+    @ToString.Exclude
     private List<Usuario>listaUsuariosProductosFavoritos;
 
     @OneToMany(mappedBy = "chatProductoCompra")
+    @ToString.Exclude
     private List<Chat>listaChatProducto;
 
     @ManyToMany
+    @ToString.Exclude
     private List<Categoria>listaCategoria;
 
 
