@@ -34,6 +34,7 @@ public class ComentarioTest {
     @Autowired
 
     private CiudadRepo miCiudadRepo;
+
     //metodo para crear un comentario
     @Test
     public void crearComentarioTest() {
@@ -49,56 +50,55 @@ public class ComentarioTest {
         usuario1.setTelefono(telefonos);
         usuario1.setCiudadUsuario(miCiudad);
         Usuario usuario = miUsuarioRepo.save(usuario1);
-
         //Producto  Vender
         List<String> imagenes = new ArrayList<>();
         imagenes.add("1");
         imagenes.add("2");
         Producto miProducto = new Producto("play 5", 10, "es bueno", 12.02, LocalDate.of(2022, 6, 25), 5.5, imagenes, usuario, miCiudad);
-        Producto productoVender = miProductoRepo.save(miProducto);
-
-
+        miProductoRepo.save(miProducto);
+        // se crea el comentarios
         Comentario comentario = new Comentario("disponible?", "yes", LocalDate.of(2022, 6, 25), 3
                 , usuario1, miProducto);
 
+        //se guarda el comentario
         Comentario comentarioGuardado = miComentarioRepo.save(comentario);
         Assertions.assertNotNull(comentarioGuardado);
 
 
     }
 
-  /*  @Test
-    public void eliminarComentarioTest() {
+    /*  @Test
+      public void eliminarComentarioTest() {
 
-        Ciudad miCiudad = new Ciudad("Cali");
-        miCiudadRepo.save(miCiudad);
+          Ciudad miCiudad = new Ciudad("Cali");
+          miCiudadRepo.save(miCiudad);
 
-        //Vendedor producto
-        Map<String, String> telefonos = new HashMap<>();
-        telefonos.put("casa", "321414");
-        telefonos.put("celular", "321452514");
-        Usuario usuario1 = new Usuario("111", "Luisa Perez", "luisaPe@", "12345", telefonos, miCiudad);
-        usuario1.setTelefono(telefonos);
-        usuario1.setCiudadUsuario(miCiudad);
-        Usuario usuario = miUsuarioRepo.save(usuario1);
+          //Vendedor producto
+          Map<String, String> telefonos = new HashMap<>();
+          telefonos.put("casa", "321414");
+          telefonos.put("celular", "321452514");
+          Usuario usuario1 = new Usuario("111", "Luisa Perez", "luisaPe@", "12345", telefonos, miCiudad);
+          usuario1.setTelefono(telefonos);
+          usuario1.setCiudadUsuario(miCiudad);
+          Usuario usuario = miUsuarioRepo.save(usuario1);
 
-        //Producto  Vender
-        List<String> imagenes = new ArrayList<>();
-        imagenes.add("1");
-        imagenes.add("2");
-        Producto miProducto = new Producto("play 5", 10, "es bueno", 12.02, LocalDate.of(2022, 6, 25), 5.5, imagenes, usuario, miCiudad);
-        Producto productoVender = miProductoRepo.save(miProducto);
+          //Producto  Vender
+          List<String> imagenes = new ArrayList<>();
+          imagenes.add("1");
+          imagenes.add("2");
+          Producto miProducto = new Producto("play 5", 10, "es bueno", 12.02, LocalDate.of(2022, 6, 25), 5.5, imagenes, usuario, miCiudad);
+          Producto productoVender = miProductoRepo.save(miProducto);
 
-        Comentario comentario = new Comentario("disponible?", "yes", LocalDate.of(2022, 6, 25), 3
-                , usuario1, miProducto);
+          Comentario comentario = new Comentario("disponible?", "yes", LocalDate.of(2022, 6, 25), 3
+                  , usuario1, miProducto);
 
-        Comentario comentarioGuardado = miComentarioRepo.save(comentario);
+          Comentario comentarioGuardado = miComentarioRepo.save(comentario);
 
-        miComentarioRepo.delete(comentarioGuardado);
-        Comentario comentarioBuscado = miComentarioRepo.findById(1).orElse(null);
-        Assertions.assertNull(comentarioBuscado);
+          miComentarioRepo.delete(comentarioGuardado);
+          Comentario comentarioBuscado = miComentarioRepo.findById(1).orElse(null);
+          Assertions.assertNull(comentarioBuscado);
 
-    }*/
+      }*/
     //metodo para eliminar un comentario
     @Test
     @Sql("classpath:comentario.sql")
