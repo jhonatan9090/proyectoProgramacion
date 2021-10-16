@@ -8,10 +8,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.jdbc.Sql;
 
-import javax.validation.constraints.Positive;
+
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,28 +22,27 @@ import java.util.Map;
 
 public class DetalleCompraTest {
 
-    @Autowired
+    @Autowired//instancia variables componentes de springboot
     private DetalleCompraRepo miDetalleCompraRepo;
 
-    @Autowired
+    @Autowired//instancia variables componentes de springboot
     private ProductoRepo miProductoRepo;
 
-    @Autowired
+    @Autowired//instancia variables componentes de springboot
     private UsuarioRepo miUsuarioRepo;
 
-    @Autowired
-
+    @Autowired//instancia variables componentes de springboot
     private CiudadRepo miCiudadRepo;
 
-    @Autowired
+    @Autowired//instancia variables componentes de springboot
     private CompraRepo miCompraRepo;
 
+    //metodo que crea un detalleCompra
     @Test
     public void crearDetalleCompraTest(){
 
         Ciudad ciudad=new Ciudad("armenia");
         miCiudadRepo.save(ciudad);
-
         //Usuario
         Map<String,String>telefonos=new HashMap<>();
         telefonos.put("casa","321414");
@@ -51,27 +50,25 @@ public class DetalleCompraTest {
 
         Usuario usuario=new Usuario("123", "Aleja", "aleja@gmail.com", "3456", telefonos, ciudad);
         miUsuarioRepo.save(usuario);
-
         //Compra
         Compra compra1 = new Compra(LocalDate.of(2022,6,25), "Efectivo", usuario );
-        Compra compraGuardado=miCompraRepo.save(compra1);
-
+        miCompraRepo.save(compra1);
         //Producto
         List<String> imagenes = new ArrayList<>();
         imagenes.add("1");
         imagenes.add("2");
         Producto miProducto = new Producto("play 5", 10, "es bueno", 12.02, LocalDate.of(2022,6,25), 5.5, imagenes, usuario, ciudad);
-        Producto productoVender = miProductoRepo.save(miProducto);
-
+        miProductoRepo.save(miProducto);
+        //crea la compra detallada
         DetalleCompra detalleCompra= new DetalleCompra(4, 600000.0, miProducto, compra1);
-
+        //guarda la compra detallada
         DetalleCompra detalleCompraGuardado=miDetalleCompraRepo.save(detalleCompra);
+        //berifica que la compra detallada no sea null
         Assertions.assertNotNull(detalleCompraGuardado);
-
 
     }
 
-    @Test
+  /*  @Test
     public void eliminarDetalleCompraTest(){
 
         Ciudad ciudad=new Ciudad("armenia");
@@ -103,10 +100,21 @@ public class DetalleCompraTest {
         miDetalleCompraRepo.delete(detalleCompraGuardado);
         DetalleCompra detalleBuscado=miDetalleCompraRepo.findById(1).orElse(null);
         Assertions.assertNull(detalleBuscado);
+    }*/
+
+    @Test
+    @Sql("classpath:detalleCompra.sql")
+    public void eliminarDetalleCompraTestSql(){
+
+        //elimina una compra detallada desde el sql por el id
+        miDetalleCompraRepo.deleteById(1);
+        //buscamos para comprobar que el detalle compra fue eliminado
+        DetalleCompra detalleBuscado=miDetalleCompraRepo.findById(1).orElse(null);
+        Assertions.assertNull(detalleBuscado);
     }
 
 
-    @Test
+ /*   @Test
     public void actualizarDetalleCompraTest(){
 
         Ciudad ciudad=new Ciudad("armenia");
@@ -139,9 +147,25 @@ public class DetalleCompraTest {
 
         //se busca el DetalleCompra
         Assertions.assertEquals(666000.9,detalleBuscado.getPrecioProducto());
+    }*/
+
+    //metodo para actualizar un detalle de la compra
+    @Test
+    @Sql("classpath:detalleCompra.sql")
+    public void actualizarDetalleCompraTestSql(){
+
+        //trae una compra detallada del sql por el id
+        DetalleCompra miDetalleCompra=miDetalleCompraRepo.findById(1).orElse(null);
+        //setteamos el cambio a la compra
+        miDetalleCompra.setUnidades(40);
+        //guardamos el cambio realizado
+        miDetalleCompraRepo.save(miDetalleCompra);
+        //buscamos para comprobar si se realizan los cambios
+        Assertions.assertEquals(40,miDetalleCompra.getUnidades());
+
     }
 
-    @Test
+   /* @Test
     public void listarDetalleCompraTest(){
 
 
@@ -177,5 +201,17 @@ public class DetalleCompraTest {
         for (DetalleCompra misDetalles : listaDetalleCompra) {
             System.out.println(misDetalles);
         }
+    }*/
+    // metodo que lista los detalles de compras
+    @Test
+    @Sql("classpath:detalleCompra.sql")
+    public void listarDetalleCompraTestSql(){
+        //trae los datos desde el sql por el id y los guarda en una lista
+        List<DetalleCompra>listaDetalleCompra=miDetalleCompraRepo.findAll();
+        //imprime los datos de la lista
+        for (DetalleCompra misDetalles : listaDetalleCompra) {
+            System.out.println(misDetalles);
+        }
+
     }
 }
