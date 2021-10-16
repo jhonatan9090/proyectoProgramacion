@@ -10,3 +10,6 @@ insert into usuario_telefono values ("435", "3456", "casa");
 insert into usuario_telefono values ("435", "6533", "trabajo");
 insert into usuario_telefono values ("654", "4567", "casa");
 insert into usuario_telefono values ("654", "7543", "trabajo");
+insert  into compra(cod_compra,fecha_pago, medio_pago, usuario_compra_cod_persona) values (1,"2022/6/20","nequi","123");
+insert  into compra(cod_compra,fecha_pago, medio_pago, usuario_compra_cod_persona) values (2,"2022/6/11","daviplata","435");
+insert  into compra(cod_compra,fecha_pago, medio_pago, usuario_compra_cod_persona) values (3,"2022/6/10","efecty","654");

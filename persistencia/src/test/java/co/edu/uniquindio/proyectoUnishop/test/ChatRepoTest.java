@@ -25,16 +25,16 @@ import java.util.Map;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class ChatRepoTest {
 
-    @Autowired
+    @Autowired//instancia variables componentes de springboot
     private ChatRepo miChatRepo;
 
-    @Autowired
+    @Autowired//instancia variables componentes de springboot
     private ProductoRepo miProductoRepo;
 
-    @Autowired
+    @Autowired//instancia variables componentes de springboot
     private UsuarioRepo miUsuarioRepo;
 
-    @Autowired
+    @Autowired//instancia variables componentes de springboot
 
     private CiudadRepo miCiudadRepo;
     //metodo para crear un chat

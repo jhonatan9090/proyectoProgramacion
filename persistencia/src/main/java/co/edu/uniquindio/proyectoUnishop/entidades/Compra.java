@@ -33,6 +33,7 @@ public class Compra implements Serializable {
     @JoinColumn(nullable = false)
     private Usuario UsuarioCompra;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "compradetalle")
     private List<DetalleCompra>listaDetalleCompra;
 
@@ -41,10 +42,10 @@ public class Compra implements Serializable {
     }
 
     public Compra(@Future LocalDate fechaPago, String medioPago, Usuario usuarioCompra) {
-        this.codCompra = codCompra;
+
         this.fechaPago = fechaPago;
         this.medioPago = medioPago;
         UsuarioCompra = usuarioCompra;
-        this.listaDetalleCompra = listaDetalleCompra;
+
     }
 }
