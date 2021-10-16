@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 
@@ -24,16 +25,25 @@ public class CiudadRepoTest {
         Assertions.assertNotNull(guardarCiudad);
     }
 
-    @Test
+   /* @Test
     public void EliminarCiudadTest(){
         Ciudad ciudad1 = new Ciudad("Armenia");
         Ciudad guardarCiudad = miCiudad.save(ciudad1);
         miCiudad.delete(guardarCiudad);
         Ciudad buscarCiudad = miCiudad.findById(1).orElse(null);
         Assertions.assertNull(buscarCiudad);
-    }
+    }*/
 
     @Test
+    @Sql("classpath:ciudad.sql")
+    public void EliminarCiudadTestSql(){
+        miCiudad.deleteById(2);
+        Ciudad miCiudadBuscada=miCiudad.findById(2).orElse(null);
+        Assertions.assertNull(miCiudadBuscada);
+
+    }
+
+   /* @Test
     public void ActualizarCiudadTest(){
         Ciudad ciudad1 = new Ciudad("Armenia");
         Ciudad guardarCiudad = miCiudad.save(ciudad1);
@@ -42,9 +52,18 @@ public class CiudadRepoTest {
 
         Assertions.assertEquals("Calarca",ciudadBuscada.getNombre());
 
-    }
-
+    }*/
     @Test
+    @Sql("classpath:ciudad.sql")
+    public void ActualizarCiudadTestSql(){
+
+        Ciudad ciudad1 =miCiudad.findById(1).orElse(null);
+        ciudad1.setNombre("Calarca");
+        Ciudad ciudadBuscada= miCiudad.save(ciudad1);
+        Assertions.assertEquals("Calarca",ciudadBuscada.getNombre());
+
+    }
+    /*@Test
     public void ListarCiudadTest(){
         Ciudad ciudad1 = new Ciudad("Armenia");
         miCiudad.save(ciudad1);
@@ -52,6 +71,16 @@ public class CiudadRepoTest {
         for (Ciudad misCiudad: listaCiudad){
             System.out.println(misCiudad);
         }
+    }*/
+    @Test
+    @Sql("classpath:ciudad.sql")
+    public void ListarCiudadTestSql(){
+
+        List<Ciudad> listaCiudad = miCiudad.findAll();
+        for (Ciudad misCiudad: listaCiudad){
+            System.out.println(misCiudad);
+        }
+
     }
 
 }
