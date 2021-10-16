@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -82,7 +83,7 @@ public class ChatRepoTest {
 
     }
     //metodo que elimina un chat
-    @Test
+   /* @Test
     public void eliminarChat(){
 
         Ciudad miCiudad = new Ciudad("Cali");
@@ -128,15 +129,21 @@ public class ChatRepoTest {
         Chat chatBuscado=miChatRepo.findById(1).orElse(null);
         Assertions.assertNull(chatBuscado);
 
-    }
+    }*/
     @Test
+    @Sql("classpath:chat.sql")
+    public void eliminarChatSql(){
+        miChatRepo.deleteById(3);
+        Chat chatBuscado=miChatRepo.findById(3).orElse(null);
+        Assertions.assertNull(chatBuscado);
+
+    }
+   /* @Test
     public void actualizarChat(){
 
 
         Ciudad miCiudad = new Ciudad("Cali");
         miCiudadRepo.save(miCiudad);
-
-
         //Vendedor producto
         Map<String, String> telefonos = new HashMap<>();
         telefonos.put("casa", "321414");
@@ -145,8 +152,6 @@ public class ChatRepoTest {
         usuario1.setTelefono(telefonos);
         usuario1.setCiudadUsuario(miCiudad);
         Usuario vendedor = miUsuarioRepo.save(usuario1);
-
-
         //Producto  Vender
         List<String> imagenes = new ArrayList<>();
         imagenes.add("1");
@@ -189,8 +194,24 @@ public class ChatRepoTest {
         Chat chatBuscado=miChatRepo.findById(1).orElse(null);
         Assertions.assertEquals("nevera",chatBuscado.getChatProductoCompra().getNombre());
 
-    }
+    }*/
     @Test
+    @Sql("classpath:chat.sql")
+    public void actualizarChatSql(){
+
+
+        Producto miProductoVender=miProductoRepo.findById(2).orElse(null);
+        Usuario usuarioComprador=miUsuarioRepo.findById("435").orElse(null);
+        Chat chat=new Chat(usuarioComprador,miProductoVender);
+        Chat miChatGuardado=miChatRepo.save(chat);
+        Usuario usuarioCompradorEditado=miUsuarioRepo.findById("123").orElse(null);
+        miChatGuardado.setUsuarioComprador(usuarioCompradorEditado);
+        Chat chatBuscado=miChatRepo.findById(1).orElse(null);
+        Assertions.assertEquals("123",chatBuscado.getUsuarioComprador().getCodPersona());
+
+
+    }
+  /*  @Test
     public void listarChat(){
 
         Ciudad miCiudad = new Ciudad("Cali");
@@ -240,6 +261,17 @@ public class ChatRepoTest {
             System.out.println(misChat);
         }
 
-    }
+    }*/
 
+    @Test
+    @Sql("classpath:chat.sql")
+    public void listarChatSql(){
+
+        List<Chat>listaChats=miChatRepo.findAll();
+        for (Chat misChat : listaChats) {
+            System.out.println(misChat);
+        }
+
+
+    }
 }
