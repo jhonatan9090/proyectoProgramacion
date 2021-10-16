@@ -8,11 +8,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.jdbc.Sql;
 
-import javax.validation.constraints.Future;
-import javax.validation.constraints.Positive;
+
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,9 +34,9 @@ public class ComentarioTest {
     @Autowired
 
     private CiudadRepo miCiudadRepo;
-
+    //metodo para crear un comentario
     @Test
-    public void crearComentarioTest(){
+    public void crearComentarioTest() {
 
         Ciudad miCiudad = new Ciudad("Cali");
         miCiudadRepo.save(miCiudad);
@@ -55,21 +54,21 @@ public class ComentarioTest {
         List<String> imagenes = new ArrayList<>();
         imagenes.add("1");
         imagenes.add("2");
-        Producto miProducto = new Producto("play 5", 10, "es bueno", 12.02, LocalDate.of(2022,6,25), 5.5, imagenes, usuario, miCiudad);
+        Producto miProducto = new Producto("play 5", 10, "es bueno", 12.02, LocalDate.of(2022, 6, 25), 5.5, imagenes, usuario, miCiudad);
         Producto productoVender = miProductoRepo.save(miProducto);
 
 
-        Comentario comentario = new Comentario("disponible?","yes", LocalDate.of(2022,6,25), 3
+        Comentario comentario = new Comentario("disponible?", "yes", LocalDate.of(2022, 6, 25), 3
                 , usuario1, miProducto);
 
-        Comentario comentarioGuardado=miComentarioRepo.save(comentario);
+        Comentario comentarioGuardado = miComentarioRepo.save(comentario);
         Assertions.assertNotNull(comentarioGuardado);
 
 
     }
 
-    @Test
-    public void eliminarComentarioTest(){
+  /*  @Test
+    public void eliminarComentarioTest() {
 
         Ciudad miCiudad = new Ciudad("Cali");
         miCiudadRepo.save(miCiudad);
@@ -87,23 +86,35 @@ public class ComentarioTest {
         List<String> imagenes = new ArrayList<>();
         imagenes.add("1");
         imagenes.add("2");
-        Producto miProducto = new Producto("play 5", 10, "es bueno", 12.02, LocalDate.of(2022,6,25), 5.5, imagenes, usuario, miCiudad);
+        Producto miProducto = new Producto("play 5", 10, "es bueno", 12.02, LocalDate.of(2022, 6, 25), 5.5, imagenes, usuario, miCiudad);
         Producto productoVender = miProductoRepo.save(miProducto);
 
-        Comentario comentario = new Comentario("disponible?","yes", LocalDate.of(2022,6,25), 3
+        Comentario comentario = new Comentario("disponible?", "yes", LocalDate.of(2022, 6, 25), 3
                 , usuario1, miProducto);
 
-        Comentario comentarioGuardado=miComentarioRepo.save(comentario);
+        Comentario comentarioGuardado = miComentarioRepo.save(comentario);
 
         miComentarioRepo.delete(comentarioGuardado);
-        Comentario comentarioBuscado=miComentarioRepo.findById(1).orElse(null);
+        Comentario comentarioBuscado = miComentarioRepo.findById(1).orElse(null);
         Assertions.assertNull(comentarioBuscado);
+
+    }*/
+    //metodo para eliminar un comentario
+    @Test
+    @Sql("classpath:comentario.sql")
+    public void eliminarComentarioTestSql() {
+
+        //elimina el comentario desde el sql por el codigo
+        miComentarioRepo.deleteById(2);
+        //busca si el comentario no fue eliminado por el codigo
+        Comentario comentarioBuscado = miComentarioRepo.findById(2).orElse(null);
+        Assertions.assertNull(comentarioBuscado);
+
 
     }
 
-
-    @Test
-    public void actualizarComentarioTest(){
+    /*@Test
+    public void actualizarComentarioTest() {
         Ciudad miCiudad = new Ciudad("Cali");
         miCiudadRepo.save(miCiudad);
 
@@ -120,23 +131,40 @@ public class ComentarioTest {
         List<String> imagenes = new ArrayList<>();
         imagenes.add("1");
         imagenes.add("2");
-        Producto miProducto = new Producto("play 5", 10, "es bueno", 12.02, LocalDate.of(2022,6,25), 5.5, imagenes, usuario, miCiudad);
+        Producto miProducto = new Producto("play 5", 10, "es bueno", 12.02, LocalDate.of(2022, 6, 25), 5.5, imagenes, usuario, miCiudad);
         Producto productoVender = miProductoRepo.save(miProducto);
 
-        Comentario comentario = new Comentario("disponible?","yes", LocalDate.of(2022,6,25), 3
+        Comentario comentario = new Comentario("disponible?", "yes", LocalDate.of(2022, 6, 25), 3
                 , usuario1, miProducto);
 
-        Comentario comentarioGuardado=miComentarioRepo.save(comentario);
+        Comentario comentarioGuardado = miComentarioRepo.save(comentario);
 
         comentarioGuardado.setRespuesta("No");
         Comentario comentarioBuscado = miComentarioRepo.save(comentarioGuardado);
 
         Assertions.assertEquals("No", comentarioBuscado.getRespuesta());
 
+    }*/
+    // metodo para actualizar un comentario
+    @Test
+    @Sql("classpath:comentario.sql")
+    public void actualizarComentarioTestSql() {
+
+        //usuario a editar
+        Usuario usuarioComentario = miUsuarioRepo.findById("435").orElse(null);
+        // buscamos comentario a editar
+        Comentario miComentario = miComentarioRepo.findById(1).orElse(null);
+        //le seteamos el nuevo dato al al usuario
+        usuarioComentario.setNombre("jhonatan uribe");
+        //seteamos el nuevo dato al comentario
+        miComentario.setUsuarioComentario(usuarioComentario);
+        Comentario comentarioEditado = miComentarioRepo.save(miComentario);
+        Assertions.assertEquals("jhonatan uribe", comentarioEditado.getUsuarioComentario().getNombre());
+
     }
 
-    @Test
-    public void listarComentariosTest(){
+    /*@Test
+    public void listarComentariosTest() {
 
 
         Ciudad miCiudad = new Ciudad("Cali");
@@ -155,18 +183,30 @@ public class ComentarioTest {
         List<String> imagenes = new ArrayList<>();
         imagenes.add("1");
         imagenes.add("2");
-        Producto miProducto = new Producto("play 5", 10, "es bueno", 12.02, LocalDate.of(2022,6,25), 5.5, imagenes, usuario, miCiudad);
+        Producto miProducto = new Producto("play 5", 10, "es bueno", 12.02, LocalDate.of(2022, 6, 25), 5.5, imagenes, usuario, miCiudad);
         Producto productoVender = miProductoRepo.save(miProducto);
 
-        Comentario comentario = new Comentario("disponible?","yes", LocalDate.of(2022,6,25), 3
+        Comentario comentario = new Comentario("disponible?", "yes", LocalDate.of(2022, 6, 25), 3
                 , usuario1, miProducto);
 
-        Comentario comentarioGuardado=miComentarioRepo.save(comentario);
+        Comentario comentarioGuardado = miComentarioRepo.save(comentario);
 
-        List<Comentario>listaComentarios=miComentarioRepo.findAll();
+        List<Comentario> listaComentarios = miComentarioRepo.findAll();
 
         for (Comentario misComentarios : listaComentarios) {
             System.out.println(misComentarios);
         }
+    }*/
+    // metodo para listar los comentarios
+    @Test
+    @Sql("classpath:comentario.sql")
+    public void listarComentariosTestSql() {
+        //trae la lista de comentarios
+        List<Comentario> listaComentarios = miComentarioRepo.findAll();
+        // imprime la lista de comentarios
+        for (Comentario misComentarios : listaComentarios) {
+            System.out.println(misComentarios);
+        }
+
     }
 }
