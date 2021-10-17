@@ -11,53 +11,42 @@ import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-
+/**
+ * Entidad Comentario
+ */
 @Entity
 @Getter @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-
 public class Comentario implements Serializable {
 
-    /**
-     * Atributos de entidad comentario
-     * @param codComentario llave primaria
-     * @param mensaje comentario
-     * @param respuesta respuesta al comentario
-     * @param fechaComentario fecha del Comentario
-     * @param calificacion calificacion
-     * @param usuarioComentario usuario que realiza el comentario
-     * @param comentarioProducto Producto a comentare
-     */
-    @Id
+    @Id //llave primaria
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer codComentario;
+    private Integer codComentario; //codigo del comentario
 
     @Column(length = 200)
-    private String mensaje;
+    private String mensaje; //mensaje del comentario
 
     @Column(length = 200)
-    private String respuesta;
+    private String respuesta; //respuesta al comentario
 
     @Column(nullable = false,columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private @Future LocalDate fechaComentario;
+    private @Future LocalDate fechaComentario; //fecha del Comentario
 
     @Positive
     @Max(5)
     @Column(nullable = false)
     private Integer calificacion;
 
-    /**
-     * Relacion de comentarios y usuario
-     */
+
+    // Relacion de comentarios y usuario
     @ManyToOne
     @JoinColumn(nullable = false)
     private Usuario usuarioComentario;
 
-    /**
-     * Relacion del comentario sobre un producto
-     */
+
+    // Relacion del comentario sobre un producto
     @ManyToOne
     @JoinColumn(nullable = false)
     private Producto comentarioProducto;

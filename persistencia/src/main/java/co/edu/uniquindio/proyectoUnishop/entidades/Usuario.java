@@ -10,25 +10,19 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * Entidad para Usuario
+ */
 @Entity
 @Getter @Setter
 @ToString
 public class Usuario extends Persona implements Serializable {
 
-
-    /**
-     * ciudad del usuario
-     * Es obligatoria
-     */
     @ManyToOne
     @JoinColumn(nullable = false)
-    private  Ciudad ciudadUsuario;
+    private  Ciudad ciudadUsuario; //ciudad del usuario
 
-    /**
-     * Relacion inversa entre usuario y comentario
-     * Relacion uno a muchos
-     */
+    // Relacion inversa entre usuario y comentario
     @OneToMany(mappedBy = "usuarioComentario")
     @ToString.Exclude
     private List<Comentario>listaComentarios;
@@ -36,35 +30,24 @@ public class Usuario extends Persona implements Serializable {
     @OneToMany(mappedBy = "usuarioSubasta")
     private List<SubastaUsuario>listaSubastasUsuarios;
 
-    /**
-     * Relacion inversa de la venta de un producto
-     * Relacion uno a muchos
-     */
+    // Relacion inversa de la venta de un producto
     @OneToMany(mappedBy = "usuarioVendedor")
     @ToString.Exclude
 
-    /**
-     * lista de productos del usuario
-     */
+    // lista de productos del usuario
     private List<Producto>listaProductos;
 
-    /**
-     *  Relacion inversi de compras de un producto
-     */
+    //  Relacion inversi de compras de un producto
     @OneToMany(mappedBy = "UsuarioCompra")
     @ToString.Exclude
     private  List<Compra>listaCompras;
 
-    /**
-     * relacion inversa producto favorito
-     */
+    // relacion inversa producto favorito
     @ManyToMany
     @ToString.Exclude
     private List<Producto>listaProductoFavorito;
 
-    /**
-     * Relacion inversa chat comprador
-     */
+    // Relacion inversa chat comprador
     @OneToMany(mappedBy = "usuarioComprador")
     @ToString.Exclude
     private List<Chat>ListChatComprador;

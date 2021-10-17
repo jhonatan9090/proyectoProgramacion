@@ -9,39 +9,33 @@ import javax.persistence.*;
 import javax.validation.constraints.Positive;
 import java.io.Serializable;
 
-
-
+/**
+ * Entidad DetalleCompra
+ */
 @Entity
 @Getter @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-
 public class DetalleCompra implements Serializable {
 
-    /**
-     * Atributos de la entidad DetalleCompra
-     * @param codDetalle
-     * @param unidades
-     * @param precioProducto
-     * @param ProductoDetalle
-     * @param compradetalle
-     */
-    @Id
+    @Id //Llave primaria de la clase
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer codDetalle;
+    private Integer codDetalle; //codigo del detalle de la compra
 
     @Positive
     @Column(nullable = false)
-    private Integer unidades;
+    private Integer unidades; //Cantidad de la compra
 
     @Positive
     @Column(nullable = false)
-    private Double precioProducto;
+    private Double precioProducto; //Costo del producto
 
+    //Relacón con producto
     @ManyToOne
     @JoinColumn(nullable = false)
     private Producto ProductoDetalle;
+
     //relacion de la compra con detalle
     @ManyToOne
     @JoinColumn(nullable = false)

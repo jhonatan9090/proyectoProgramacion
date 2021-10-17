@@ -6,7 +6,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Map;
 
-
+/**
+ * Entidad para Persona
+ */
 @Getter @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
@@ -15,26 +17,21 @@ import java.util.Map;
 @AllArgsConstructor
 public class Persona implements Serializable {
 
-    /**
-     * Atributos de la entidad Persona
-     * @param codPersona
-     * @param nombre
-     * @param email
-     * @param password
-     * @param telefono
-     */
     @Id
     @EqualsAndHashCode.Include
-    private String codPersona;
+    private String codPersona; //Llave primaria, codigo de Persona
 
     @Column(length = 30,nullable = false)
-    private String nombre;
+    private String nombre; //Nombre de la persona
+
     @Column(length = 100,nullable = false,unique = true)
-    private String email;
+    private String email; //email de la persona
+
     @Column(length = 10,nullable = false,unique = true)
-    private String password;
+    private String password; //contraseña de persona
+
     @ElementCollection
-    private Map<String,String> telefono;
+    private Map<String,String> telefono; //Telefonos que tiene la persona
 
     /**
      * Constructor sin parametros de la entidad Persona
@@ -42,8 +39,5 @@ public class Persona implements Serializable {
     public Persona(){
     super();
     }
-
-
-
 
 }

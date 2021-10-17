@@ -10,40 +10,31 @@ import java.io.Serializable;
 import java.util.List;
 
 
+/**
+ * Entidad Ciudad
+ */
 @Entity
 @Getter @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 public class Ciudad implements Serializable {
 
-    /**
-     * atributos de la clase Ciudad
-     * @param codCiudad codigo de la ciudad
-     *                  llave primaria de la entidad
-     * @param nombre nombre de la ciudad
-     *               se le asigna un tamaño maximo de 80 caracteres
-     *               no puede ser null
-     */
-    @Id
+    @Id //llave primaria de la entidad
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer codCiudad;
+    private Integer codCiudad; //codigo de la ciudad
 
     @Column(length = 80,nullable = false)
-    private String nombre;
+    private String nombre; //nombre de la ciudad
 
-    /**
-     * Relacion con la lista de usuarios
-     * Uno a muchos
-     */
+
+    // Relacion con la lista de usuarios
     @OneToMany(mappedBy = "ciudadUsuario")
     @ToString.Exclude
     private List<Usuario>listaUsuarios;
 
-    /**
-     * Relacion con la lista de productos
-     * Uno a muchos
-     */
+
+    //  Relacion con la lista de productos
     @OneToMany(mappedBy = "ciudadProducto")
     @ToString.Exclude
     private List<Producto>listaProductos;

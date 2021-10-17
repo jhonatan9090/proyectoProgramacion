@@ -12,119 +12,86 @@ import java.time.LocalDate;
 import java.util.List;
 
 
-
+/**
+ * Entidad para  Producto
+ */
 @Entity
 @Getter @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-
 public class Producto implements Serializable {
 
-    /**
-     * Atributos de la clase Producto
-     * @param codProducto
-     * @param nombre
-     * @param unidades Cantidad de productos disponibles
-     * @param descripcion Descripcion del producto
-     * @param precio  precio del producto
-     * @param fechaLimite Fecha limite del producto
-     * @param descuento descuento del producto
-     * @param imagenes Imagenes de un producto
-     * @param usuarioProducto
-     * @param ciudadProducto
-     * @param listaSubasta
-     * @param listaDetalles
-     * @param ListaComentariosProductos
-     */
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer codProducto;
+    private Integer codProducto; //Llave primaria
 
     @Column(length = 80,nullable = false)
-    private String nombre;
-
+    private String nombre; // nombre del producto
 
     @Positive
     @Column(nullable = false)
-    private Integer unidades;
-
+    private Integer unidades; //Cantidad de productos disponibles
 
     @Column(length = 200,nullable = false)
-    private String descripcion;
-
+    private String descripcion; //Descripcion del producto
 
     @Positive
     @Column(nullable = false)
-    private Double precio;
-
+    private Double precio; //precio del producto
 
    // @Future
     @Column(nullable = false)
-    private LocalDate fechaLimite;
-
+    private LocalDate fechaLimite; //Fecha limite del producto
 
     @Positive
     @Column(nullable = false)
-    private Double descuento;
-
+    private Double descuento; //Descuento del producto
 
     @JoinColumn(nullable = false)
     @ElementCollection
-    private List<String> imagenes;
+    private List<String> imagenes; //imagenes para el producto
 
-    /**
-     * Relacion de la venta de un producto
-     */
+     // Relacion de la venta de un producto
     @ManyToOne
     @JoinColumn(nullable = false)
     private  Usuario usuarioVendedor;
 
+    //Relacion con la ciudad del producto
     @ManyToOne
     @JoinColumn(nullable = false)
     private Ciudad ciudadProducto;
 
-    /**
-     * Relacion inversa entre subasta y producto
-     */
+    // Relacion inversa entre subasta y producto
     @OneToMany(mappedBy = "subastaProducto")
     @ToString.Exclude
     private List<Subasta>listaSubasta;
 
-    /**
-     * Relacion inversa de compra con detalle
-     */
+    // Relacion inversa de compra con detalla
     @OneToMany(mappedBy = "ProductoDetalle")
     @ToString.Exclude
     private  List<DetalleCompra>listaDetalles;
 
-    /**
-     *Relacion inversa del comentario de un producto
-     */
+    // Relacion inversa del comentario de un producto
     @OneToMany(mappedBy = "comentarioProducto")
     @ToString.Exclude
     private List<Comentario>ListaComentariosProductos;
 
-    /**
-     * Relacion de productos favoritos
-     */
+    // Relacion de productos favoritos
     @ManyToMany(mappedBy = "listaProductoFavorito")
     @ToString.Exclude
     private List<Usuario>listaUsuariosProductosFavoritos;
 
-    /**
-     * Relacion con la lista de chat
-     */
+    // Relacion con la lista de chat
     @OneToMany(mappedBy = "chatProductoCompra")
     @ToString.Exclude
     private List<Chat>listaChatProducto;
 
-    /**
-     * Relacion con la lista de categorias
-     */
+    // Relacion con la lista de categorias
     @ManyToMany
     @ToString.Exclude
     private List<Categoria>listaCategoria;
+
 
     /**
      * Constructor de la entidad Producto

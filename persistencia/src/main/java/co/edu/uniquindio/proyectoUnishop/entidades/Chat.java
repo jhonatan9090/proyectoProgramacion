@@ -9,7 +9,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
-
+/**
+ * Entidad Chat
+ */
 @Entity
 @Getter
 @Setter
@@ -17,31 +19,24 @@ import java.util.List;
 @ToString
 public class Chat  implements Serializable {
 
-    /**
-     * @param codChat codigo del chat, es la llave primaria de la clase
-     */
-    @Id
+    @Id //llave primaria de la clase
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private Integer codChat;
+    private Integer codChat; //codigo del chat
 
-    /**
-     * Relacion usurario comprador
-     */
+
+    // Relacion usurario comprador
     @ManyToOne
     @JoinColumn(nullable = false)
     private Usuario usuarioComprador;
 
-    /**
-     * Relación con producto a comprar
-     */
+
+    // Relación con producto a comprar
     @ManyToOne
     @JoinColumn(nullable = false)
     private Producto chatProductoCompra;
 
-    /**
-     * Relación con lista de mensajes
-     */
+    //Relación con lista de mensajes
     @ToString.Exclude
     @OneToMany(mappedBy = "chatUsuario")
     private List<Mensajes>listaMensajes;

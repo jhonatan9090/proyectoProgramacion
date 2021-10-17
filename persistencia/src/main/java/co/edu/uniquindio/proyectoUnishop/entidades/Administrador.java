@@ -10,7 +10,9 @@ import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Map;
 
-
+/**
+ * Entidad administrador que se extiende se la entidad Persona
+ */
 @Entity
 @Getter @Setter
 @ToString

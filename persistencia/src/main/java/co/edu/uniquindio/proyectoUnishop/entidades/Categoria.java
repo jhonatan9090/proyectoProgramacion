@@ -10,44 +10,27 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-
+/**
+ * Entidad Categoria
+ */
 @Entity
 @Getter @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 public class Categoria implements Serializable {
 
-    /**
-     * atributos de la clase Categoria
-     *
-     * @param codCategoria codigo de la categoria
-     *                     es la llave primaria de la entidad categoria
-     *
-     * @param nombre nombre de la categoria
-     *               se le asigna un tamaño maximo de 30 caracteres
-     *               no puede ser null
-     *               el nombre no se puede repetir
-     *
-     * @param listaProductosCategorias
-     */
-
-    @Id
+    @Id  //Llave primaria de la clase
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer codCategoria;
+    private Integer codCategoria; //Codigo de la categoria
 
     @Column(length = 30,nullable = false,unique = true)
-    private String nombre;
+    private String nombre; //nombre de la categoria
 
-
-    /**
-     * Relacion con lista de productos
-     * MUchos a muchos
-     */
+    // Relacion con lista de productos
     @ManyToMany(mappedBy = "listaCategoria")
     @ToString.Exclude
     private List<Producto>listaProductosCategorias;
-
 
     /**
      * Metodo constructor sin parámetros de la entidad Categoria
