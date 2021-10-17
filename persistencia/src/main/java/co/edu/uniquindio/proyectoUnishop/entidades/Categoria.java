@@ -27,7 +27,13 @@ public class Categoria implements Serializable {
     private String nombre;
 
     @ManyToMany(mappedBy = "listaCategoria")
+    @ToString.Exclude
     private List<Producto>listaProductosCategorias;
+
+    public Categoria() {
+        super();
+
+    }
 
     public Categoria(String nombre) {
         this.nombre = nombre;

@@ -47,5 +47,6 @@ public class Subasta implements Serializable {
     public Subasta(@Future LocalDate fechaLimite, Producto subastaProducto) {
         this.fechaLimite = fechaLimite;
         this.subastaProducto = subastaProducto;
+        this.listaSubastaUsuarios = listaSubastaUsuarios;
     }
 }
