@@ -95,7 +95,7 @@ public class AdministradorTest {
     @Sql("classpath:administrador.sql")
     public void actualizarUsuarioSql() {
 
-        //desde aqui se busca al administrador del sql con su id y se modifica
+        //desde aqui se busca al administrador del sql con su id y se modifica el
         Administrador administradorBuscado=miAdministradorRepo.findById("1340").orElse(null);
         administradorBuscado.setNombre("Maria");
         //en la linea de abajo se Guardan los cambios realizados al administrador buscado
