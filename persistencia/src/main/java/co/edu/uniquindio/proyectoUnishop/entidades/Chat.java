@@ -30,7 +30,7 @@ public class Chat  implements Serializable {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Producto chatProductoCompra;
-
+    @ToString.Exclude
     @OneToMany(mappedBy = "chatUsuario")
     private List<Mensajes>listaMensajes;
 
