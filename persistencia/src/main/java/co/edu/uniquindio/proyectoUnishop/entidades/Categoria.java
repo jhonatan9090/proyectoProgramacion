@@ -29,11 +29,6 @@ public class Categoria implements Serializable {
     @ManyToMany(mappedBy = "listaCategoria")
     private List<Producto>listaProductosCategorias;
 
-    public Categoria(){
-        super();
-
-    }
-
     public Categoria(String nombre) {
         this.nombre = nombre;
 

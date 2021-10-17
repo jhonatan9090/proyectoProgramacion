@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +27,7 @@ public class AdministradorTest {
 
     //metodo para registrar un arministrador
     @Test
-    public void registrarAdministradorTest(){
+    public void registrarAdministradorTestSql(){
 
         Map<String,String>telefonos=new HashMap<>();
         telefonos.put("casa","321414");
@@ -39,8 +40,8 @@ public class AdministradorTest {
 
     }
 
-    //metodo que elimina un administrador
-    @Test
+
+   /* @Test
     public void eliminarUsuario(){
 
         Map<String,String>telefonos=new HashMap<>();
@@ -54,11 +55,21 @@ public class AdministradorTest {
 
         Administrador administradorBuscado= miAdministradorRepo.findById("123").orElse(null);
         Assertions.assertNull(administradorBuscado);
-    }
+    }*/
 
-
-    //metodo que actualiza un administrador
+    //metodo para eliminar un administrador desde el Sql
     @Test
+    @Sql("classpath:administrador.sql")
+    public void eliminarUsuarioSql(){
+
+        //se elimina el administrado deseado buscandolo por su id
+        miAdministradorRepo.deleteById("1340");
+        Administrador administradorBuscado= miAdministradorRepo.findById("1340").orElse(null);
+        //se verifica que se haya eliminado el administrador deseado
+        Assertions.assertNull(administradorBuscado);
+
+    }
+    /*@Test
     public void actualizarUsuario(){
 
     //se guarda el administrador
@@ -77,9 +88,23 @@ public class AdministradorTest {
         Administrador administradorBuscado=miAdministradorRepo.findById("123").orElse(null);
         Assertions.assertEquals("Maria",administradorBuscado.getNombre());
 
-    }
-    //metodo que busca los administradores
+    }*/
+
+    //Metodo que sirve para actualizar los datos de un administrador
     @Test
+    @Sql("classpath:administrador.sql")
+    public void actualizarUsuarioSql() {
+
+        //desde aqui se busca al administrador del sql con su id y se modifica
+        Administrador administradorBuscado=miAdministradorRepo.findById("1340").orElse(null);
+        administradorBuscado.setNombre("Maria");
+        //en la linea de abajo se Guardan los cambios realizados al administrador buscado
+        miAdministradorRepo.save(administradorBuscado);
+        //aqui se busca si se guardaron correctamente los cambios
+        Assertions.assertEquals("Maria",administradorBuscado.getNombre());
+    }
+
+    /*@Test
     public void listarUsuariosTes(){
 
         Map<String,String>telefonos=new HashMap<>();
@@ -93,5 +118,19 @@ public class AdministradorTest {
         System.out.println(listaAdministradores);
 
     }
+    */
 
+
+    //metodo que sirve para listar los administradores guardados en el sql
+    @Test
+    @Sql("classpath:administrador.sql")
+    public void listarUsuariosTesSql() {
+        //se traen los datos de el sql y se guarda en la lista
+        List<Administrador>listaAdministradores=miAdministradorRepo.findAll();
+
+        //en este for se imprimen los datos guardados en la lista
+        for(Administrador miAdministrador: listaAdministradores){
+            System.out.println(miAdministrador);
+        }
+    }
 }
