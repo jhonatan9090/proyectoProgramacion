@@ -69,6 +69,64 @@ public class ComentarioTest {
 
     }
 
+
+    /**
+     * metodo para eliminar un comentario desde el Sql
+     */
+    @Test
+    @Sql("classpath:comentario.sql")
+    public void eliminarComentarioTestSql() {
+
+        //elimina el comentario desde el sql por el codigo
+        miComentarioRepo.deleteById(2);
+        //busca si el comentario no fue eliminado por el codigo
+        Comentario comentarioBuscado = miComentarioRepo.findById(2).orElse(null);
+        Assertions.assertNull(comentarioBuscado);
+
+    }
+
+
+    /**
+     *metodo para actualizar un comentario
+     */
+    @Test
+    @Sql("classpath:comentario.sql")
+    public void actualizarComentarioTestSql() {
+
+        //usuario a editar
+        Usuario usuarioComentario = miUsuarioRepo.findById("435").orElse(null);
+
+        // buscamos comentario a editar
+        Comentario miComentario = miComentarioRepo.findById(1).orElse(null);
+
+        //le seteamos el nuevo dato al al usuario
+        usuarioComentario.setNombre("jhonatan uribe");
+
+        //seteamos el nuevo dato al comentario
+        miComentario.setUsuarioComentario(usuarioComentario);
+        Comentario comentarioEditado = miComentarioRepo.save(miComentario);
+        Assertions.assertEquals("jhonatan uribe", comentarioEditado.getUsuarioComentario().getNombre());
+
+    }
+
+
+    /**
+     * Metodo para listar los comentarios guardados en sql
+     */
+    @Test
+    @Sql("classpath:comentario.sql")
+    public void listarComentariosTestSql() {
+
+        //trae la lista de comentarios
+        List<Comentario> listaComentarios = miComentarioRepo.findAll();
+
+        // imprime la lista de comentarios
+        for (Comentario misComentarios : listaComentarios) {
+            System.out.println(misComentarios);
+        }
+    }
+
+    //Metodo para Eliminar un comentario (sin sql)
     /*  @Test
       public void eliminarComentarioTest() {
 
@@ -101,22 +159,8 @@ public class ComentarioTest {
           Assertions.assertNull(comentarioBuscado);
 
       }*/
-    /**
-     * metodo para eliminar un comentario desde el Sql
-     */
-    @Test
-    @Sql("classpath:comentario.sql")
-    public void eliminarComentarioTestSql() {
 
-        //elimina el comentario desde el sql por el codigo
-        miComentarioRepo.deleteById(2);
-        //busca si el comentario no fue eliminado por el codigo
-        Comentario comentarioBuscado = miComentarioRepo.findById(2).orElse(null);
-        Assertions.assertNull(comentarioBuscado);
-
-
-    }
-
+    //Metodo para Actualizar un comentario (sin sql)
     /*@Test
     public void actualizarComentarioTest() {
         Ciudad miCiudad = new Ciudad("Cali");
@@ -150,29 +194,7 @@ public class ComentarioTest {
 
     }*/
 
-    /**
-     *metodo para actualizar un comentario
-     */
-    @Test
-    @Sql("classpath:comentario.sql")
-    public void actualizarComentarioTestSql() {
-
-        //usuario a editar
-        Usuario usuarioComentario = miUsuarioRepo.findById("435").orElse(null);
-
-        // buscamos comentario a editar
-        Comentario miComentario = miComentarioRepo.findById(1).orElse(null);
-
-        //le seteamos el nuevo dato al al usuario
-        usuarioComentario.setNombre("jhonatan uribe");
-
-        //seteamos el nuevo dato al comentario
-        miComentario.setUsuarioComentario(usuarioComentario);
-        Comentario comentarioEditado = miComentarioRepo.save(miComentario);
-        Assertions.assertEquals("jhonatan uribe", comentarioEditado.getUsuarioComentario().getNombre());
-
-    }
-
+    //Metodo para listar comentarios (sin sql)
     /*@Test
     public void listarComentariosTest() {
 
@@ -207,19 +229,4 @@ public class ComentarioTest {
             System.out.println(misComentarios);
         }
     }*/
-
-    /**
-     * Metodo para listar los comentarios guardados en sql
-     */
-    @Test
-    @Sql("classpath:comentario.sql")
-    public void listarComentariosTestSql() {
-        //trae la lista de comentarios
-        List<Comentario> listaComentarios = miComentarioRepo.findAll();
-        // imprime la lista de comentarios
-        for (Comentario misComentarios : listaComentarios) {
-            System.out.println(misComentarios);
-        }
-
-    }
 }

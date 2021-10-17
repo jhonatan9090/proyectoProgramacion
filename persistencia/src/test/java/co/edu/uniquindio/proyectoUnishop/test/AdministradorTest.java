@@ -16,7 +16,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//
 //Guarda nuestra prueba en la Base de datos
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -24,6 +23,7 @@ public class AdministradorTest {
 
     @Autowired    //instancia variables componentes de springboot
     private AdministradorRepo miAdministradorRepo;
+
 
     /**
      * metodo para registrar un arministrador
@@ -42,23 +42,6 @@ public class AdministradorTest {
 
     }
 
-
-   /* @Test
-    public void eliminarUsuario(){
-
-        Map<String,String>telefonos=new HashMap<>();
-        telefonos.put("casa","321414");
-        telefonos.put("celular","321452514");
-
-        Administrador administrador1 = new Administrador("123", "Ana", "ana@gmail.com", "2323", telefonos);
-        miAdministradorRepo.save(administrador1);
-
-        miAdministradorRepo.deleteById("123");
-
-        Administrador administradorBuscado= miAdministradorRepo.findById("123").orElse(null);
-        Assertions.assertNull(administradorBuscado);
-    }*/
-
     /**
      * metodo para eliminar un administrador desde el Sql
      */
@@ -74,6 +57,60 @@ public class AdministradorTest {
         Assertions.assertNull(administradorBuscado);
 
     }
+
+
+    /**
+     * Metodo que sirve para actualizar los datos de un administrador
+     */
+    @Test
+    @Sql("classpath:administrador.sql")
+    public void actualizarUsuarioSql() {
+
+        //desde aqui se busca al administrador del sql con su id y se modifica el
+        Administrador administradorBuscado=miAdministradorRepo.findById("1340").orElse(null);
+        administradorBuscado.setNombre("Maria");
+
+        //en la linea de abajo se Guardan los cambios realizados al administrador buscado
+        miAdministradorRepo.save(administradorBuscado);
+
+        //aqui se busca si se guardaron correctamente los cambios
+        Assertions.assertEquals("Maria",administradorBuscado.getNombre());
+    }
+
+
+    /**
+     * metodo que sirve para listar los administradores guardados en el sql
+     */
+    @Test
+    @Sql("classpath:administrador.sql")
+    public void listarUsuariosTesSql() {
+        //se traen los datos de el sql y se guarda en la lista
+        List<Administrador>listaAdministradores=miAdministradorRepo.findAll();
+
+        //en este for se imprimen los datos guardados en la lista
+        for(Administrador miAdministrador: listaAdministradores){
+            System.out.println(miAdministrador);
+        }
+    }
+
+    //Metodo que elimina un administrador (sin sql)
+    /* @Test
+    public void eliminarUsuario(){
+
+        Map<String,String>telefonos=new HashMap<>();
+        telefonos.put("casa","321414");
+        telefonos.put("celular","321452514");
+
+        Administrador administrador1 = new Administrador("123", "Ana", "ana@gmail.com", "2323", telefonos);
+        miAdministradorRepo.save(administrador1);
+
+        miAdministradorRepo.deleteById("123");
+
+        Administrador administradorBuscado= miAdministradorRepo.findById("123").orElse(null);
+        Assertions.assertNull(administradorBuscado);
+    }*/
+
+    //Metodo que actualiza un administrador (sin sql)
     /*@Test
     public void actualizarUsuario(){
 
@@ -95,24 +132,7 @@ public class AdministradorTest {
 
     }*/
 
-    /**
-     * Metodo que sirve para actualizar los datos de un administrador
-     */
-    @Test
-    @Sql("classpath:administrador.sql")
-    public void actualizarUsuarioSql() {
-
-        //desde aqui se busca al administrador del sql con su id y se modifica el
-        Administrador administradorBuscado=miAdministradorRepo.findById("1340").orElse(null);
-        administradorBuscado.setNombre("Maria");
-
-        //en la linea de abajo se Guardan los cambios realizados al administrador buscado
-        miAdministradorRepo.save(administradorBuscado);
-
-        //aqui se busca si se guardaron correctamente los cambios
-        Assertions.assertEquals("Maria",administradorBuscado.getNombre());
-    }
-
+    //Metodo que lista los administrador (sin sql)
     /*@Test
     public void listarUsuariosTes(){
 
@@ -128,19 +148,4 @@ public class AdministradorTest {
 
     }
     */
-
-    /**
-     * metodo que sirve para listar los administradores guardados en el sql
-     */
-    @Test
-    @Sql("classpath:administrador.sql")
-    public void listarUsuariosTesSql() {
-        //se traen los datos de el sql y se guarda en la lista
-        List<Administrador>listaAdministradores=miAdministradorRepo.findAll();
-
-        //en este for se imprimen los datos guardados en la lista
-        for(Administrador miAdministrador: listaAdministradores){
-            System.out.println(miAdministrador);
-        }
-    }
 }

@@ -17,7 +17,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//
 //Guarda nuestra prueba en la Base de datos
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -40,18 +39,23 @@ public class CompraTest {
 
         // se inicializa una ciudad
         Ciudad ciudad1 = new Ciudad("armenia");
+
         //se guarda la ciudad
         miCiudadRepo.save(ciudad1);
+
         // se inicializa un cliente
         Map<String, String> telefonos = new HashMap<>();
         telefonos.put("casa", "321414");
         telefonos.put("celular", "321452514");
 
         Usuario usuario = new Usuario("123", "Aleja", "aleja@gmail.com", "3456", telefonos, ciudad1);
+
         //se guarda el usurio
         miUsuarioRepo.save(usuario);
+
         //se crea la compra
         Compra miCompra = new Compra(LocalDate.of(2022, 6, 25), "Efectivo", usuario);
+
         // se guarda la compra
         Compra compraGuardado = miCompraRepo.save(miCompra);
         Assertions.assertNotNull(compraGuardado);
@@ -59,6 +63,62 @@ public class CompraTest {
     }
 
 
+    /**
+     * metodo para eliminar una compra desde el Sql
+     */
+    @Test
+    @Sql("classpath:compra.sql")
+    public void eliminarCompraTestSql() {
+
+        //se eliminla compra por medio del id
+        miCompraRepo.deleteById(2);
+
+        //se busca para comprobar si ya se elimino
+        Compra compraBuscada = miCompraRepo.findById(2).orElse(null);
+        Assertions.assertNull(compraBuscada);
+
+    }
+
+
+    /**
+     * metodo que actualiza una Compra
+     */
+    @Test
+    @Sql("classpath:compra.sql")
+    public void actualizarCompraTestSql() {
+
+        //trae la compra del sql por el id
+        Compra compraRealizada = miCompraRepo.findById(1).orElse(null);
+
+        //se le settea la nueva info
+        compraRealizada.setMedioPago("daviplata");
+
+        //se guarda el cambio realizado
+        Compra compraBuscada = miCompraRepo.save(compraRealizada);
+
+        //se busca si el cambio fue hecho correctamente
+        Assertions.assertEquals("daviplata", compraBuscada.getMedioPago());
+
+
+    }
+
+    /**
+     * Metodo para listar las compras guardadas en sql
+     */
+    @Test
+    @Sql("classpath:compra.sql")
+    public void listarCompraTestSql() {
+
+        //busca las compras y las guarda en una lisy
+        List<Compra> listaCompra = miCompraRepo.findAll();
+
+        //imprime las compras
+        for (Compra misCompras : listaCompra) {
+            System.out.println(misCompras);
+        }
+    }
+
+    //Metodo para eliminar una compra (sin sql)
     /*@Test
     public void eliminarCompraTest() {
 
@@ -82,23 +142,7 @@ public class CompraTest {
         Assertions.assertNull(compraBuscada);
     }*/
 
-
-    /**
-     * metodo para eliminar una compra desde el Sql
-     */
-    @Test
-    @Sql("classpath:compra.sql")
-    public void eliminarCompraTestSql() {
-
-        //se eliminla compra por medio del id
-        miCompraRepo.deleteById(2);
-        //se busca para comprobar si ya se elimino
-        Compra compraBuscada = miCompraRepo.findById(2).orElse(null);
-        Assertions.assertNull(compraBuscada);
-
-    }
-
-
+    //Metodo para eliminar una compra (sin sql)
     /*@Test
     public void actualizarCompraTest() {
 
@@ -123,28 +167,7 @@ public class CompraTest {
         Assertions.assertEquals("tarjeta", compraBuscada.getMedioPago());
     }*/
 
-    /**
-     * metodo que actualiza una Compra
-     */
-    @Test
-    @Sql("classpath:compra.sql")
-    public void actualizarCompraTestSql() {
-
-        //trae la compra del sql por el id
-        Compra compraRealizada = miCompraRepo.findById(1).orElse(null);
-
-        //se le settea la nueva info
-        compraRealizada.setMedioPago("daviplata");
-
-        //se guarda el cambio realizado
-        Compra compraBuscada = miCompraRepo.save(compraRealizada);
-
-        //se busca si el cambio fue hecho correctamente
-        Assertions.assertEquals("daviplata", compraBuscada.getMedioPago());
-
-
-    }
-
+    //Metodo para listar las compras (sin sql)
     /*  @Test
       public void listarCompraTest() {
 
@@ -172,23 +195,5 @@ public class CompraTest {
           System.out.println(listaCompra);
 
       }*/
-
-    /**
-     * Metodo para listar las compras guardadas en sql
-     */
-    @Test
-    @Sql("classpath:compra.sql")
-    public void listarCompraTestSql() {
-
-        //busca las compras y las guarda en una lisy
-        List<Compra> listaCompra = miCompraRepo.findAll();
-
-        //imprime las compras
-        for (Compra misCompras : listaCompra) {
-            System.out.println(misCompras);
-        }
-
-
-    }
 
 }

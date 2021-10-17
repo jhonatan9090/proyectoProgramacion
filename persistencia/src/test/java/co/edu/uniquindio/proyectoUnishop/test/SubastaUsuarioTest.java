@@ -66,7 +66,64 @@ public class SubastaUsuarioTest {
         Assertions.assertNotNull(subUSGuardada);
 
     }
-   /* @Test
+
+
+    /**
+     * metodo para eliminar un usuario de subasta guardado desde el Sql
+     */
+    @Test
+    @Sql("classpath:subastaUsuario.sql")
+    public void EliminarSubastaUsuarioTestSql(){
+
+        //se busca el usuario de la subasta por su id y se elimina
+        miUsuarioSubasta.deleteById(1);
+        SubastaUsuario buscarsubUs = miUsuarioSubasta.findById(1).orElse(null);
+        //se comprueba que se haya eliminad el usuario de subasta
+        Assertions.assertNull(buscarsubUs);
+    }
+
+
+
+    /**
+     * metodo para actualizar los datos de las subastas guardadas en el sql
+     */
+    @Test
+    @Sql("classpath:subastaUsuario.sql")
+    public void ActualizarSubastaUsuarioTestSql(){
+
+        //se busca el usuario de la subasta a actualizar
+        SubastaUsuario subastaUsuarioBuscar = miUsuarioSubasta.findById(1).orElse(null);
+
+        //se escribe el valor con el cual se desea actualziar
+        subastaUsuarioBuscar.setValor(10000.2);
+
+        //se guarda el valor actualizado
+        miUsuarioSubasta.save(subastaUsuarioBuscar);
+
+        SubastaUsuario subUsBuscada = miUsuarioSubasta.findById(1).orElse(null);
+        //se comprueba que el valor se haya actualzido
+        Assertions.assertEquals(10000.2,subUsBuscada.getValor());
+    }
+
+
+
+    /**
+     * metodo para listar los usuarios de la subasta guardados en el sql
+     */
+    @Test
+    @Sql("classpath:subastaUsuario.sql")
+    public void ListarSubastaUsuarioTestSql(){
+        //se guardan los datos del sql en una lista
+        List<SubastaUsuario> listaSubastaUsuario = miUsuarioSubasta.findAll();
+
+        //el for se usa para mostrar los datos guardados en la lista
+        for (SubastaUsuario miUsarioSubasta: listaSubastaUsuario){
+            System.out.println(miUsarioSubasta);
+        }
+    }
+
+    //Metodo para eliminar una subasta de usuario (sin sql)
+    /* @Test
     public void EliminarSubastaUsuarioTest(){
         Ciudad ciudad1 = new Ciudad("Armenia");
         miCiudad.save(ciudad1);
@@ -96,22 +153,8 @@ public class SubastaUsuarioTest {
         Assertions.assertNull(buscarsubUs);
     }*/
 
-
-    /**
-     * metodo para eliminar un usuario de subasta guardado desde el Sql
-     */
-    @Test
-    @Sql("classpath:subastaUsuario.sql")
-    public void EliminarSubastaUsuarioTestSql(){
-
-        //se busca el usuario de la subasta por su id y se elimina
-        miUsuarioSubasta.deleteById(1);
-        SubastaUsuario buscarsubUs = miUsuarioSubasta.findById(1).orElse(null);
-        //se comprueba que se haya eliminad el usuario de subasta
-        Assertions.assertNull(buscarsubUs);
-    }
-
-   /* @Test
+    //Metodo para actualizar una subasta de usuario (sin sql)
+    /* @Test
     public void ActualizarSubastaUsuarioTest(){
         Ciudad ciudad1 = new Ciudad("Armenia");
         miCiudad.save(ciudad1);
@@ -152,28 +195,8 @@ public class SubastaUsuarioTest {
 
     }*/
 
-    /**
-     * metodo para actualizar los datos de las subastas guardadas en el sql
-     */
-    @Test
-    @Sql("classpath:subastaUsuario.sql")
-    public void ActualizarSubastaUsuarioTestSql(){
-
-        //se busca el usuario de la subasta a actualizar
-        SubastaUsuario subastaUsuarioBuscar = miUsuarioSubasta.findById(1).orElse(null);
-
-        //se escribe el valor con el cual se desea actualziar
-        subastaUsuarioBuscar.setValor(10000.2);
-
-        //se guarda el valor actualizado
-        miUsuarioSubasta.save(subastaUsuarioBuscar);
-
-        SubastaUsuario subUsBuscada = miUsuarioSubasta.findById(1).orElse(null);
-        //se comprueba que el valor se haya actualzido
-        Assertions.assertEquals(10000.2,subUsBuscada.getValor());
-    }
-
-   /* @Test
+    //Metodo para listar las subastas de usuario (sin sql)
+    /* @Test
     public void ListarSubastaUsuarioTest(){
         Ciudad ciudad1 = new Ciudad("Armenia");
         miCiudad.save(ciudad1);
@@ -204,20 +227,4 @@ public class SubastaUsuarioTest {
         }
 
     }*/
-
-    /**
-     * metodo para listar los usuarios de la subasta guardados en el sql
-     */
-    @Test
-    @Sql("classpath:subastaUsuario.sql")
-    public void ListarSubastaUsuarioTestSql(){
-        //se guardan los datos del sql en una lista
-        List<SubastaUsuario> listaSubastaUsuario = miUsuarioSubasta.findAll();
-        //el for se usa para mostrar los datos guardados en la lista
-        for (SubastaUsuario miUsarioSubasta: listaSubastaUsuario){
-            System.out.println(miUsarioSubasta);
-        }
-
-    }
-
 }

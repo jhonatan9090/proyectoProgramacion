@@ -1,6 +1,5 @@
 package co.edu.uniquindio.proyectoUnishop.test;
 
-
 import co.edu.uniquindio.proyectoUnishop.entidades.*;
 import co.edu.uniquindio.proyectoUnishop.repositorios.*;
 import org.junit.jupiter.api.Assertions;
@@ -73,7 +72,64 @@ public class DetalleCompraTest {
 
     }
 
-  /*  @Test
+    /**
+     * metodo para eliminar un detalle de la compra desde el Sql
+     */
+    @Test
+    @Sql("classpath:detalleCompra.sql")
+    public void eliminarDetalleCompraTestSql(){
+
+        //elimina una compra detallada desde el sql por el id
+        miDetalleCompraRepo.deleteById(1);
+
+        //buscamos para comprobar que el detalle compra fue eliminado
+        DetalleCompra detalleBuscado=miDetalleCompraRepo.findById(1).orElse(null);
+        Assertions.assertNull(detalleBuscado);
+    }
+
+
+
+
+    /**
+     * metodo para actualizar un detalle de la compra
+     */
+    @Test
+    @Sql("classpath:detalleCompra.sql")
+    public void actualizarDetalleCompraTestSql(){
+
+        //trae una compra detallada del sql por el id
+        DetalleCompra miDetalleCompra=miDetalleCompraRepo.findById(1).orElse(null);
+
+        //setteamos el cambio a la compra
+        miDetalleCompra.setUnidades(40);
+
+        //guardamos el cambio realizado
+        miDetalleCompraRepo.save(miDetalleCompra);
+
+        //buscamos para comprobar si se realizan los cambios
+        Assertions.assertEquals(40,miDetalleCompra.getUnidades());
+
+    }
+
+
+    /**
+     *  metodo que lista los detalles de compras
+     */
+    @Test
+    @Sql("classpath:detalleCompra.sql")
+    public void listarDetalleCompraTestSql(){
+
+        //trae los datos desde el sql por el id y los guarda en una lista
+        List<DetalleCompra>listaDetalleCompra=miDetalleCompraRepo.findAll();
+
+        //imprime los datos de la lista
+        for (DetalleCompra misDetalles : listaDetalleCompra) {
+            System.out.println(misDetalles);
+        }
+    }
+
+    //Metodo para eliminar un detalle de compra (sin sql)
+    /*  @Test
     public void eliminarDetalleCompraTest(){
 
         Ciudad ciudad=new Ciudad("armenia");
@@ -107,23 +163,8 @@ public class DetalleCompraTest {
         Assertions.assertNull(detalleBuscado);
     }*/
 
-    /**
-     * metodo para eliminar un detalle de la compra desde el Sql
-     */
-    @Test
-    @Sql("classpath:detalleCompra.sql")
-    public void eliminarDetalleCompraTestSql(){
-
-        //elimina una compra detallada desde el sql por el id
-        miDetalleCompraRepo.deleteById(1);
-
-        //buscamos para comprobar que el detalle compra fue eliminado
-        DetalleCompra detalleBuscado=miDetalleCompraRepo.findById(1).orElse(null);
-        Assertions.assertNull(detalleBuscado);
-    }
-
-
- /*   @Test
+    //Metodo para actualizar un detalle de compra (sin sql)
+    /*   @Test
     public void actualizarDetalleCompraTest(){
 
         Ciudad ciudad=new Ciudad("armenia");
@@ -158,28 +199,8 @@ public class DetalleCompraTest {
         Assertions.assertEquals(666000.9,detalleBuscado.getPrecioProducto());
     }*/
 
-    /**
-     * metodo para actualizar un detalle de la compra
-     */
-    @Test
-    @Sql("classpath:detalleCompra.sql")
-    public void actualizarDetalleCompraTestSql(){
-
-        //trae una compra detallada del sql por el id
-        DetalleCompra miDetalleCompra=miDetalleCompraRepo.findById(1).orElse(null);
-
-        //setteamos el cambio a la compra
-        miDetalleCompra.setUnidades(40);
-
-        //guardamos el cambio realizado
-        miDetalleCompraRepo.save(miDetalleCompra);
-
-        //buscamos para comprobar si se realizan los cambios
-        Assertions.assertEquals(40,miDetalleCompra.getUnidades());
-
-    }
-
-   /* @Test
+    //Metodo para listar los detalle de compras (sin sql)
+    /* @Test
     public void listarDetalleCompraTest(){
 
 
@@ -216,21 +237,4 @@ public class DetalleCompraTest {
             System.out.println(misDetalles);
         }
     }*/
-
-    /**
-     *  metodo que lista los detalles de compras
-     */
-    @Test
-    @Sql("classpath:detalleCompra.sql")
-    public void listarDetalleCompraTestSql(){
-
-        //trae los datos desde el sql por el id y los guarda en una lista
-        List<DetalleCompra>listaDetalleCompra=miDetalleCompraRepo.findAll();
-
-        //imprime los datos de la lista
-        for (DetalleCompra misDetalles : listaDetalleCompra) {
-            System.out.println(misDetalles);
-        }
-
-    }
 }

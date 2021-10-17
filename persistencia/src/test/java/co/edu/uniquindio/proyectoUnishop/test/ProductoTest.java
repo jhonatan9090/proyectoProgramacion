@@ -19,9 +19,6 @@ import java.util.Map;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-
-
-
 public class ProductoTest {
 
 
@@ -64,32 +61,6 @@ public class ProductoTest {
 
     }
 
-   /* @Test
-    public void eliminarProductoTest(){
-
-        Ciudad miCiudad = new Ciudad("Cali");
-        miCiudadRepo.save(miCiudad);
-
-        //Vendedor producto
-        Map<String, String> telefonos = new HashMap<>();
-        telefonos.put("casa", "321414");
-        telefonos.put("celular", "321452514");
-        Usuario usuario1 = new Usuario("111", "Maria Perez", "mariaPe@", "12345", telefonos, miCiudad);
-        usuario1.setTelefono(telefonos);
-        usuario1.setCiudadUsuario(miCiudad);
-        Usuario usuario = miUsuarioRepo.save(usuario1);
-
-        //Producto  Vender
-        List<String> imagenes = new ArrayList<>();
-        imagenes.add("1");
-        imagenes.add("2");
-        Producto miProducto = new Producto("televisor", 10, "es bueno", 12.02, LocalDate.of(2022,6,25), 5.5, imagenes, usuario, miCiudad);
-        //eliminar producto
-        Producto productoGuardado=miProductoRepo.save(miProducto);
-        miProductoRepo.delete(productoGuardado);
-        Producto productoBuscado=miProductoRepo.findById(1).orElse(null);
-        Assertions.assertNull(productoBuscado);
-    }*/
 
     /**
      * metodo para eliminar un producto desde el Sql
@@ -104,34 +75,6 @@ public class ProductoTest {
 
     }
 
-
-    /*@Test
-    public void actualizarMensajeTest(){
-
-        Ciudad miCiudad = new Ciudad("Cali");
-        miCiudadRepo.save(miCiudad);
-
-        //Vendedor producto
-        Map<String, String> telefonos = new HashMap<>();
-        telefonos.put("casa", "321414");
-        telefonos.put("celular", "321452514");
-        Usuario usuario1 = new Usuario("111", "Maria Perez", "mariaPe@", "12345", telefonos, miCiudad);
-        usuario1.setTelefono(telefonos);
-        usuario1.setCiudadUsuario(miCiudad);
-        Usuario usuario = miUsuarioRepo.save(usuario1);
-
-        //Producto  Vender
-        List<String> imagenes = new ArrayList<>();
-        imagenes.add("1");
-        imagenes.add("2");
-        Producto miProducto = new Producto("televisor", 10, "es bueno", 12.02, LocalDate.of(2022,6,25), 5.5, imagenes, usuario, miCiudad);
-        Producto productoGuardado=miProductoRepo.save(miProducto);
-
-        productoGuardado.setNombre("Computador");
-        Producto productoBuscado = miProductoRepo.save(productoGuardado);
-
-        Assertions.assertEquals("Computador",productoBuscado.getNombre());
-    }*/
 
     /**
      * Metodo para actualizar los datos de un producto
@@ -161,7 +104,82 @@ public class ProductoTest {
 
     }
 
-   /* @Test
+
+    /**
+     * Metodo para listar los mensajes guardados en sql
+     */
+    @Test
+    @Sql("classpath:producto.sql")
+    public void listarProductosTestSql(){
+
+        //se guardan los datos del sql en una lista
+        List<Producto>listaProductos=miProductoRepo.findAll();
+
+        //el for se usa para mostrar los datos guardados en la lista
+        for (Producto misProductos: listaProductos) {
+            System.out.println(misProductos);
+        }
+    }
+
+    //Metodo para eliminar un producto (sin sql)
+    /* @Test
+    public void eliminarProductoTest(){
+
+        Ciudad miCiudad = new Ciudad("Cali");
+        miCiudadRepo.save(miCiudad);
+
+        //Vendedor producto
+        Map<String, String> telefonos = new HashMap<>();
+        telefonos.put("casa", "321414");
+        telefonos.put("celular", "321452514");
+        Usuario usuario1 = new Usuario("111", "Maria Perez", "mariaPe@", "12345", telefonos, miCiudad);
+        usuario1.setTelefono(telefonos);
+        usuario1.setCiudadUsuario(miCiudad);
+        Usuario usuario = miUsuarioRepo.save(usuario1);
+
+        //Producto  Vender
+        List<String> imagenes = new ArrayList<>();
+        imagenes.add("1");
+        imagenes.add("2");
+        Producto miProducto = new Producto("televisor", 10, "es bueno", 12.02, LocalDate.of(2022,6,25), 5.5, imagenes, usuario, miCiudad);
+        //eliminar producto
+        Producto productoGuardado=miProductoRepo.save(miProducto);
+        miProductoRepo.delete(productoGuardado);
+        Producto productoBuscado=miProductoRepo.findById(1).orElse(null);
+        Assertions.assertNull(productoBuscado);
+    }*/
+
+    //Metodo para actualizar un producto (sin sql)
+    /*@Test
+    public void actualizarProductoTest(){
+
+        Ciudad miCiudad = new Ciudad("Cali");
+        miCiudadRepo.save(miCiudad);
+
+        //Vendedor producto
+        Map<String, String> telefonos = new HashMap<>();
+        telefonos.put("casa", "321414");
+        telefonos.put("celular", "321452514");
+        Usuario usuario1 = new Usuario("111", "Maria Perez", "mariaPe@", "12345", telefonos, miCiudad);
+        usuario1.setTelefono(telefonos);
+        usuario1.setCiudadUsuario(miCiudad);
+        Usuario usuario = miUsuarioRepo.save(usuario1);
+
+        //Producto  Vender
+        List<String> imagenes = new ArrayList<>();
+        imagenes.add("1");
+        imagenes.add("2");
+        Producto miProducto = new Producto("televisor", 10, "es bueno", 12.02, LocalDate.of(2022,6,25), 5.5, imagenes, usuario, miCiudad);
+        Producto productoGuardado=miProductoRepo.save(miProducto);
+
+        productoGuardado.setNombre("Computador");
+        Producto productoBuscado = miProductoRepo.save(productoGuardado);
+
+        Assertions.assertEquals("Computador",productoBuscado.getNombre());
+    }*/
+
+    //Metodo para listar productos (sin sql)
+    /* @Test
     public void listarProductosTest(){
 
         Ciudad miCiudad = new Ciudad("Cali");
@@ -192,21 +210,4 @@ public class ProductoTest {
             System.out.println(misProductos);
         }
     }*/
-
-    /**
-     * Metodo para listar los mensajes guardados en sql
-     */
-    @Test
-    @Sql("classpath:producto.sql")
-    public void listarProductosTestSql(){
-
-
-        List<Producto>listaProductos=miProductoRepo.findAll();
-
-        //el for se usa para mostrar los datos guardados en la lista
-        for (Producto misProductos: listaProductos) {
-            System.out.println(misProductos);
-        }
-
-    }
 }

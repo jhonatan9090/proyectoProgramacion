@@ -112,10 +112,16 @@ public class Producto implements Serializable {
     @ToString.Exclude
     private List<Usuario>listaUsuariosProductosFavoritos;
 
+    /**
+     * Relacion con la lista de chat
+     */
     @OneToMany(mappedBy = "chatProductoCompra")
     @ToString.Exclude
     private List<Chat>listaChatProducto;
 
+    /**
+     * Relacion con la lista de categorias
+     */
     @ManyToMany
     @ToString.Exclude
     private List<Categoria>listaCategoria;

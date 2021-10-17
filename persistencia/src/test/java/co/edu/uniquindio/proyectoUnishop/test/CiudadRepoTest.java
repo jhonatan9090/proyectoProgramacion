@@ -29,14 +29,6 @@ public class CiudadRepoTest {
         Assertions.assertNotNull(guardarCiudad);
     }
 
-   /* @Test
-    public void EliminarCiudadTest(){
-        Ciudad ciudad1 = new Ciudad("Armenia");
-        Ciudad guardarCiudad = miCiudad.save(ciudad1);
-        miCiudad.delete(guardarCiudad);
-        Ciudad buscarCiudad = miCiudad.findById(1).orElse(null);
-        Assertions.assertNull(buscarCiudad);
-    }*/
 
     /**
      * metodo para eliminar una ciudad desde el Sql
@@ -50,16 +42,6 @@ public class CiudadRepoTest {
 
     }
 
-   /* @Test
-    public void ActualizarCiudadTest(){
-        Ciudad ciudad1 = new Ciudad("Armenia");
-        Ciudad guardarCiudad = miCiudad.save(ciudad1);
-        guardarCiudad.setNombre("Calarca");
-       Ciudad ciudadBuscada= miCiudad.save(guardarCiudad);
-
-        Assertions.assertEquals("Calarca",ciudadBuscada.getNombre());
-
-    }*/
 
     /**
      * Metodos para actualizar los datos de una ciudad
@@ -73,9 +55,51 @@ public class CiudadRepoTest {
         //actualiza el nombre de la ciudad
         ciudad1.setNombre("Calarca");
         Ciudad ciudadBuscada= miCiudad.save(ciudad1);
+
         Assertions.assertEquals("Calarca",ciudadBuscada.getNombre());
 
     }
+
+
+    /**
+     * metodo que sirve para listar las ciudades guardados en el sql
+     */
+    @Test
+    @Sql("classpath:ciudad.sql")
+    public void ListarCiudadTestSql(){
+
+        //se guardan los datos del sql en una lista
+        List<Ciudad> listaCiudad = miCiudad.findAll();
+
+        //el for se usa para mostrar los datos guardados en la lista
+        for (Ciudad misCiudad: listaCiudad){
+            System.out.println(misCiudad);
+        }
+    }
+
+    //Metodo para eliminar una ciudad (sin sql)
+    /* @Test
+    public void EliminarCiudadTest(){
+        Ciudad ciudad1 = new Ciudad("Armenia");
+        Ciudad guardarCiudad = miCiudad.save(ciudad1);
+        miCiudad.delete(guardarCiudad);
+        Ciudad buscarCiudad = miCiudad.findById(1).orElse(null);
+        Assertions.assertNull(buscarCiudad);
+    }*/
+
+    //Metodo para eliminar una ciudad (sin sql)
+    /* @Test
+    public void ActualizarCiudadTest(){
+        Ciudad ciudad1 = new Ciudad("Armenia");
+        Ciudad guardarCiudad = miCiudad.save(ciudad1);
+        guardarCiudad.setNombre("Calarca");
+       Ciudad ciudadBuscada= miCiudad.save(guardarCiudad);
+
+        Assertions.assertEquals("Calarca",ciudadBuscada.getNombre());
+
+    }*/
+
+    //Metodo para listar las ciudades (sin sql)
     /*@Test
     public void ListarCiudadTest(){
         Ciudad ciudad1 = new Ciudad("Armenia");
@@ -85,19 +109,5 @@ public class CiudadRepoTest {
             System.out.println(misCiudad);
         }
     }*/
-
-    /**
-     * metodo que sirve para listar las ciudades guardados en el sql
-     */
-    @Test
-    @Sql("classpath:ciudad.sql")
-    public void ListarCiudadTestSql(){
-
-        List<Ciudad> listaCiudad = miCiudad.findAll();
-        for (Ciudad misCiudad: listaCiudad){
-            System.out.println(misCiudad);
-        }
-
-    }
 
 }

@@ -1,6 +1,5 @@
 package co.edu.uniquindio.proyectoUnishop.test;
 
-
 import co.edu.uniquindio.proyectoUnishop.entidades.*;
 import co.edu.uniquindio.proyectoUnishop.repositorios.*;
 import org.junit.jupiter.api.Assertions;
@@ -48,7 +47,7 @@ public class MensajesRepoTest {
         Ciudad miCiudad = new Ciudad("Cali");
         miCiudadRepo.save(miCiudad);
 
-        //Vendedor producto
+        //Crea un Vendedor producto
         Map<String, String> telefonos = new HashMap<>();
         telefonos.put("casa", "321414");
         telefonos.put("celular", "321452514");
@@ -69,28 +68,83 @@ public class MensajesRepoTest {
         Ciudad miCiudad2 = new Ciudad("armenia");
         miCiudadRepo.save(miCiudad2);
 
+        //Crea un comprador
         Map<String, String> telefonos2 = new HashMap<>();
         telefonos2.put("casa", "32140014");
         telefonos2.put("celular", "32100452514");
         Usuario usuario2 = new Usuario("222", "carlos velez", "jiji@", "123485", telefonos2, miCiudad);
         usuario2.setTelefono(telefonos2);
         usuario2.setCiudadUsuario(miCiudad);
-
         Usuario comprador = miUsuarioRepo.save(usuario2);
 
-
+        //Crea un chat
         Chat miChat = new Chat(comprador, productoVender);
         Chat miChatGuardado = miChatRepo.save(miChat);
 
-
+        //crea un mensaje
         Mensajes miMensajes = new Mensajes("hola", "andres perez", LocalDateTime.now(), miChatGuardado);
 
         Mensajes mensajeGuardado = miMensajesRepo.save(miMensajes);
         Assertions.assertNotNull(mensajeGuardado);
+    }
 
+
+
+    /**
+     * metodo para eliminar un mensaje desde el Sql
+     */
+    @Test
+    @Sql("classpath:mensaje.sql")
+    public void eliminarMensajeTestSql() {
+
+        //se elimina el mensaje por medio del id
+        miMensajesRepo.deleteById(1);
+
+        //se busca para comprobar que si se elimino
+        Mensajes mensajeBuscado = miMensajesRepo.findById(1).orElse(null);
+        Assertions.assertNull(mensajeBuscado);
 
     }
 
+
+    /**
+     * metodo que actualiza un mensaje
+     */
+    @Test
+    @Sql("classpath:mensaje.sql")
+    public void actualizarMensajeTestSql() {
+
+        //trae el mensaje desde del sql
+        Mensajes mensajeBuscado = miMensajesRepo.findById(3).orElse(null);
+
+        //se seteamos el cambio que le queremos hacer
+        mensajeBuscado.setMensaje("el producto llego ya");
+
+        //se guarda la modificacion
+        miMensajesRepo.save(mensajeBuscado);
+
+        //se busca para comprobar si se realizo los cambios
+        Assertions.assertEquals("el producto llego ya", mensajeBuscado.getMensaje());
+    }
+
+
+    /**
+     * metodo que lista los mensajes
+     */
+    @Test
+    @Sql("classpath:mensaje.sql")
+    public void listarMensajeTestSql() {
+
+        //busca los mensajes desde el sql por medio del id y los guarda en una list
+        List<Mensajes> listaMensajes = miMensajesRepo.findAll();
+
+        //imprime los mensajes de la lista
+        for (Mensajes misMensajes : listaMensajes) {
+            System.out.println(misMensajes);
+        }
+    }
+
+    //Metodo para eliminar un mensaje (sin sql)
     /*@Test
     public void eliminarMensajeTest(){
 
@@ -138,26 +192,9 @@ public class MensajesRepoTest {
         Mensajes mensajeBuscado=miMensajesRepo.findById(1).orElse(null);
         Assertions.assertNull(mensajeBuscado);
 
-
     }*/
 
-    /**
-     * metodo para eliminar un mensaje desde el Sql
-     */
-    @Test
-    @Sql("classpath:mensaje.sql")
-    public void eliminarMensajeTestSql() {
-
-        //se elimina el mensaje por medio del id
-        miMensajesRepo.deleteById(1);
-
-        //se busca para comprobar que si se elimino
-        Mensajes mensajeBuscado = miMensajesRepo.findById(1).orElse(null);
-        Assertions.assertNull(mensajeBuscado);
-
-    }
-
-
+    //Metodo para actualizar un mensaje (sin sql)
     /* @Test
      public void actualizarMensajeTest(){
 
@@ -212,27 +249,8 @@ public class MensajesRepoTest {
 
      }*/
 
-    /**
-     * metodo que actualiza un mensaje
-     */
-    @Test
-    @Sql("classpath:mensaje.sql")
-    public void actualizarMensajeTestSql() {
-
-        //trae el mensaje desde del sql
-        Mensajes mensajeBuscado = miMensajesRepo.findById(3).orElse(null);
-
-        //se seteamos el cambio que le queremos hacer
-        mensajeBuscado.setMensaje("el producto llego ya");
-
-        //se guarda la modificacion
-        miMensajesRepo.save(mensajeBuscado);
-
-        //se busca para comprobar si se realizo los cambios
-        Assertions.assertEquals("el producto llego ya", mensajeBuscado.getMensaje());
-    }
-
-   /* @Test
+    //Metodo paralistar los mensajes (sin sql)
+    /* @Test
     public void listarMensajeTest(){
 
 
@@ -284,23 +302,4 @@ public class MensajesRepoTest {
             System.out.println(misMensajes);
         }
     }*/
-
-
-    /**
-     * metodo que lista los mensajes
-     */
-    @Test
-    @Sql("classpath:mensaje.sql")
-    public void listarMensajeTestSql() {
-
-        //busca los mensajes desde el sql por medio del id y los guarda en una list
-        List<Mensajes> listaMensajes = miMensajesRepo.findAll();
-
-        //imprime los mensajes de la lista
-        for (Mensajes misMensajes : listaMensajes) {
-            System.out.println(misMensajes);
-        }
-
-
-    }
 }

@@ -66,6 +66,58 @@ public class SubastaRepoTest {
         Assertions.assertNotNull(subastaGuardada);
     }
 
+
+    /**
+     * metodo para eliminar una subasta desde el Sql
+     */
+    @Test
+    @Sql("classpath:subasta.sql")
+    public void EliminaSubastaTestSql() {
+
+        //sebusca la subasta en el sql por su codigo para eliminar
+        miSubasta.deleteById(3);
+        //se verifica que la subasta fue eliminada
+        Subasta subastaBuscar = miSubasta.findById(3).orElse(null);
+        Assertions.assertNull(subastaBuscar);
+
+    }
+
+
+    /**
+     * metodo para actualizar la informacon de las subastas
+     */
+    @Test
+    @Sql("classpath:subasta.sql")
+    public void ActualizarSubastaTest() {
+
+        //se trae una subasta desde el sql por medio del id
+        Subasta subastaBuscar = miSubasta.findById(1).orElse(null);
+        //se modifica la fecha de la subasta en el sql por la escrita abajo
+        subastaBuscar.setFechaLimite(LocalDate.of(2023,2,3));
+        //se guardan los cambios realizados a la subasta en el sql
+        miSubasta.save(subastaBuscar);
+        //se verifica que se hayan echs los cambios pertinentes en el sql
+        Assertions.assertEquals(LocalDate.of(2023, 2, 3),subastaBuscar.getFechaLimite());
+    }
+
+
+    /**
+     * metodo para listar las subastas guardadas en el sql
+     */
+    @Test
+    @Sql("classpath:subasta.sql")
+    public void ListarSubastaTestSql() {
+
+        //Se guardan los datos del sql en una lista
+        List<Subasta> listaSubasta = miSubasta.findAll();
+
+        //el for se usa para mostrar los datos guardados en la lista
+        for (Subasta misubasta : listaSubasta) {
+            System.out.println(misubasta);
+        }
+    }
+
+    //Metodo para eliminar una subasta (sin sql)
     /*@Test
     public void EliminaSubastaTest() {
         Ciudad ciudad1 = new Ciudad("Armenia");
@@ -93,20 +145,7 @@ public class SubastaRepoTest {
         Assertions.assertNull(subastaBuscar);
     }*/
 
-    /**
-     * metodo para eliminar una subasta desde el Sql
-     */
-    @Test
-    @Sql("classpath:subasta.sql")
-    public void EliminaSubastaTestSql() {
-
-        //sebusca la subasta en el sql por su codigo para eliminar
-        miSubasta.deleteById(3);
-        //se verifica que la subasta fue eliminada
-        Subasta subastaBuscar = miSubasta.findById(3).orElse(null);
-        Assertions.assertNull(subastaBuscar);
-
-    }
+    //Metodo para actualizar una subasta (sin sql)
     /*@Test
     public void ActualizarSubastaTest() {
         Ciudad ciudad1 = new Ciudad("Armenia");
@@ -137,22 +176,7 @@ public class SubastaRepoTest {
     }
 */
 
-    /**
-     * metodo para actualizar la informacon de las subastas
-     */
-    @Test
-    @Sql("classpath:subasta.sql")
-    public void ActualizarSubastaTest() {
-
-        //se trae una subasta desde el sql por medio del id
-        Subasta subastaBuscar = miSubasta.findById(1).orElse(null);
-        //se modifica la fecha de la subasta en el sql por la escrita abajo
-        subastaBuscar.setFechaLimite(LocalDate.of(2023,2,3));
-        //se guardan los cambios realizados a la subasta en el sql
-        miSubasta.save(subastaBuscar);
-        //se verifica que se hayan echs los cambios pertinentes en el sql
-        Assertions.assertEquals(LocalDate.of(2023, 2, 3),subastaBuscar.getFechaLimite());
-    }
+    //Metodo para listar las subastas (sin sql)
     /* @Test
      public void ListarSubastaTest(){
          Ciudad ciudad1 = new Ciudad("Armenia");
@@ -181,20 +205,4 @@ public class SubastaRepoTest {
          }
      }
      */
-
-    /**
-     * metodo para listar las subastas guardadas en el sql
-     */
-    @Test
-    @Sql("classpath:subasta.sql")
-    public void ListarSubastaTestSql() {
-
-        //Se guardan los datos del sql en una lista
-        List<Subasta> listaSubasta = miSubasta.findAll();
-
-        //el for se usa para mostrar los datos guardados en la lista
-        for (Subasta misubasta : listaSubasta) {
-            System.out.println(misubasta);
-        }
-    }
 }

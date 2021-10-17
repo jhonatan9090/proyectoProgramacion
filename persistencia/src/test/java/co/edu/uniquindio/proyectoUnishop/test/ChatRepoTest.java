@@ -37,6 +37,7 @@ public class ChatRepoTest {
     @Autowired//instancia variables componentes de springboot
     private CiudadRepo miCiudadRepo;
 
+
     /**
      * metodo para crear un chat
      */
@@ -84,7 +85,59 @@ public class ChatRepoTest {
         Assertions.assertNotNull(chatGuardado);
 
     }
-    //metodo que elimina un chat
+
+
+    /**
+     * metodo para eliminar un chat desde el Sql
+     */
+    @Test
+    @Sql("classpath:chat.sql")
+    public void eliminarChatSql(){
+        miChatRepo.deleteById(3);
+        Chat chatBuscado=miChatRepo.findById(3).orElse(null);
+        Assertions.assertNull(chatBuscado);
+
+    }
+
+
+    /**
+     * Metodo para actualizar los datos del chat desde sql
+     */
+    @Test
+    @Sql("classpath:chat.sql")
+    public void actualizarChatSql(){
+
+
+        Producto miProductoVender=miProductoRepo.findById(2).orElse(null);
+        Usuario usuarioComprador=miUsuarioRepo.findById("435").orElse(null);
+        Chat chat=new Chat(usuarioComprador,miProductoVender);
+        Chat miChatGuardado=miChatRepo.save(chat);
+        Usuario usuarioCompradorEditado=miUsuarioRepo.findById("123").orElse(null);
+        miChatGuardado.setUsuarioComprador(usuarioCompradorEditado);
+        Chat chatBuscado=miChatRepo.findById(1).orElse(null);
+        Assertions.assertEquals("123",chatBuscado.getUsuarioComprador().getCodPersona());
+
+
+    }
+
+
+    /**
+     * metodo que sirve para listar los chat guardados en el sql
+     */
+    @Test
+    @Sql("classpath:chat.sql")
+    public void listarChatSql(){
+
+        //se guardan los datos del sql en una lista
+        List<Chat>listaChats=miChatRepo.findAll();
+
+        //el for se usa para mostrar los datos guardados en la lista
+        for (Chat misChat : listaChats) {
+            System.out.println(misChat);
+        }
+    }
+
+    //metodo que elimina un chat (sin sql)
    /* @Test
     public void eliminarChat(){
 
@@ -133,18 +186,8 @@ public class ChatRepoTest {
 
     }*/
 
-    /**
-     * metodo para eliminar un chat desde el Sql
-     */
-    @Test
-    @Sql("classpath:chat.sql")
-    public void eliminarChatSql(){
-        miChatRepo.deleteById(3);
-        Chat chatBuscado=miChatRepo.findById(3).orElse(null);
-        Assertions.assertNull(chatBuscado);
-
-    }
-   /* @Test
+    //metodo que actualiza un chat (sin sql)
+    /* @Test
     public void actualizarChat(){
 
 
@@ -202,26 +245,8 @@ public class ChatRepoTest {
 
     }*/
 
-    /**
-     * Metodo para actualizar los datos del chat desde sql
-     */
-    @Test
-    @Sql("classpath:chat.sql")
-    public void actualizarChatSql(){
-
-
-        Producto miProductoVender=miProductoRepo.findById(2).orElse(null);
-        Usuario usuarioComprador=miUsuarioRepo.findById("435").orElse(null);
-        Chat chat=new Chat(usuarioComprador,miProductoVender);
-        Chat miChatGuardado=miChatRepo.save(chat);
-        Usuario usuarioCompradorEditado=miUsuarioRepo.findById("123").orElse(null);
-        miChatGuardado.setUsuarioComprador(usuarioCompradorEditado);
-        Chat chatBuscado=miChatRepo.findById(1).orElse(null);
-        Assertions.assertEquals("123",chatBuscado.getUsuarioComprador().getCodPersona());
-
-
-    }
-  /*  @Test
+    //Metoto para listar los chat (sin sql)
+    /*  @Test
     public void listarChat(){
 
         Ciudad miCiudad = new Ciudad("Cali");
@@ -272,19 +297,4 @@ public class ChatRepoTest {
         }
 
     }*/
-
-    /**
-     * metodo que sirve para listar los chat guardados en el sql
-     */
-    @Test
-    @Sql("classpath:chat.sql")
-    public void listarChatSql(){
-
-        List<Chat>listaChats=miChatRepo.findAll();
-        for (Chat misChat : listaChats) {
-            System.out.println(misChat);
-        }
-
-
-    }
 }

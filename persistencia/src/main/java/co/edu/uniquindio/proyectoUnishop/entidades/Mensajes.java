@@ -20,11 +20,11 @@ public class Mensajes implements Serializable {
 
     /**
      * Atributos de la entidad Mensaje
-     * @param codMensaje
-     * @param mensaje
-     * @param emisor
-     * @param fechaMensaje
-     * @param chatUsuario
+     * @param codMensaje llave primaria de la entidad
+     * @param mensaje mensaje
+     * @param emisor codigo de la persona que manda el mensaje
+     * @param fechaMensaje fecxha del envio del mensaje
+     * @param chatUsuario Chat del usuario que envia el mensaje
      */
     @Id
     @EqualsAndHashCode.Include
@@ -41,6 +41,9 @@ public class Mensajes implements Serializable {
     @Column(nullable = false,columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime fechaMensaje;
 
+    /**
+     * Relacion entre mensaje y el chat del usuario
+     */
     @ManyToOne
     @JoinColumn(nullable = false)
     private Chat chatUsuario;

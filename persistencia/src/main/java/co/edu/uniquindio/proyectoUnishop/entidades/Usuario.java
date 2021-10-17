@@ -48,17 +48,23 @@ public class Usuario extends Persona implements Serializable {
      */
     private List<Producto>listaProductos;
 
-    //Relacion inversi de compras de un producto
+    /**
+     *  Relacion inversi de compras de un producto
+     */
     @OneToMany(mappedBy = "UsuarioCompra")
     @ToString.Exclude
     private  List<Compra>listaCompras;
 
-    //relacion inversa producto favorito
+    /**
+     * relacion inversa producto favorito
+     */
     @ManyToMany
     @ToString.Exclude
     private List<Producto>listaProductoFavorito;
 
-    //Relacion inversa chat comprador
+    /**
+     * Relacion inversa chat comprador
+     */
     @OneToMany(mappedBy = "usuarioComprador")
     @ToString.Exclude
     private List<Chat>ListChatComprador;

@@ -21,8 +21,11 @@ public class Subasta implements Serializable {
 
     /**
      * Atributos de la entidad Subasta
-     * @param codSubasta
-     * @param fechaLimite
+     * @param fechaLimite fecha limite de la subasta
+     * @param subastaProducto producto a subastar
+     * @param subastaProducto producto a subastar
+     * @param listaSubastaUsuarios lista de subastas
+     *
      */
     @Id
     @EqualsAndHashCode.Include

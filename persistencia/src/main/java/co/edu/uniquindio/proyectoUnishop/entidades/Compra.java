@@ -17,6 +17,15 @@ import java.util.List;
 @ToString
 
 public class Compra implements Serializable {
+
+    /**
+     * Atributos de la entidad Compra
+     * @param codCompra llave primaria de la entidad
+     * @param fechaPago fecha de pago de la compra
+     * @param medioPago medio de pago de la compra
+     * @param usuarioCompra usuario a realizar la compra
+     * @param listaDetalleCompra lista de detalle de la compra
+     */
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
