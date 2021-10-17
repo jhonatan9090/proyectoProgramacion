@@ -19,6 +19,9 @@ public class CategoriaRepoTest {
     @Autowired
     private CategoriaRepo miCategoria;
 
+    /**
+     * metodo para registrar una categoria
+     */
     @Test
     public void CrearCatergoriaTest() {
         Categoria categoria1 = new Categoria("Electrodomestico");
@@ -36,6 +39,10 @@ public class CategoriaRepoTest {
         Assertions.assertNull(categoriaBuscada);
 
     }*/
+
+    /**
+     * metodo para eliminar una categoria desde el Sql
+     */
     @Test
     @Sql("classpath:Categoria.sql")
     public void EliminarCategoriaTestSql() {
@@ -56,12 +63,17 @@ public class CategoriaRepoTest {
         Assertions.assertEquals("Video Juegos", categoriaBuscada.getNombre());
 
     }*/
+
+    /**
+     * Metodo que sirve para actualizar los datos de una Categoria
+     */
     @Test
     @Sql("classpath:Categoria.sql")
     public void ActualizarCategoriaTestSql() {
 
-
         Categoria categoriaGuardada = miCategoria.findById(1).orElse(null);
+
+        //actualiza el nombre de la categoria
         categoriaGuardada.setNombre("Video Juegos");
         miCategoria.save(categoriaGuardada);
         Categoria categoriaBuscada = miCategoria.findById(1).orElse(null);
@@ -78,10 +90,13 @@ public class CategoriaRepoTest {
             System.out.println(misCategorias);
         }
     }*/
+
+    /**
+     * metodo que sirve para listar las categorias guardados en el sql
+     */
     @Test
     @Sql("classpath:Categoria.sql")
     public void ListarCategoriaTestSql() {
-
 
         List<Categoria> listaCategoria = miCategoria.findAll();
         for (Categoria misCategorias : listaCategoria) {

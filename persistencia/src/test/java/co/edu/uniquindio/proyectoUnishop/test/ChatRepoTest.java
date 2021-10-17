@@ -35,9 +35,11 @@ public class ChatRepoTest {
     private UsuarioRepo miUsuarioRepo;
 
     @Autowired//instancia variables componentes de springboot
-
     private CiudadRepo miCiudadRepo;
-    //metodo para crear un chat
+
+    /**
+     * metodo para crear un chat
+     */
     @Test
     public void crearChat() {
 
@@ -130,6 +132,10 @@ public class ChatRepoTest {
         Assertions.assertNull(chatBuscado);
 
     }*/
+
+    /**
+     * metodo para eliminar un chat desde el Sql
+     */
     @Test
     @Sql("classpath:chat.sql")
     public void eliminarChatSql(){
@@ -195,6 +201,10 @@ public class ChatRepoTest {
         Assertions.assertEquals("nevera",chatBuscado.getChatProductoCompra().getNombre());
 
     }*/
+
+    /**
+     * Metodo para actualizar los datos del chat desde sql
+     */
     @Test
     @Sql("classpath:chat.sql")
     public void actualizarChatSql(){
@@ -263,6 +273,9 @@ public class ChatRepoTest {
 
     }*/
 
+    /**
+     * metodo que sirve para listar los chat guardados en el sql
+     */
     @Test
     @Sql("classpath:chat.sql")
     public void listarChatSql(){

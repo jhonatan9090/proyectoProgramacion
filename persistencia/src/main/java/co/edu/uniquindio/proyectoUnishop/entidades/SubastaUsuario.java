@@ -18,17 +18,23 @@ import java.time.LocalDateTime;
 
 public class SubastaUsuario implements Serializable {
 
+    /**
+     * Atributos de la entidad SubastaUsuario
+     * @param codSubastaUsuario dicta el valor del producto, llave primaria
+     * @param valor costo de la subasta
+     * @param fechaSubasta fecha de publicacion de la subasta
+     * @param usuarioSubasta  usuario que hace la subasta del producto
+     * @param subastaUsuario subasta del producto
+     */
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer codSubastaUsuario;
 
-    //atributo que dicta el valor del producto
     @Positive
     @Column(nullable = false)
     private Double valor;
 
-    //atributo de la fecha de subasta del producto
     //@Future
     @Column(nullable = false)
     private LocalDateTime fechaSubasta;
@@ -37,16 +43,27 @@ public class SubastaUsuario implements Serializable {
     @JoinColumn(nullable = false)
     private Usuario usuarioSubasta;
 
-    //Relacion de usarios que subastaran
+    /**
+     * Relacion de usarios que subastaran
+     */
     @ManyToOne
     @JoinColumn(nullable = false)
     private Subasta subastaUsuario;
 
+    /**
+     * Constructor sin parametrosde la entidad SubastaUsuario
+     */
     public SubastaUsuario(){
         super();
-
     }
 
+    /**
+     * Constructor de la entidad SubastaUsuario
+     * @param valor costo de la subasta
+     * @param fechaSubasta fecha de publicacion de la subasta
+     * @param usuarioSubasta  usuario que hace la subasta del producto
+     * @param subastaUsuario subasta del producto
+     */
     public SubastaUsuario(@Positive Double valor, @Future LocalDateTime fechaSubasta, Usuario usuarioSubasta, Subasta subastaUsuario) {
         this.valor = valor;
         this.fechaSubasta = fechaSubasta;

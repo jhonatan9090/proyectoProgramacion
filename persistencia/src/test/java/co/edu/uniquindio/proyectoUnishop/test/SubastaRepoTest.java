@@ -38,7 +38,9 @@ public class SubastaRepoTest {
     @Autowired
     private UsuarioRepo miUsuario;
 
-    //metodo para crear una nueva subasta
+    /**
+     *  metodo para crear una nueva subasta
+     */
     @Test
     public void CrearSubastaTest() {
         Ciudad ciudad1 = new Ciudad("Armenia");
@@ -90,7 +92,10 @@ public class SubastaRepoTest {
         Subasta subastaBuscar = miSubasta.findById(1).orElse(null);
         Assertions.assertNull(subastaBuscar);
     }*/
-    //metodo para eliminar una subasta del sql
+
+    /**
+     * metodo para eliminar una subasta desde el Sql
+     */
     @Test
     @Sql("classpath:subasta.sql")
     public void EliminaSubastaTestSql() {
@@ -132,7 +137,9 @@ public class SubastaRepoTest {
     }
 */
 
-    //metodo para actualizar la informacon de las subastas
+    /**
+     * metodo para actualizar la informacon de las subastas
+     */
     @Test
     @Sql("classpath:subasta.sql")
     public void ActualizarSubastaTest() {
@@ -175,13 +182,16 @@ public class SubastaRepoTest {
      }
      */
 
-    //metodo para listar las subastas guardadas en el sql
+    /**
+     * metodo para listar las subastas guardadas en el sql
+     */
     @Test
     @Sql("classpath:subasta.sql")
     public void ListarSubastaTestSql() {
 
         //Se guardan los datos del sql en una lista
         List<Subasta> listaSubasta = miSubasta.findAll();
+
         //el for se usa para mostrar los datos guardados en la lista
         for (Subasta misubasta : listaSubasta) {
             System.out.println(misubasta);

@@ -17,12 +17,18 @@ import java.util.Map;
 public class Usuario extends Persona implements Serializable {
 
 
-    //ciudad del usuario
+    /**
+     * ciudad del usuario
+     * Es obligatoria
+     */
     @ManyToOne
     @JoinColumn(nullable = false)
     private  Ciudad ciudadUsuario;
 
-    //Relacion inversa entre usuario y comentario
+    /**
+     * Relacion inversa entre usuario y comentario
+     * Relacion uno a muchos
+     */
     @OneToMany(mappedBy = "usuarioComentario")
     @ToString.Exclude
     private List<Comentario>listaComentarios;
@@ -30,10 +36,16 @@ public class Usuario extends Persona implements Serializable {
     @OneToMany(mappedBy = "usuarioSubasta")
     private List<SubastaUsuario>listaSubastasUsuarios;
 
-    //Relacion inversa de la venta de un producto
+    /**
+     * Relacion inversa de la venta de un producto
+     * Relacion uno a muchos
+     */
     @OneToMany(mappedBy = "usuarioVendedor")
     @ToString.Exclude
 
+    /**
+     * lista de productos del usuario
+     */
     private List<Producto>listaProductos;
 
     //Relacion inversi de compras de un producto
@@ -51,15 +63,25 @@ public class Usuario extends Persona implements Serializable {
     @ToString.Exclude
     private List<Chat>ListChatComprador;
 
+    /**
+     * Metodo constructor sin parámetros de la entidad Usuario
+     */
     public Usuario() {
     super();
     }
 
-
+    /**
+     * Metodo constructor de la entidad Usuario
+     * @param codPersona codigo del usuario
+     * @param nombre nombre del usuario
+     * @param email email del usuario
+     * @param password contraseña del usuario
+     * @param telefono telefonos del usuario
+     * @param ciudadUsuario ciudad del usuario
+     */
     public Usuario(String codPersona, String nombre, String email, String password, Map<String, String> telefono, Ciudad ciudadUsuario) {
         super(codPersona, nombre, email, password, telefono);
         this.ciudadUsuario = ciudadUsuario;
-
     }
 
     @Override

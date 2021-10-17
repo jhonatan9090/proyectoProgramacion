@@ -39,7 +39,9 @@ public class MensajesRepoTest {
     private MensajesRepo miMensajesRepo;
 
 
-    //metodo que crea un mensaje nuevo
+    /**
+     * metodo que crea un mensaje nuevo
+     */
     @Test
     public void crearMensajeTest() {
 
@@ -139,13 +141,16 @@ public class MensajesRepoTest {
 
     }*/
 
-    //metodo que elimina mensajes
+    /**
+     * metodo para eliminar un mensaje desde el Sql
+     */
     @Test
     @Sql("classpath:mensaje.sql")
     public void eliminarMensajeTestSql() {
 
         //se elimina el mensaje por medio del id
         miMensajesRepo.deleteById(1);
+
         //se busca para comprobar que si se elimino
         Mensajes mensajeBuscado = miMensajesRepo.findById(1).orElse(null);
         Assertions.assertNull(mensajeBuscado);
@@ -206,17 +211,23 @@ public class MensajesRepoTest {
          Assertions.assertEquals("jhonatan uribe",mesajeBuscado.getEmisor());
 
      }*/
-    //metodo que actualiza un mensaje
+
+    /**
+     * metodo que actualiza un mensaje
+     */
     @Test
     @Sql("classpath:mensaje.sql")
     public void actualizarMensajeTestSql() {
 
         //trae el mensaje desde del sql
         Mensajes mensajeBuscado = miMensajesRepo.findById(3).orElse(null);
+
         //se seteamos el cambio que le queremos hacer
         mensajeBuscado.setMensaje("el producto llego ya");
+
         //se guarda la modificacion
         miMensajesRepo.save(mensajeBuscado);
+
         //se busca para comprobar si se realizo los cambios
         Assertions.assertEquals("el producto llego ya", mensajeBuscado.getMensaje());
     }
@@ -275,13 +286,16 @@ public class MensajesRepoTest {
     }*/
 
 
-    //metodo que lista los mensajes
+    /**
+     * metodo que lista los mensajes
+     */
     @Test
     @Sql("classpath:mensaje.sql")
     public void listarMensajeTestSql() {
 
         //busca los mensajes desde el sql por medio del id y los guarda en una list
         List<Mensajes> listaMensajes = miMensajesRepo.findAll();
+
         //imprime los mensajes de la lista
         for (Mensajes misMensajes : listaMensajes) {
             System.out.println(misMensajes);

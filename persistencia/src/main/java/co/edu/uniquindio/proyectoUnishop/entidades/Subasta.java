@@ -19,8 +19,11 @@ import java.util.List;
 
 public class Subasta implements Serializable {
 
-
-
+    /**
+     * Atributos de la entidad Subasta
+     * @param codSubasta
+     * @param fechaLimite
+     */
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,20 +33,32 @@ public class Subasta implements Serializable {
     @Column(nullable = false)
     private LocalDate fechaLimite;
 
-    //Relacion entre subasta y producto
+    /**
+     * Relacion entre subasta y producto
+     */
     @ManyToOne
     @JoinColumn(nullable = false)
     private  Producto subastaProducto;
 
-    //Relacion inversa de lista de usarios que sabastaran
+    /**
+     * Relacion inversa de lista de usarios que sabastaran
+     */
     @ToString.Exclude
     @OneToMany(mappedBy = "subastaUsuario")
     private List<SubastaUsuario>listaSubastaUsuarios;
 
+    /**
+     * Metodo constructor sin parametros de la entidad Subasta
+     */
     public Subasta(){
     super();
     }
 
+    /**
+     * Metodo constructor de la entidad Subasta
+     * @param fechaLimite fecha limite de la subasta
+     * @param subastaProducto producto a subastar
+     */
     public Subasta(@Future LocalDate fechaLimite, Producto subastaProducto) {
         this.fechaLimite = fechaLimite;
         this.subastaProducto = subastaProducto;

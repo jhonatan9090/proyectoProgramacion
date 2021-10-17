@@ -18,6 +18,10 @@ public class CiudadRepoTest {
 
     @Autowired
     private CiudadRepo miCiudad;
+
+    /**
+     * metodo para crear una Ciudad
+     */
     @Test
     public void CrearCiudadTest(){
         Ciudad ciudad1 = new Ciudad("Armenia");
@@ -34,6 +38,9 @@ public class CiudadRepoTest {
         Assertions.assertNull(buscarCiudad);
     }*/
 
+    /**
+     * metodo para eliminar una ciudad desde el Sql
+     */
     @Test
     @Sql("classpath:ciudad.sql")
     public void EliminarCiudadTestSql(){
@@ -53,11 +60,17 @@ public class CiudadRepoTest {
         Assertions.assertEquals("Calarca",ciudadBuscada.getNombre());
 
     }*/
+
+    /**
+     * Metodos para actualizar los datos de una ciudad
+     */
     @Test
     @Sql("classpath:ciudad.sql")
     public void ActualizarCiudadTestSql(){
 
         Ciudad ciudad1 =miCiudad.findById(1).orElse(null);
+
+        //actualiza el nombre de la ciudad
         ciudad1.setNombre("Calarca");
         Ciudad ciudadBuscada= miCiudad.save(ciudad1);
         Assertions.assertEquals("Calarca",ciudadBuscada.getNombre());
@@ -72,6 +85,10 @@ public class CiudadRepoTest {
             System.out.println(misCiudad);
         }
     }*/
+
+    /**
+     * metodo que sirve para listar las ciudades guardados en el sql
+     */
     @Test
     @Sql("classpath:ciudad.sql")
     public void ListarCiudadTestSql(){

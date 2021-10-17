@@ -18,6 +18,14 @@ import java.io.Serializable;
 
 public class DetalleCompra implements Serializable {
 
+    /**
+     * Atributos de la entidad DetalleCompra
+     * @param codDetalle
+     * @param unidades
+     * @param precioProducto
+     * @param ProductoDetalle
+     * @param compradetalle
+     */
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,11 +47,20 @@ public class DetalleCompra implements Serializable {
     @JoinColumn(nullable = false)
     private Compra compradetalle;
 
+    /**
+     * Constructor sin parametros de la entidad DetalleCompra
+     */
     public DetalleCompra(){
     super();
     }
 
-
+    /**
+     * Constructor de la entidad DetalleCompra
+     * @param unidades Cantidad de la compra
+     * @param precioProducto Costo del producto
+     * @param productoDetalle Producto a detallar
+     * @param compradetalle Compra a detallar
+     */
     public DetalleCompra(@Positive Integer unidades, @Positive Double precioProducto, Producto productoDetalle, Compra compradetalle) {
         this.unidades = unidades;
         this.precioProducto = precioProducto;

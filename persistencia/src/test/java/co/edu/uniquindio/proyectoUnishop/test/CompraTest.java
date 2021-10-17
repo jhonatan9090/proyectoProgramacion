@@ -32,7 +32,9 @@ public class CompraTest {
     private CiudadRepo miCiudadRepo;
 
 
-    //metodo para registrar una Compra
+    /**
+     * metodo para registrar una Compra
+     */
     @Test
     public void registroCompraTest() {
 
@@ -81,18 +83,18 @@ public class CompraTest {
     }*/
 
 
-    //metodo que elimina una Compra
+    /**
+     * metodo para eliminar una compra desde el Sql
+     */
     @Test
     @Sql("classpath:compra.sql")
     public void eliminarCompraTestSql() {
-
 
         //se eliminla compra por medio del id
         miCompraRepo.deleteById(2);
         //se busca para comprobar si ya se elimino
         Compra compraBuscada = miCompraRepo.findById(2).orElse(null);
         Assertions.assertNull(compraBuscada);
-
 
     }
 
@@ -121,17 +123,22 @@ public class CompraTest {
         Assertions.assertEquals("tarjeta", compraBuscada.getMedioPago());
     }*/
 
-    //metodo que actualiza una Compra
+    /**
+     * metodo que actualiza una Compra
+     */
     @Test
     @Sql("classpath:compra.sql")
     public void actualizarCompraTestSql() {
 
         //trae la compra del sql por el id
         Compra compraRealizada = miCompraRepo.findById(1).orElse(null);
+
         //se le settea la nueva info
         compraRealizada.setMedioPago("daviplata");
+
         //se guarda el cambio realizado
         Compra compraBuscada = miCompraRepo.save(compraRealizada);
+
         //se busca si el cambio fue hecho correctamente
         Assertions.assertEquals("daviplata", compraBuscada.getMedioPago());
 
@@ -165,13 +172,17 @@ public class CompraTest {
           System.out.println(listaCompra);
 
       }*/
-    //metodo que liata las Compras
+
+    /**
+     * Metodo para listar las compras guardadas en sql
+     */
     @Test
     @Sql("classpath:compra.sql")
     public void listarCompraTestSql() {
 
         //busca las compras y las guarda en una lisy
         List<Compra> listaCompra = miCompraRepo.findAll();
+
         //imprime las compras
         for (Compra misCompras : listaCompra) {
             System.out.println(misCompras);

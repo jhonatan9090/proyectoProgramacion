@@ -26,8 +26,9 @@ public class UsuarioTest {
     @Autowired
     private CiudadRepo miCiudadRepo;
 
-
-    //metodo para registrar un usuario
+    /**
+     * metodo para registrar un usuario
+     */
     @Test
     public void registroUsuarioTest(){
 
@@ -68,6 +69,10 @@ public class UsuarioTest {
         Usuario usuarioBuscado= miUsuarioRepo.findById("111").orElse(null);
         Assertions.assertNull(usuarioBuscado);
     }*/
+
+    /**
+     * Metodo para eliminar un usuario desde Sql
+     */
     @Test
     @Sql("classpath:usuarios.sql")
     public void eliminarUsuarioTestSql(){
@@ -107,11 +112,17 @@ public class UsuarioTest {
         Assertions.assertEquals("Claudia perez",usuarioBuscado.getNombre());
 
     }*/
+
+    /**
+     * Metodo para actualizar los datos de un usuario
+     */
     @Test
     @Sql("classpath:usuarios.sql")
     public void actualizarUsuarioTestSql(){
 
         Usuario usuarioGuardado=miUsuarioRepo.findById("123").orElse(null);
+
+        //se actualiza el nombre del Usuario
         usuarioGuardado.setNombre("Claudia perez");
         miUsuarioRepo.save(usuarioGuardado);
         Usuario usuarioBuscado=miUsuarioRepo.findById("123").orElse(null);
@@ -140,12 +151,17 @@ public class UsuarioTest {
         System.out.println(listaUsuarios);
 
     }*/
+
+    /**
+     * Metodo para listar los usuarios guardados en sql
+     */
     @Test
     @Sql("classpath:usuarios.sql")
     public void listarUsuariosTestSql(){
 
-
         List<Usuario>listaUsuarios=miUsuarioRepo.findAll();
+
+        // for se usa para mostrar los datos guardados en la lista
         for(Usuario miUsuario:listaUsuarios) {
             System.out.println(miUsuario);
         }

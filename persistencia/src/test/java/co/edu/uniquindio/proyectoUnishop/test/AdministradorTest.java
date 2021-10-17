@@ -25,14 +25,16 @@ public class AdministradorTest {
     @Autowired    //instancia variables componentes de springboot
     private AdministradorRepo miAdministradorRepo;
 
-    //metodo para registrar un arministrador
+    /**
+     * metodo para registrar un arministrador
+     */
     @Test
     public void registrarAdministradorTestSql(){
 
+        //crea un administrador
         Map<String,String>telefonos=new HashMap<>();
         telefonos.put("casa","321414");
         telefonos.put("celular","321452514");
-
         Administrador administrador1 = new Administrador("123", "Ana", "ana@gmail.com", "2323", telefonos);
 
         Administrador administradorGuardado=miAdministradorRepo.save(administrador1);
@@ -57,7 +59,9 @@ public class AdministradorTest {
         Assertions.assertNull(administradorBuscado);
     }*/
 
-    //metodo para eliminar un administrador desde el Sql
+    /**
+     * metodo para eliminar un administrador desde el Sql
+     */
     @Test
     @Sql("classpath:administrador.sql")
     public void eliminarUsuarioSql(){
@@ -65,6 +69,7 @@ public class AdministradorTest {
         //se elimina el administrado deseado buscandolo por su id
         miAdministradorRepo.deleteById("1340");
         Administrador administradorBuscado= miAdministradorRepo.findById("1340").orElse(null);
+
         //se verifica que se haya eliminado el administrador deseado
         Assertions.assertNull(administradorBuscado);
 
@@ -90,7 +95,9 @@ public class AdministradorTest {
 
     }*/
 
-    //Metodo que sirve para actualizar los datos de un administrador
+    /**
+     * Metodo que sirve para actualizar los datos de un administrador
+     */
     @Test
     @Sql("classpath:administrador.sql")
     public void actualizarUsuarioSql() {
@@ -98,8 +105,10 @@ public class AdministradorTest {
         //desde aqui se busca al administrador del sql con su id y se modifica el
         Administrador administradorBuscado=miAdministradorRepo.findById("1340").orElse(null);
         administradorBuscado.setNombre("Maria");
+
         //en la linea de abajo se Guardan los cambios realizados al administrador buscado
         miAdministradorRepo.save(administradorBuscado);
+
         //aqui se busca si se guardaron correctamente los cambios
         Assertions.assertEquals("Maria",administradorBuscado.getNombre());
     }
@@ -120,8 +129,9 @@ public class AdministradorTest {
     }
     */
 
-
-    //metodo que sirve para listar los administradores guardados en el sql
+    /**
+     * metodo que sirve para listar los administradores guardados en el sql
+     */
     @Test
     @Sql("classpath:administrador.sql")
     public void listarUsuariosTesSql() {

@@ -18,7 +18,14 @@ import java.util.List;
 
 public class Mensajes implements Serializable {
 
-
+    /**
+     * Atributos de la entidad Mensaje
+     * @param codMensaje
+     * @param mensaje
+     * @param emisor
+     * @param fechaMensaje
+     * @param chatUsuario
+     */
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,11 +45,20 @@ public class Mensajes implements Serializable {
     @JoinColumn(nullable = false)
     private Chat chatUsuario;
 
+    /**
+     * Constructor sin parametros de la entidad Mensajes
+     */
     public Mensajes() {
         super();
     }
 
-
+    /**
+     * Constructor de la entidad Mensajes
+     * @param mensaje mensaje
+     * @param emisor codigo de la persona que manda el mensaje
+     * @param fechaMensaje fecxha del envio del mensaje
+     * @param chatUsuario Chat del usuario que envia el mensaje
+     */
     public Mensajes(String mensaje, String emisor, @Future LocalDateTime fechaMensaje, Chat chatUsuario) {
         this.mensaje = mensaje;
         this.emisor = emisor;

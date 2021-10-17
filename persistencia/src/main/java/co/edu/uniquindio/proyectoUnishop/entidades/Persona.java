@@ -15,6 +15,14 @@ import java.util.Map;
 @AllArgsConstructor
 public class Persona implements Serializable {
 
+    /**
+     * Atributos de la entidad Persona
+     * @param codPersona
+     * @param nombre
+     * @param email
+     * @param password
+     * @param telefono
+     */
     @Id
     @EqualsAndHashCode.Include
     private String codPersona;
@@ -28,7 +36,9 @@ public class Persona implements Serializable {
     @ElementCollection
     private Map<String,String> telefono;
 
-
+    /**
+     * Constructor sin parametros de la entidad Persona
+     */
     public Persona(){
     super();
     }

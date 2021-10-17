@@ -35,8 +35,9 @@ public class SubastaUsuarioTest {
     @Autowired
     private UsuarioRepo miUsuario;
 
-
-
+    /**
+     *  metodo para crear un usuario de subasta
+     */
     @Test
     public void CrearSubastaUsuarioRepoTest(){
         Ciudad ciudad1 = new Ciudad("Armenia");
@@ -95,7 +96,10 @@ public class SubastaUsuarioTest {
         Assertions.assertNull(buscarsubUs);
     }*/
 
-    //metodo para eliminar un usuario de subasta guardado en el sql
+
+    /**
+     * metodo para eliminar un usuario de subasta guardado desde el Sql
+     */
     @Test
     @Sql("classpath:subastaUsuario.sql")
     public void EliminarSubastaUsuarioTestSql(){
@@ -148,16 +152,22 @@ public class SubastaUsuarioTest {
 
     }*/
 
-    //metodo para actualizar los datos de las subastas guardadas en el sql
+    /**
+     * metodo para actualizar los datos de las subastas guardadas en el sql
+     */
     @Test
     @Sql("classpath:subastaUsuario.sql")
     public void ActualizarSubastaUsuarioTestSql(){
+
         //se busca el usuario de la subasta a actualizar
         SubastaUsuario subastaUsuarioBuscar = miUsuarioSubasta.findById(1).orElse(null);
+
         //se escribe el valor con el cual se desea actualziar
         subastaUsuarioBuscar.setValor(10000.2);
+
         //se guarda el valor actualizado
         miUsuarioSubasta.save(subastaUsuarioBuscar);
+
         SubastaUsuario subUsBuscada = miUsuarioSubasta.findById(1).orElse(null);
         //se comprueba que el valor se haya actualzido
         Assertions.assertEquals(10000.2,subUsBuscada.getValor());
@@ -195,7 +205,9 @@ public class SubastaUsuarioTest {
 
     }*/
 
-    //metodo para listar los usuarios de la subasta guardados en el sql
+    /**
+     * metodo para listar los usuarios de la subasta guardados en el sql
+     */
     @Test
     @Sql("classpath:subastaUsuario.sql")
     public void ListarSubastaUsuarioTestSql(){

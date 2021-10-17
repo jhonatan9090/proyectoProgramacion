@@ -34,6 +34,9 @@ public class ProductoTest {
     @Autowired
     private CiudadRepo miCiudadRepo;
 
+    /**
+     * metodo que crea un producto
+     */
     @Test
     public void crearProductoTest(){
 
@@ -88,6 +91,9 @@ public class ProductoTest {
         Assertions.assertNull(productoBuscado);
     }*/
 
+    /**
+     * metodo para eliminar un producto desde el Sql
+     */
     @Test
     @Sql("classpath:producto.sql")
     public void eliminarProductoTestSql(){
@@ -127,13 +133,18 @@ public class ProductoTest {
         Assertions.assertEquals("Computador",productoBuscado.getNombre());
     }*/
 
+    /**
+     * Metodo para actualizar los datos de un producto
+     */
     @Test
     @Sql("classpath:producto.sql")
-    public void actualizarMensajeTestSql(){
+    public void actualizarProductoTestSql(){
 
         //Vendedor producto
         Ciudad miCiudad = new Ciudad("Cali");
         miCiudadRepo.save(miCiudad);
+
+        //Crea un usuario
         Map<String, String> telefonos = new HashMap<>();
         telefonos.put("casa", "321414");
         telefonos.put("celular", "321452514");
@@ -141,6 +152,8 @@ public class ProductoTest {
         usuario1.setTelefono(telefonos);
         usuario1.setCiudadUsuario(miCiudad);
         Usuario usuario = miUsuarioRepo.save(usuario1);
+
+        //Busca el producto mediante el codigo
         Producto productoBuscado=miProductoRepo.findById(1).orElse(null);
         productoBuscado.setUsuarioVendedor(usuario);
         Assertions.assertEquals("151",productoBuscado.getUsuarioVendedor().getCodPersona());
@@ -180,6 +193,9 @@ public class ProductoTest {
         }
     }*/
 
+    /**
+     * Metodo para listar los mensajes guardados en sql
+     */
     @Test
     @Sql("classpath:producto.sql")
     public void listarProductosTestSql(){
@@ -187,6 +203,7 @@ public class ProductoTest {
 
         List<Producto>listaProductos=miProductoRepo.findAll();
 
+        //el for se usa para mostrar los datos guardados en la lista
         for (Producto misProductos: listaProductos) {
             System.out.println(misProductos);
         }

@@ -35,7 +35,9 @@ public class ComentarioTest {
 
     private CiudadRepo miCiudadRepo;
 
-    //metodo para crear un comentario
+    /**
+     * metodo para crear un comentario
+     */
     @Test
     public void crearComentarioTest() {
 
@@ -99,7 +101,9 @@ public class ComentarioTest {
           Assertions.assertNull(comentarioBuscado);
 
       }*/
-    //metodo para eliminar un comentario
+    /**
+     * metodo para eliminar un comentario desde el Sql
+     */
     @Test
     @Sql("classpath:comentario.sql")
     public void eliminarComentarioTestSql() {
@@ -145,17 +149,23 @@ public class ComentarioTest {
         Assertions.assertEquals("No", comentarioBuscado.getRespuesta());
 
     }*/
-    // metodo para actualizar un comentario
+
+    /**
+     *metodo para actualizar un comentario
+     */
     @Test
     @Sql("classpath:comentario.sql")
     public void actualizarComentarioTestSql() {
 
         //usuario a editar
         Usuario usuarioComentario = miUsuarioRepo.findById("435").orElse(null);
+
         // buscamos comentario a editar
         Comentario miComentario = miComentarioRepo.findById(1).orElse(null);
+
         //le seteamos el nuevo dato al al usuario
         usuarioComentario.setNombre("jhonatan uribe");
+
         //seteamos el nuevo dato al comentario
         miComentario.setUsuarioComentario(usuarioComentario);
         Comentario comentarioEditado = miComentarioRepo.save(miComentario);
@@ -197,7 +207,10 @@ public class ComentarioTest {
             System.out.println(misComentarios);
         }
     }*/
-    // metodo para listar los comentarios
+
+    /**
+     * Metodo para listar los comentarios guardados en sql
+     */
     @Test
     @Sql("classpath:comentario.sql")
     public void listarComentariosTestSql() {
