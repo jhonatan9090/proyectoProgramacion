@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -37,111 +38,152 @@ public class SubastaRepoTest {
     @Autowired
     private UsuarioRepo miUsuario;
 
+    //metodo para crear una nueva subasta
     @Test
-    public void CrearSubastaTest(){
+    public void CrearSubastaTest() {
         Ciudad ciudad1 = new Ciudad("Armenia");
         miCiudad.save(ciudad1);
         //este es el usuario que se crea para la subasta
-        Ciudad ciudad2=new Ciudad("Pereira");
+        Ciudad ciudad2 = new Ciudad("Pereira");
         miCiudad.save(ciudad2);
         List<String> listaImagenes = new ArrayList<>();
         listaImagenes.add("loquesea");
 
-        Map<String,String> telefonos=new HashMap<>();
-        telefonos.put("casa","321414");
-        telefonos.put("celular","321452514");
-        Usuario usuario1=new Usuario("111","Luisa Perez","luisaPe@","12345",telefonos,ciudad2);
+        Map<String, String> telefonos = new HashMap<>();
+        telefonos.put("casa", "321414");
+        telefonos.put("celular", "321452514");
+        Usuario usuario1 = new Usuario("111", "Luisa Perez", "luisaPe@", "12345", telefonos, ciudad2);
         usuario1.setTelefono(telefonos);
-        Usuario usuarioGuardado=miUsuario.save(usuario1);
+        Usuario usuarioGuardado = miUsuario.save(usuario1);
 
-        Producto producto1 = new Producto("computador",2,"Muy rapido",20000.00, LocalDate.of(2022,12,2),19.0,listaImagenes,usuarioGuardado,ciudad1);
+        Producto producto1 = new Producto("computador", 2, "Muy rapido", 20000.00, LocalDate.of(2022, 12, 2), 19.0, listaImagenes, usuarioGuardado, ciudad1);
         Producto productoGuardado = miProducto.save(producto1);
 
-        Subasta subasta1 = new Subasta(LocalDate.of(2022,9,21),productoGuardado);
+        Subasta subasta1 = new Subasta(LocalDate.of(2022, 9, 21), productoGuardado);
         Subasta subastaGuardada = miSubasta.save(subasta1);
         Assertions.assertNotNull(subastaGuardada);
     }
 
-    @Test
-    public void EliminaSubastaTest(){
+    /*@Test
+    public void EliminaSubastaTest() {
         Ciudad ciudad1 = new Ciudad("Armenia");
         miCiudad.save(ciudad1);
         //este es el usuario que se crea para la subasta
-        Ciudad ciudad2=new Ciudad("Pereira");
+        Ciudad ciudad2 = new Ciudad("Pereira");
         miCiudad.save(ciudad2);
         List<String> listaImagenes = new ArrayList<>();
         listaImagenes.add("loquesea");
 
-        Map<String,String> telefonos=new HashMap<>();
-        telefonos.put("casa","321414");
-        telefonos.put("celular","321452514");
-        Usuario usuario1=new Usuario("111","Luisa Perez","luisaPe@","12345",telefonos,ciudad2);
+        Map<String, String> telefonos = new HashMap<>();
+        telefonos.put("casa", "321414");
+        telefonos.put("celular", "321452514");
+        Usuario usuario1 = new Usuario("111", "Luisa Perez", "luisaPe@", "12345", telefonos, ciudad2);
         usuario1.setTelefono(telefonos);
-        Usuario usuarioGuardado=miUsuario.save(usuario1);
+        Usuario usuarioGuardado = miUsuario.save(usuario1);
 
-        Producto producto1 = new Producto("computador",2,"Muy rapido",20000.00, LocalDate.of(2022,12,2),19.0,listaImagenes,usuarioGuardado,ciudad1);
+        Producto producto1 = new Producto("computador", 2, "Muy rapido", 20000.00, LocalDate.of(2022, 12, 2), 19.0, listaImagenes, usuarioGuardado, ciudad1);
         Producto productoGuardado = miProducto.save(producto1);
 
-        Subasta subasta1 = new Subasta(LocalDate.of(2022,9,21),productoGuardado);
+        Subasta subasta1 = new Subasta(LocalDate.of(2022, 9, 21), productoGuardado);
         Subasta subastaGuardada = miSubasta.save(subasta1);
         miSubasta.delete(subastaGuardada);
         Subasta subastaBuscar = miSubasta.findById(1).orElse(null);
         Assertions.assertNull(subastaBuscar);
-    }
-
+    }*/
+    //metodo para eliminar una subasta del sql
     @Test
-    public void ActualizarSubastaTest(){
+    @Sql("classpath:subasta.sql")
+    public void EliminaSubastaTestSql() {
+
+        //sebusca la subasta en el sql por su codigo para eliminar
+        miSubasta.deleteById(3);
+        //se verifica que la subasta fue eliminada
+        Subasta subastaBuscar = miSubasta.findById(3).orElse(null);
+        Assertions.assertNull(subastaBuscar);
+
+    }
+    /*@Test
+    public void ActualizarSubastaTest() {
         Ciudad ciudad1 = new Ciudad("Armenia");
         miCiudad.save(ciudad1);
         //este es el usuario que se crea para la subasta
-        Ciudad ciudad2=new Ciudad("Pereira");
+        Ciudad ciudad2 = new Ciudad("Pereira");
         miCiudad.save(ciudad2);
         List<String> listaImagenes = new ArrayList<>();
         listaImagenes.add("loquesea");
 
-        Map<String,String> telefonos=new HashMap<>();
-        telefonos.put("casa","321414");
-        telefonos.put("celular","321452514");
-        Usuario usuario1=new Usuario("111","Luisa Perez","luisaPe@","12345",telefonos,ciudad2);
+        Map<String, String> telefonos = new HashMap<>();
+        telefonos.put("casa", "321414");
+        telefonos.put("celular", "321452514");
+        Usuario usuario1 = new Usuario("111", "Luisa Perez", "luisaPe@", "12345", telefonos, ciudad2);
         usuario1.setTelefono(telefonos);
-        Usuario usuarioGuardado=miUsuario.save(usuario1);
+        Usuario usuarioGuardado = miUsuario.save(usuario1);
 
-        Producto producto1 = new Producto("computador",2,"Muy rapido",20000.00, LocalDate.of(2022,12,2),19.0,listaImagenes,usuarioGuardado,ciudad1);
+        Producto producto1 = new Producto("computador", 2, "Muy rapido", 20000.00, LocalDate.of(2022, 12, 2), 19.0, listaImagenes, usuarioGuardado, ciudad1);
         Producto productoGuardado = miProducto.save(producto1);
 
-        Subasta subasta1 = new Subasta(LocalDate.of(2022,9,21),productoGuardado);
+        Subasta subasta1 = new Subasta(LocalDate.of(2022, 9, 21), productoGuardado);
         Subasta subastaGuardada = miSubasta.save(subasta1);
 
-        subastaGuardada.setFechaLimite(LocalDate.of(2023,2,3));
-        Subasta subastaBuscada=miSubasta.save(subastaGuardada);
+        subastaGuardada.setFechaLimite(LocalDate.of(2023, 2, 3));
+        Subasta subastaBuscada = miSubasta.save(subastaGuardada);
 
-        Assertions.assertEquals(LocalDate.of(2023,2,3),subastaBuscada.getFechaLimite());
+        Assertions.assertEquals(LocalDate.of(2023, 2, 3), subastaBuscada.getFechaLimite());
     }
+*/
 
+    //metodo para actualizar la informacon de las subastas
     @Test
-    public void ListarSubastaTest(){
-        Ciudad ciudad1 = new Ciudad("Armenia");
-        miCiudad.save(ciudad1);
-        //este es el usuario que se crea para la subasta
-        Ciudad ciudad2=new Ciudad("Pereira");
-        miCiudad.save(ciudad2);
-        List<String> listaImagenes = new ArrayList<>();
-        listaImagenes.add("loquesea");
+    @Sql("classpath:subasta.sql")
+    public void ActualizarSubastaTest() {
 
-        Map<String,String> telefonos=new HashMap<>();
-        telefonos.put("casa","321414");
-        telefonos.put("celular","321452514");
-        Usuario usuario1=new Usuario("111","Luisa Perez","luisaPe@","12345",telefonos,ciudad2);
-        usuario1.setTelefono(telefonos);
-        Usuario usuarioGuardado=miUsuario.save(usuario1);
+        //se trae una subasta desde el sql por medio del id
+        Subasta subastaBuscar = miSubasta.findById(1).orElse(null);
+        //se modifica la fecha de la subasta en el sql por la escrita abajo
+        subastaBuscar.setFechaLimite(LocalDate.of(2023,2,3));
+        //se guardan los cambios realizados a la subasta en el sql
+        miSubasta.save(subastaBuscar);
+        //se verifica que se hayan echs los cambios pertinentes en el sql
+        Assertions.assertEquals(LocalDate.of(2023, 2, 3),subastaBuscar.getFechaLimite());
+    }
+    /* @Test
+     public void ListarSubastaTest(){
+         Ciudad ciudad1 = new Ciudad("Armenia");
+         miCiudad.save(ciudad1);
+         //este es el usuario que se crea para la subasta
+         Ciudad ciudad2=new Ciudad("Pereira");
+         miCiudad.save(ciudad2);
+         List<String> listaImagenes = new ArrayList<>();
+         listaImagenes.add("loquesea");
 
-        Producto producto1 = new Producto("computador",2,"Muy rapido",20000.00, LocalDate.of(2022,12,2),19.0,listaImagenes,usuarioGuardado,ciudad1);
-        Producto productoGuardado = miProducto.save(producto1);
+         Map<String,String> telefonos=new HashMap<>();
+         telefonos.put("casa","321414");
+         telefonos.put("celular","321452514");
+         Usuario usuario1=new Usuario("111","Luisa Perez","luisaPe@","12345",telefonos,ciudad2);
+         usuario1.setTelefono(telefonos);
+         Usuario usuarioGuardado=miUsuario.save(usuario1);
 
-        Subasta subasta1 = new Subasta(LocalDate.of(2022,9,21),productoGuardado);
-        miSubasta.save(subasta1);
+         Producto producto1 = new Producto("computador",2,"Muy rapido",20000.00, LocalDate.of(2022,12,2),19.0,listaImagenes,usuarioGuardado,ciudad1);
+         Producto productoGuardado = miProducto.save(producto1);
+
+         Subasta subasta1 = new Subasta(LocalDate.of(2022,9,21),productoGuardado);
+         miSubasta.save(subasta1);
+         List<Subasta> listaSubasta = miSubasta.findAll();
+         for (Subasta misubasta: listaSubasta){
+             System.out.println(misubasta);
+         }
+     }
+     */
+
+    //metodo para listar las subastas guardadas en el sql
+    @Test
+    @Sql("classpath:subasta.sql")
+    public void ListarSubastaTestSql() {
+
+        //Se guardan los datos del sql en una lista
         List<Subasta> listaSubasta = miSubasta.findAll();
-        for (Subasta misubasta: listaSubasta){
+        //el for se usa para mostrar los datos guardados en la lista
+        for (Subasta misubasta : listaSubasta) {
             System.out.println(misubasta);
         }
     }

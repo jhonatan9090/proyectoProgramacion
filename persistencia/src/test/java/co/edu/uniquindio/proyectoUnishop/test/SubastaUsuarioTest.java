@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -64,7 +65,7 @@ public class SubastaUsuarioTest {
         Assertions.assertNotNull(subUSGuardada);
 
     }
-    @Test
+   /* @Test
     public void EliminarSubastaUsuarioTest(){
         Ciudad ciudad1 = new Ciudad("Armenia");
         miCiudad.save(ciudad1);
@@ -92,9 +93,21 @@ public class SubastaUsuarioTest {
         miUsuarioSubasta.delete(subUSGuardada);
         SubastaUsuario buscarsubUs = miUsuarioSubasta.findById(1).orElse(null);
         Assertions.assertNull(buscarsubUs);
+    }*/
+
+    //metodo para eliminar un usuario de subasta guardado en el sql
+    @Test
+    @Sql("classpath:subastaUsuario.sql")
+    public void EliminarSubastaUsuarioTestSql(){
+
+        //se busca el usuario de la subasta por su id y se elimina
+        miUsuarioSubasta.deleteById(1);
+        SubastaUsuario buscarsubUs = miUsuarioSubasta.findById(1).orElse(null);
+        //se comprueba que se haya eliminad el usuario de subasta
+        Assertions.assertNull(buscarsubUs);
     }
 
-    @Test
+   /* @Test
     public void ActualizarSubastaUsuarioTest(){
         Ciudad ciudad1 = new Ciudad("Armenia");
         miCiudad.save(ciudad1);
@@ -133,9 +146,24 @@ public class SubastaUsuarioTest {
         SubastaUsuario subUsBuscada = miUsuarioSubasta.findById(1).orElse(null);
         Assertions.assertEquals("123",subUsBuscada.getUsuarioSubasta().getCodPersona());
 
+    }*/
+
+    //metodo para actualizar los datos de las subastas guardadas en el sql
+    @Test
+    @Sql("classpath:subastaUsuario.sql")
+    public void ActualizarSubastaUsuarioTestSql(){
+        //se busca el usuario de la subasta a actualizar
+        SubastaUsuario subastaUsuarioBuscar = miUsuarioSubasta.findById(1).orElse(null);
+        //se escribe el valor con el cual se desea actualziar
+        subastaUsuarioBuscar.setValor(10000.2);
+        //se guarda el valor actualizado
+        miUsuarioSubasta.save(subastaUsuarioBuscar);
+        SubastaUsuario subUsBuscada = miUsuarioSubasta.findById(1).orElse(null);
+        //se comprueba que el valor se haya actualzido
+        Assertions.assertEquals(10000.2,subUsBuscada.getValor());
     }
 
-    @Test
+   /* @Test
     public void ListarSubastaUsuarioTest(){
         Ciudad ciudad1 = new Ciudad("Armenia");
         miCiudad.save(ciudad1);
@@ -165,5 +193,19 @@ public class SubastaUsuarioTest {
             System.out.println(miUsarioSubasta);
         }
 
+    }*/
+
+    //metodo para listar los usuarios de la subasta guardados en el sql
+    @Test
+    @Sql("classpath:subastaUsuario.sql")
+    public void ListarSubastaUsuarioTestSql(){
+        //se guardan los datos del sql en una lista
+        List<SubastaUsuario> listaSubastaUsuario = miUsuarioSubasta.findAll();
+        //el for se usa para mostrar los datos guardados en la lista
+        for (SubastaUsuario miUsarioSubasta: listaSubastaUsuario){
+            System.out.println(miUsarioSubasta);
+        }
+
     }
+
 }
