@@ -1,9 +1,9 @@
 package test;
 
-import co.edu.uniquindio.proyecto.NegocioApplication;
-import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
-import co.edu.uniquindio.proyectoUnishop.entidades.Ciudad;
-import co.edu.uniquindio.proyectoUnishop.entidades.Usuario;
+import co.edu.uniquindio.proyecto.proyecto.NegocioApplication;
+import co.edu.uniquindio.proyecto.proyecto.servicios.UsuarioServicio;
+import co.edu.uniquindio.proyecto.proyectoUnishop.entidades.Ciudad;
+import co.edu.uniquindio.proyecto.proyectoUnishop.entidades.Usuario;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
