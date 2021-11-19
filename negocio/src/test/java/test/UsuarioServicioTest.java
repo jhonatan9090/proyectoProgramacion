@@ -1,0 +1,41 @@
+package test;
+
+import co.edu.uniquindio.proyecto.NegocioApplication;
+import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
+import co.edu.uniquindio.proyectoUnishop.entidades.Ciudad;
+import co.edu.uniquindio.proyectoUnishop.entidades.Usuario;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import javax.transaction.Transactional;
+import java.util.HashMap;
+import java.util.Map;
+
+@SpringBootTest(classes = NegocioApplication.class)
+@Transactional
+public class UsuarioServicioTest {
+
+    @Autowired
+    private UsuarioServicio usuarioServicio;
+
+    @Test
+    public void RegistrarTest(){
+        Ciudad ciudad=new Ciudad("armenia");
+
+        Map<String,String> telefonos=new HashMap<>();
+        telefonos.put("casa","321414");
+        telefonos.put("celular","321452514");
+        Usuario u= new Usuario("as", "Oscar", "oscar@gmail.com", "oscar1", telefonos, null);
+
+        try {
+            Usuario respuesta = usuarioServicio.registrarUsuario(u);
+
+            Assertions.assertNotNull(respuesta);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
