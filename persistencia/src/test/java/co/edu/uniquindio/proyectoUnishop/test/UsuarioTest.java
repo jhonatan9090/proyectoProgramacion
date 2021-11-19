@@ -14,6 +14,7 @@ import org.springframework.test.context.jdbc.Sql;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 //
 //Guarda nuestra prueba en la Base de datos
@@ -64,6 +65,15 @@ public class UsuarioTest {
         Assertions.assertNull(usuarioBuscado);
     }
 
+    @Test
+    @Sql("classpath:usuarios.sql")
+    public void paginarUsuarioTestSql(){
+
+        miUsuarioRepo.deleteById("123");
+
+        Usuario usuarioBuscado= miUsuarioRepo.findById("123").orElse(null);
+        Assertions.assertNull(usuarioBuscado);
+    }
 
     /**
      * Metodo para actualizar los datos de un usuario
@@ -97,6 +107,25 @@ public class UsuarioTest {
         // for se usa para mostrar los datos guardados en la lista
         for(Usuario miUsuario:listaUsuarios) {
             System.out.println(miUsuario);
+        }
+    }
+
+    @Test
+    @Sql("classpath:usuarios.sql")
+    public void filtrarNombreContains(){
+        List<Usuario> lista = miUsuarioRepo.findAllByNombreContains("oscar");
+        lista.forEach(u ->  System.out.println(u));
+    }
+
+    @Test
+    @Sql("classpath:usuarios.sql")
+    public void filtrarEmailTest(){
+        Optional<Usuario> usuario = miUsuarioRepo.findByEmail("karla@gmail.com");
+
+        if(usuario.isPresent()){
+            System.out.println(usuario.get());
+        }else{
+            System.out.println("No existe ese correo");
         }
     }
 

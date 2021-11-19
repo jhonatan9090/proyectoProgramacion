@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyectoUnishop.test;
 
 import co.edu.uniquindio.proyectoUnishop.entidades.Categoria;
+import co.edu.uniquindio.proyectoUnishop.entidades.Chat;
 import co.edu.uniquindio.proyectoUnishop.repositorios.CategoriaRepo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -80,6 +81,18 @@ public class CategoriaRepoTest {
         //el for se usa para mostrar los datos guardados en la lista
         for (Categoria misCategorias : listaCategoria) {
             System.out.println(misCategorias);
+        }
+    }
+
+    @Test
+    @Sql("classpath:Categoria.sql")
+    public void listarProductosTestSql(){
+
+        List<Categoria>listaCategorias=miCategoria.obtenerProducto(1);
+
+        // for se usa para mostrar los datos guardados en la lista
+        for(Categoria miCategoria:listaCategorias) {
+            System.out.println(listaCategorias);
         }
     }
 

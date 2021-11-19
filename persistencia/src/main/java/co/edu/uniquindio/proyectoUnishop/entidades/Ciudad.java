@@ -24,7 +24,7 @@ public class Ciudad implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer codCiudad; //codigo de la ciudad
 
-    @Column(length = 80,nullable = false)
+    @Column(length = 80,nullable = true)
     private String nombre; //nombre de la ciudad
 
 

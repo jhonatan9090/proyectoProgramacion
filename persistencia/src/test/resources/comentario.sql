@@ -17,5 +17,5 @@ insert into producto_imagenes values(1, "televisor");
 insert into producto_imagenes values(2, "Celular");
 insert into producto_imagenes values(3, "mango");
 insert into comentario(cod_comentario,calificacion,fecha_comentario,mensaje,respuesta,comentario_producto_cod_producto,usuario_comentario_cod_persona)values(1,5,"2023/6/25","gracias por enviar","con gusto",2,"435");
-insert into comentario(cod_comentario,calificacion,fecha_comentario,mensaje,respuesta,comentario_producto_cod_producto,usuario_comentario_cod_persona)values(2,2,"2023/7/26","Mal servicio","que le disgusto",1,"123");
+insert into comentario(cod_comentario,calificacion,fecha_comentario,mensaje,respuesta,comentario_producto_cod_producto,usuario_comentario_cod_persona)values(2,2,"2023/7/26","Mal servicio",null,1,"123");
 insert into comentario(cod_comentario,calificacion,fecha_comentario,mensaje,respuesta,comentario_producto_cod_producto,usuario_comentario_cod_persona)values(3,4,"2023/8/27","gracias","con gusto",3,"654");

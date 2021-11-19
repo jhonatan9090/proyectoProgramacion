@@ -16,10 +16,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -134,6 +131,18 @@ public class ChatRepoTest {
         //el for se usa para mostrar los datos guardados en la lista
         for (Chat misChat : listaChats) {
             System.out.println(misChat);
+        }
+    }
+
+    @Test
+    @Sql("classpath:chat.sql")
+    public void listarChatTestSql(){
+
+        List<Chat>listaChats=miChatRepo.obtenerChatPorCodigo("123");
+
+        // for se usa para mostrar los datos guardados en la lista
+        for(Chat miChat:listaChats) {
+            System.out.println(listaChats);
         }
     }
 

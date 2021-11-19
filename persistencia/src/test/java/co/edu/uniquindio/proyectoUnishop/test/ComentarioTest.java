@@ -126,6 +126,18 @@ public class ComentarioTest {
         }
     }
 
+    @Test
+    @Sql("classpath:comentario.sql")
+    public void listarComentarioTestSql(){
+
+        List<Comentario>listaChats=miComentarioRepo.obtenerChatPorCodigo(1);
+
+        // for se usa para mostrar los datos guardados en la lista
+        for(Comentario miChat:listaChats) {
+            System.out.println(listaChats);
+        }
+    }
+
     //Metodo para Eliminar un comentario (sin sql)
     /*  @Test
       public void eliminarComentarioTest() {

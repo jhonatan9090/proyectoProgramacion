@@ -19,7 +19,7 @@ import java.util.Map;
 public class Usuario extends Persona implements Serializable {
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+   // @JoinColumn(nullable = false)
     private  Ciudad ciudadUsuario; //ciudad del usuario
 
     // Relacion inversa entre usuario y comentario
