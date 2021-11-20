@@ -19,6 +19,12 @@ insert into producto(cod_producto,descripcion,descuento,fecha_limite,nombre,prec
 insert into producto_imagenes values(1, "televisor");
 insert into producto_imagenes values(2, "Celular");
 insert into producto_imagenes values(3, "mango");
+insert  into compra(cod_compra,fecha_pago, medio_pago, usuario_compra_cod_persona) values (1,"2022/6/20","nequi","123");
+insert  into compra(cod_compra,fecha_pago, medio_pago, usuario_compra_cod_persona) values (2,"2022/6/11","daviplata","435");
+insert  into compra(cod_compra,fecha_pago, medio_pago, usuario_compra_cod_persona) values (3,"2022/6/10","efecty","654");
+insert into detalle_Compra(cod_detalle,precio_producto,unidades,producto_detalle_cod_producto,compradetalle_cod_compra) values (1,45000001,3,1,1);
+insert into detalle_Compra(cod_detalle,precio_producto,unidades,producto_detalle_cod_producto,compradetalle_cod_compra) values (2,2500000.1,2,2,1);
+insert into detalle_Compra(cod_detalle,precio_producto,unidades,producto_detalle_cod_producto,compradetalle_cod_compra) values (3,5000000.1,1,3,2);
 insert into producto_lista_categoria(lista_productos_categorias_cod_producto,lista_categoria_cod_categoria) values(1, 1);
 insert into producto_lista_categoria(lista_productos_categorias_cod_producto,lista_categoria_cod_categoria) values(2, 1);
 insert into producto_lista_categoria(lista_productos_categorias_cod_producto,lista_categoria_cod_categoria) values(3, 1)

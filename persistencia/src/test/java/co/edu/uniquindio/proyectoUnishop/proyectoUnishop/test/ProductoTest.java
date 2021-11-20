@@ -137,6 +137,34 @@ public class ProductoTest {
             System.out.println(misProductos[0]+" "+misProductos[1]);
         }
     }
+
+    @Test
+    @Sql("classpath:producto.sql")
+    public void listarCompras(){
+
+        //se guardan los datos del sql en una lista
+
+        List<Object[]> listaProductos=miProductoRepo.ListarComprasUsuario("123");
+
+        //el for se usa para mostrar los datos guardados en la lista
+        for (Object[] misProductos: listaProductos) {
+            System.out.println(misProductos[0]+" "+misProductos[1]+" "+misProductos[2]);
+        }
+    }
+
+    @Test
+    @Sql("classpath:producto.sql")
+    public void listarVentas(){
+
+        //se guardan los datos del sql en una lista
+
+        List<Object[]> listaProductos=miProductoRepo.ListarProductosDelUsuario("123");
+
+        //el for se usa para mostrar los datos guardados en la lista
+        for (Object[] misProductos: listaProductos) {
+            System.out.println(misProductos[0]+" "+misProductos[1]+" "+misProductos[2]);
+        }
+    }
     //Metodo para eliminar un producto (sin sql)
     /* @Test
     public void eliminarProductoTest(){
