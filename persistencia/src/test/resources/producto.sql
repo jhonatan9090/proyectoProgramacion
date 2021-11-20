@@ -1,3 +1,6 @@
+insert into categoria values (1,"Tecnologia");
+insert into categoria values (2,"Accesorios");
+insert into categoria values (3,"Electrodomesticos");
 insert into ciudad values(1,"Armenia");
 insert into ciudad values (2,"Cali");
 insert into ciudad values (3,"pereira");
@@ -16,5 +19,7 @@ insert into producto(cod_producto,descripcion,descuento,fecha_limite,nombre,prec
 insert into producto_imagenes values(1, "televisor");
 insert into producto_imagenes values(2, "Celular");
 insert into producto_imagenes values(3, "mango");
-
+insert into producto_lista_categoria(lista_productos_categorias_cod_producto,lista_categoria_cod_categoria) values(1, 1);
+insert into producto_lista_categoria(lista_productos_categorias_cod_producto,lista_categoria_cod_categoria) values(2, 1);
+insert into producto_lista_categoria(lista_productos_categorias_cod_producto,lista_categoria_cod_categoria) values(3, 1)
 

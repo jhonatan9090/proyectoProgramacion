@@ -17,4 +17,6 @@ public interface UsuarioRepo extends JpaRepository<Usuario,String> {
     Optional<Usuario> findByEmail(String email);
 
     Page<Usuario> findAll(Pageable paginador);
+
+    Optional<Usuario>findAllByEmailAndPassword(String email,String password);
 }

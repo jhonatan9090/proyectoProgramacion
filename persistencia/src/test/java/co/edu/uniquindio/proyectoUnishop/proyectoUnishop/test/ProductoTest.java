@@ -124,6 +124,19 @@ public class ProductoTest {
         }
     }
 
+    @Test
+    @Sql("classpath:producto.sql")
+    public void listarCategoria(){
+
+        //se guardan los datos del sql en una lista
+
+        List<Object[]> listaProductos=miProductoRepo.ListarProductosPorCategoria("Tecnologia");
+
+        //el for se usa para mostrar los datos guardados en la lista
+        for (Object[] misProductos: listaProductos) {
+            System.out.println(misProductos[0]+" "+misProductos[1]);
+        }
+    }
     //Metodo para eliminar un producto (sin sql)
     /* @Test
     public void eliminarProductoTest(){
