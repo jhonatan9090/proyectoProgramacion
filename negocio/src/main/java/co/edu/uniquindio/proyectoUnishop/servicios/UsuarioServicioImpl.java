@@ -60,4 +60,19 @@ public class UsuarioServicioImpl implements UsuarioServicio{
         }
         return buscado.get();
     }
+
+    @Override
+    public Usuario loguearUsuario(String correo, String password) throws Exception {
+
+       Optional<Usuario> usuario= usuarioRepo.findAllByEmailAndPassword(correo,password);
+
+       if(usuario.isEmpty()){
+
+
+           throw new Exception("El Correo o la contraseña no son correctas");
+
+       }
+
+        return usuario.get();
+    }
 }
