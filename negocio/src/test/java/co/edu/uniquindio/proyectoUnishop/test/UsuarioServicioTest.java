@@ -2,7 +2,6 @@ package co.edu.uniquindio.proyectoUnishop.test;
 
 import co.edu.uniquindio.proyectoUnishop.NegocioApplication;
 import co.edu.uniquindio.proyectoUnishop.servicios.UsuarioServicio;
-import co.edu.uniquindio.proyectoUnishop.entidades.Ciudad;
 import co.edu.uniquindio.proyectoUnishop.entidades.Usuario;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -22,13 +21,14 @@ public class UsuarioServicioTest {
 
     @Test
     public void RegistrarTest(){
-        Ciudad ciudad=new Ciudad("armenia");
+
 
         Map<String,String> telefonos=new HashMap<>();
         telefonos.put("casa","321414");
         telefonos.put("celular","321452514");
-        Usuario u= new Usuario("2020", "Oscar", "oscar@gmail.com", "oscar1",telefonos,null);
+        Usuario u= new Usuario("200", "Oscar", "oscar@gmail.com", "oscar1",telefonos,null);
         u.setTelefono(telefonos);
+
         try {
 
             Usuario respuesta = usuarioServicio.registrarUsuario(u);
