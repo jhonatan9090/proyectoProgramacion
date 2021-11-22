@@ -15,9 +15,15 @@
 </h:head>
 <h:body>
     <h:form >
-        <h:inputText value="#{ejemploBean.atributo1}" />
-        <h:inputText value="#{ejemploBean.atributo2}" />
-        <h:commandButton value="Cambiar valores" action="#{ejemploBean.cambiar}"/>
+        <h:panelGrid columns="2" cellpadding="5">
+            <p:outputLabel form="atri1" value="Atributo 1: "/>
+            <p:inputText id="atri1" value="#{ejemploBean.atributo1}" required="true"/>
+
+            <p:outputLabel value="Atributo 2: "/>
+            <p:inputText value="#{ejemploBean.atributo2}"/>
+
+        </h:panelGrid>
+        <p:commandButton value="Cambiar valores" action="#{ejemploBean.cambiar}" update="@form"/>
     </h:form>
 
 </h:body>
