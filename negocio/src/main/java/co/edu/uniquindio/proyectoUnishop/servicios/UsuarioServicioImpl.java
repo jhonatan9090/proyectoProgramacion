@@ -59,11 +59,11 @@ public class UsuarioServicioImpl implements UsuarioServicio{
 
     @Override
     public Usuario obtenerUsuario(String codigo) throws Exception {
-        Optional<Usuario> buscado = usuarioRepo.findById(codigo);
-        if(buscado.isPresent()){
-            throw new Exception("El codigo del usuario ya existe");
+        Optional<Usuario> usuario = usuarioRepo.findById(codigo);
+        if(usuario.isEmpty()){
+            throw new Exception("No existe un usuario con el id dado");
         }
-        return buscado.get();
+        return usuario.get();
     }
 
     @Override

@@ -49,7 +49,7 @@ public class Producto implements Serializable {
     @Column(nullable = false)
     private Double descuento; //Descuento del producto
 
-    @JoinColumn(nullable = false)
+    //@JoinColumn(nullable = false)
     @ElementCollection
     private List<String> imagenes; //imagenes para el producto
 
@@ -60,7 +60,7 @@ public class Producto implements Serializable {
 
     //Relacion con la ciudad del producto
     @ManyToOne
-    @JoinColumn(nullable = false)
+    //@JoinColumn(nullable = false)
     private Ciudad ciudadProducto;
 
     // Relacion inversa entre subasta y producto
