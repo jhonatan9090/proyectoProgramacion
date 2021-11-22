@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyectoUnishop.servicios;
 
 import co.edu.uniquindio.proyectoUnishop.entidades.Usuario;
 import co.edu.uniquindio.proyectoUnishop.repositorios.UsuarioRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,11 +10,15 @@ import java.util.Optional;
 
 @Service
 public class UsuarioServicioImpl implements UsuarioServicio{
-    private UsuarioRepo usuarioRepo;
 
-    public void UsuarioServicioImplf(UsuarioRepo usuarioRepo) {
+
+    private final UsuarioRepo usuarioRepo;
+
+    public UsuarioServicioImpl(UsuarioRepo usuarioRepo) {
         this.usuarioRepo = usuarioRepo;
     }
+
+
 
 
     @Override
@@ -59,5 +64,20 @@ public class UsuarioServicioImpl implements UsuarioServicio{
             throw new Exception("El codigo del usuario ya existe");
         }
         return buscado.get();
+    }
+
+    @Override
+    public Usuario loguearUsuario(String correo, String password) throws Exception {
+
+       Optional<Usuario> usuario= usuarioRepo.findAllByEmailAndPassword(correo,password);
+
+       if(usuario.isEmpty()){
+
+
+           throw new Exception("El Correo o la contraseña no son correctas");
+
+       }
+
+        return usuario.get();
     }
 }

@@ -7,6 +7,7 @@ import lombok.ToString;
 import javax.persistence.*;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
@@ -29,7 +30,7 @@ public class Producto implements Serializable {
     @Column(length = 80,nullable = false)
     private String nombre; // nombre del producto
 
-    @Positive
+    @PositiveOrZero
     @Column(nullable = false)
     private Integer unidades; //Cantidad de productos disponibles
 
@@ -40,7 +41,7 @@ public class Producto implements Serializable {
     @Column(nullable = false)
     private Double precio; //precio del producto
 
-   // @Future
+    @Future
     @Column(nullable = false)
     private LocalDate fechaLimite; //Fecha limite del producto
 
