@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Repository
@@ -13,4 +14,10 @@ public interface CategoriaRepo extends JpaRepository<Categoria,Integer> {
 
     @Query("select ca.codCategoria , max(d.ProductoDetalle) from Compra c join c.listaDetalleCompra d join d.ProductoDetalle.listaCategoria ca where ca.codCategoria = :codCategoria")
     List<Categoria> obtenerProducto(int codCategoria);
+
+
+    //obtiene el nombre de una categoria
+    Optional<Categoria>findByNombreContains(String nombreCategoria);
+
+
 }

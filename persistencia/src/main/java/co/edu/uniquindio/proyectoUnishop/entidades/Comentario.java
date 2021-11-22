@@ -4,9 +4,13 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -25,6 +29,7 @@ public class Comentario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer codComentario; //codigo del comentario
 
+    @NotBlank(message = "el mensaje no puede estar vacio")
     @Column(length = 200)
     private String mensaje; //mensaje del comentario
 
@@ -43,11 +48,13 @@ public class Comentario implements Serializable {
     // Relacion de comentarios y usuario
     @ManyToOne
     @JoinColumn(nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Usuario usuarioComentario;
 
 
     // Relacion del comentario sobre un producto
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(nullable = false)
     private Producto comentarioProducto;
 

@@ -4,6 +4,9 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Positive;
@@ -34,10 +37,12 @@ public class SubastaUsuario implements Serializable {
 
     @ManyToOne
     @JoinColumn(nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Usuario usuarioSubasta; // usuario que hace la subasta del producto
 
     // Relacion de usarios que subastaran
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(nullable = false)
     private Subasta subastaUsuario;
 

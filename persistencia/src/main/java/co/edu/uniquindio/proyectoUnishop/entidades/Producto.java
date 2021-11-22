@@ -4,8 +4,12 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.Future;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
@@ -27,6 +31,7 @@ public class Producto implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer codProducto; //Llave primaria
 
+    @NotBlank(message = "el nombre no puede estar vacio")
     @Column(length = 80,nullable = false)
     private String nombre; // nombre del producto
 
@@ -34,6 +39,7 @@ public class Producto implements Serializable {
     @Column(nullable = false)
     private Integer unidades; //Cantidad de productos disponibles
 
+    @NotBlank(message = "la descripcion no puede estar vacio")
     @Column(length = 200,nullable = false)
     private String descripcion; //Descripcion del producto
 
@@ -56,10 +62,12 @@ public class Producto implements Serializable {
      // Relacion de la venta de un producto
     @ManyToOne
     @JoinColumn(nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private  Usuario usuarioVendedor;
 
     //Relacion con la ciudad del producto
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     //@JoinColumn(nullable = false)
     private Ciudad ciudadProducto;
 
@@ -90,6 +98,7 @@ public class Producto implements Serializable {
 
     // Relacion con la lista de categorias
     @ManyToMany
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @ToString.Exclude
     private List<Categoria>listaCategoria;
 

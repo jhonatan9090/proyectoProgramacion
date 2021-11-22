@@ -11,10 +11,10 @@ public interface ProductoServicio {
 
 
     Producto publicarProducto(Producto p) throws  Exception;
-    void  actualizarProducto(Producto p) throws Exception;
+    Producto actualizarProducto(Producto p) throws Exception;
     void eliminarProducto(Integer idProdcuto) throws Exception;
     Producto buscarProducto(Integer idProducto)throws Exception;
-    List<Object[]> listarporCategoria(Categoria categoria) throws Exception;
+    List<Producto> listarporCategoria(Categoria categoria) throws Exception;
     void comentarProducto(Comentario comentario) throws Exception;
     void guardarProductoFavorito(Usuario usuario,Producto producto) throws Exception;
     void eliminarProductoFavorito(Usuario usuario,Producto producto) throws Exception;

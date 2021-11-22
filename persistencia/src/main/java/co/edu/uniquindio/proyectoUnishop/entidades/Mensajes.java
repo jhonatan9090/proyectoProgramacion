@@ -4,8 +4,12 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.Future;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -23,9 +27,11 @@ public class Mensajes implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer codMensaje; //codigo de mensaje
 
+    @NotBlank(message = "el mensaje no puede estar vacio")
     @Column(length = 200,nullable = false)
     private String mensaje;
 
+    @NotBlank(message = "el emisor no puede estar vacio")
     @Column(length = 80,nullable = false)
     private String emisor; //nombre de la persona que manda el mensaje
 
@@ -35,6 +41,7 @@ public class Mensajes implements Serializable {
 
     // Relacion entre mensaje y el chat del usuario
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(nullable = false)
     private Chat chatUsuario; //Chat del usuario que envia el mensaje
 

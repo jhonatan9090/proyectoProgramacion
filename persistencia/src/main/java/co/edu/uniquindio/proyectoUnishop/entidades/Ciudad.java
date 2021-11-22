@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class Ciudad implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer codCiudad; //codigo de la ciudad
 
+    @NotBlank(message = "el nombre no puede estar vacio")
     @Column(length = 80,nullable = true)
     private String nombre; //nombre de la ciudad
 

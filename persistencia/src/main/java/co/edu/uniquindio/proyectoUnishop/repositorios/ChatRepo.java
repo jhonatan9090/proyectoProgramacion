@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface ChatRepo extends JpaRepository<Chat,Integer> {
 
-    @Query("select c from  Chat c where c.chatProductoCompra.usuarioVendedor.codPersona=:codPersona")
-    List<Chat> obtenerChatPorCodigo(String codPersona);
+   /* @Query("select c from  Chat c where c.chatProductoCompra.usuarioVendedor.codPersona=:codPersona")
+    List<Chat> obtenerChatPorCodigo(String codPersona);*/
 }

@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class Categoria implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer codCategoria; //Codigo de la categoria
 
+    @NotBlank(message = "el nombre no puede estar vacio")
     @Column(length = 30,nullable = false,unique = true)
     private String nombre; //nombre de la categoria
 

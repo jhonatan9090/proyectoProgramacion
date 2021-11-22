@@ -23,8 +23,11 @@ public class UsuarioBean {
     @Setter
     private Usuario usuario;
 
-    @Autowired
-    private UsuarioServicio usuarioServicio;
+    private final UsuarioServicio usuarioServicio;
+
+    public UsuarioBean(UsuarioServicio usuarioServicio) {
+        this.usuarioServicio = usuarioServicio;
+    }
 
     @PostConstruct
     public void inicializar() {

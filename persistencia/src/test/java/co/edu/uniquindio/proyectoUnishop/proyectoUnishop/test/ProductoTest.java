@@ -124,7 +124,7 @@ public class ProductoTest {
         }
     }
 
-    @Test
+    /*@Test
     @Sql("classpath:producto.sql")
     public void listarCategoria(){
 
@@ -136,7 +136,7 @@ public class ProductoTest {
         for (Object[] misProductos: listaProductos) {
             System.out.println(misProductos[0]+" "+misProductos[1]);
         }
-    }
+    }*/
 
     @Test
     @Sql("classpath:producto.sql")

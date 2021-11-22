@@ -1,7 +1,6 @@
 package co.edu.uniquindio.proyectoUnishop.test;
 
 import co.edu.uniquindio.proyectoUnishop.NegocioApplication;
-import co.edu.uniquindio.proyectoUnishop.entidades.Ciudad;
 import co.edu.uniquindio.proyectoUnishop.servicios.UsuarioServicio;
 import co.edu.uniquindio.proyectoUnishop.entidades.Usuario;
 import org.junit.jupiter.api.Assertions;
@@ -20,6 +19,7 @@ public class UsuarioServicioTest {
 
     @Autowired
     private UsuarioServicio usuarioServicio;
+
 
     @Test
     public void ListarUsuariosTest(){
