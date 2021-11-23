@@ -10,9 +10,27 @@
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Title</title>
+    <title>Pagina de Bienvenida</title>
 </h:head>
 <h:body>
-    <h1>Hola mundo</h1>
+    <div id="header">
+        <ul>
+            <li><a href="index.xhtml">Inicio</a></li>
+
+        </ul>
+    <h:form>
+
+        <p:inputText placeholder="¿que producto desea buscar?" required="true" value="#{busquedaBean.busqueda}" />
+        <p:commandButton icon="pi pi-search" action="#{busquedaBean.buscar}" update="@form"/>
+
+    </h:form>
+
+    </div>
+
+    <div id="content">
+
+
+
+    </div>
 </h:body>
 </html>

@@ -12,7 +12,6 @@ public interface ProductoRepo extends JpaRepository<Producto,Integer> {
 
 
     //lista los productos por categoria
-
     @Query("Select p from Producto p join p.listaCategoria c where c.nombre=:nombreCategoria")
     List<Producto> ListarProductosPorCategoria(String nombreCategoria);
 
@@ -23,6 +22,11 @@ public interface ProductoRepo extends JpaRepository<Producto,Integer> {
     //listra los productos que el usuario vende
     @Query("Select p.nombre,p.unidades,p.descripcion from Producto p join p.usuarioVendedor v where v.codPersona=:idUsuario")
     List<Object[]> ListarProductosDelUsuario(String idUsuario);
+
+
+    //listar producto por nombre
+    @Query("select p from Producto p where p.nombre like concat('%',:nombreProducto,'%' ) ")
+    List<Producto>listarProductoNombre(String nombreProducto);
 
 
 

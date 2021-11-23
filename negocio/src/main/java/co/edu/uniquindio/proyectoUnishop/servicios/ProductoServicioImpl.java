@@ -108,7 +108,7 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public List<Object[]> buscarProductoFiltro(String nonbre, String[] filtro) throws Exception {
-        return null;
+    public List<Producto> buscarProductoFiltro(String nonbre, String[] filtro)  {
+        return productoRepo.listarProductoNombre(nonbre);
     }
 }

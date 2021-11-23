@@ -18,7 +18,7 @@ public interface ProductoServicio {
     void comentarProducto(Comentario comentario) throws Exception;
     void guardarProductoFavorito(Usuario usuario,Producto producto) throws Exception;
     void eliminarProductoFavorito(Usuario usuario,Producto producto) throws Exception;
-    List<Object[]>buscarProductoFiltro(String nonbre,String [] filtro) throws Exception;
+    List<Producto>buscarProductoFiltro(String nonbre,String [] filtro) ;
 
 
 }
