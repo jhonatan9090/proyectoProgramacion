@@ -23,9 +23,6 @@
             <h:panelGrid columns="2" cellpadding="5">
 
 
-
-
-
                 <p:outputLabel for="email" value="Email" />
                 <p:inputText class="campo-texto" id="email" value="#{loguinBean.correo}" required="true"  />
 
@@ -33,15 +30,40 @@
                 <p:outputLabel for="password" value="Password" />
                 <p:password class="campo-texto" id="password" value="#{loguinBean.password}" required="true" />
 
+
                 <p:growl showDetail="true" />
-
-
-
-
 
             </h:panelGrid>
             <p:commandButton value="Ingresar" class="button" action="#{loguinBean.loguearPersona}" update="@form" />
+
+
+
         </h:form>
+
+
+
+
     </p:panel>
+
+<p:panel>
+
+
+    <h:form>
+
+        <h:panelGrid cellpadding="2">
+
+            <h:commandLink action="usuarioRegistro.xhtml?faces-redirect=true" value="Crear nuevo usuario" />
+
+            <h:commandLink action="index.xhtml?faces-redirect=true" value="¿Olvidaste tu contraeña?" />
+
+        </h:panelGrid>
+
+
+    </h:form>
+
+</p:panel>
+
+
+
 </h:body>
 </html>

@@ -25,4 +25,7 @@ public interface ProductoRepo extends JpaRepository<Producto,Integer> {
     List<Object[]> ListarProductosDelUsuario(String idUsuario);
 
 
+
+
+
 }
