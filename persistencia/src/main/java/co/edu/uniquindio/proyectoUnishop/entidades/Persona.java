@@ -9,12 +9,16 @@ import java.util.Map;
 /**
  * Entidad para Persona
  */
-@Getter @Setter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString
+
+
+
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@MappedSuperclass
+@NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Getter
+@Setter
+@Entity
 public class Persona implements Serializable {
 
     @Id
@@ -36,8 +40,6 @@ public class Persona implements Serializable {
     /**
      * Constructor sin parametros de la entidad Persona
      */
-    public Persona(){
-    super();
-    }
+
 
 }

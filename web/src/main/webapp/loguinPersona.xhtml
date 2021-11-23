@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="./styles/usuario/style.css" />
 </h:head>
 <h:body>
-    <p:panel header="Registrar Usuario" class="p-text-center" id="container">
+    <p:panel header="Iniciar Sesion" class="p-text-center" id="container">
         <h:form >
             <h:panelGrid columns="2" cellpadding="5">
 
@@ -27,15 +27,11 @@
 
 
                 <p:outputLabel for="email" value="Email" />
-                <p:inputText class="campo-texto" id="email" value="#{loguinBean.usuario.email}" required="true"  />
-
+                <p:inputText class="campo-texto" id="email" value="#{loguinBean.correo}" required="true"  />
 
 
                 <p:outputLabel for="password" value="Password" />
-                <p:password class="campo-texto" id="password" value="#{loguinBean.usuario.password}" />
-
-
-
+                <p:password class="campo-texto" id="password" value="#{loguinBean.password}" required="true" />
 
                 <p:growl showDetail="true" />
 
@@ -44,7 +40,7 @@
 
 
             </h:panelGrid>
-            <p:commandButton value="Registrar" class="button" action="#{}" update="@form" />
+            <p:commandButton value="Ingresar" class="button" action="#{loguinBean.loguearPersona}" update="@form" />
         </h:form>
     </p:panel>
 </h:body>

@@ -1,47 +1,72 @@
 package co.edu.uniquindio.proyectoUnishop.bean;
 
+import co.edu.uniquindio.proyectoUnishop.entidades.Persona;
 import co.edu.uniquindio.proyectoUnishop.entidades.Usuario;
+import co.edu.uniquindio.proyectoUnishop.servicios.LoguinServicio;
 import co.edu.uniquindio.proyectoUnishop.servicios.UsuarioServicio;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
-
 
 
 @Component
 @ViewScoped
 public class LoguinBean {
 
+    private final LoguinServicio loguinServicio;
+
     @Getter
     @Setter
-    private Usuario usuario;
+    private Persona persona;
+
+    @Getter
+    @Setter
+    private String correo;
+
+    @Getter
+    @Setter
+    private String password;
 
 
-    private final UsuarioServicio usuarioServicio;
 
-    public LoguinBean(UsuarioServicio usuarioServicio) {
-        this.usuarioServicio = usuarioServicio;
+
+    public LoguinBean(LoguinServicio loguinServicio) {
+        this.loguinServicio = loguinServicio;
     }
 
-    @PostConstruct
-    public void inicializar() {
-        usuario = new Usuario();
-    }
 
-    public  void loguearUsuario(String correo,String password){
+    public String loguearPersona() {
+
+        if (correo != null && password != null) {
+
+            try {
+
+                persona = loguinServicio.loguinPersona(correo, password);
 
 
-        try {
-            usuarioServicio.loguearUsuario(correo,password);
-        } catch (Exception e) {
-            e.printStackTrace();
+                return "/index.xhtml?faces-redirect=true";
+
+            } catch (Exception e) {
+
+
+                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+                FacesContext.getCurrentInstance().addMessage("mensaje-sesion", m);
+
+
+            }
+
+
         }
 
-
+        return null;
     }
+
 
 }

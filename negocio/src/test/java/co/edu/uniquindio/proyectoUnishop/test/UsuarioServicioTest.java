@@ -63,30 +63,6 @@ public class UsuarioServicioTest {
     }
 
 
-    @Test
-    public void loguearUsuario(){
 
-
-        Map<String,String> telefonos=new HashMap<>();
-        telefonos.put("casa","321414");
-        telefonos.put("celular","321452514");
-        Usuario u= new Usuario("200", "Oscar", "oscar@gmail.com", "oscar1",telefonos,null);
-        u.setTelefono(telefonos);
-        try {
-            Usuario respuesta = usuarioServicio.registrarUsuario(u);
-            Usuario usuarioLogueado=usuarioServicio.loguearUsuario("oscar@gmail.com","oscar1");
-            Assertions.assertNotNull(usuarioLogueado);
-        }catch (Exception e){
-
-
-            Assertions.assertTrue(false, e.getMessage());
-
-
-        }
-
-
-
-
-    }
 }
 

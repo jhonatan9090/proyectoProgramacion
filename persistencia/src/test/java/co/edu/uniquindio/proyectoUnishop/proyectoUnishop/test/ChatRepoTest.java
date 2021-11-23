@@ -134,7 +134,7 @@ public class ChatRepoTest {
         }
     }
 
-    @Test
+    /*@Test
     @Sql("classpath:chat.sql")
     public void listarChatTestSql(){
 
@@ -144,7 +144,7 @@ public class ChatRepoTest {
         for(Chat miChat:listaChats) {
             System.out.println(listaChats);
         }
-    }
+    }*/
 
     //metodo que elimina un chat (sin sql)
    /* @Test
