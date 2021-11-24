@@ -1,9 +1,11 @@
 package co.edu.uniquindio.proyectoUnishop.repositorios;
 
+import co.edu.uniquindio.proyectoUnishop.entidades.Producto;
 import co.edu.uniquindio.proyectoUnishop.entidades.Usuario;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,5 +20,12 @@ public interface UsuarioRepo extends JpaRepository<Usuario,String> {
 
     Page<Usuario> findAll(Pageable paginador);
 
+    @Query("select p from Usuario u, in (u.listaProductoFavorito) p where u.email =: email ")
+    List<Producto> obtenerProductosFavoritos(String email);
+
+
+    Optional<Usuario> findAllByEmailAndPassword(String email,String password);
+
+    Optional<Usuario>findAllByEmailAndCodPersona(String email,String codPersona);
 
 }

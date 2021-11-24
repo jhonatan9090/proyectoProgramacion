@@ -13,12 +13,10 @@ import java.util.Map;
 
 
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Getter
 @Setter
-@Entity
+@MappedSuperclass
 public class Persona implements Serializable {
 
     @Id
@@ -37,9 +35,21 @@ public class Persona implements Serializable {
     @ElementCollection
     private Map<String,String> telefono; //Telefonos que tiene la persona
 
+    public Persona(String codPersona, String nombre, String email, String password, Map<String, String> telefono) {
+        this.codPersona = codPersona;
+        this.nombre = nombre;
+        this.email = email;
+        this.password = password;
+        this.telefono = telefono;
+    }
+
     /**
      * Constructor sin parametros de la entidad Persona
      */
 
 
+    public Persona()
+    {
+        super();
+    }
 }

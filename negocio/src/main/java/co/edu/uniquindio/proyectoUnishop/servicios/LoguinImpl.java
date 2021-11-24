@@ -1,7 +1,8 @@
 package co.edu.uniquindio.proyectoUnishop.servicios;
 
 import co.edu.uniquindio.proyectoUnishop.entidades.Persona;
-import co.edu.uniquindio.proyectoUnishop.repositorios.PersonaRepo;
+import co.edu.uniquindio.proyectoUnishop.entidades.Usuario;
+import co.edu.uniquindio.proyectoUnishop.repositorios.UsuarioRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,15 +18,15 @@ public class LoguinImpl implements  LoguinServicio{
 
 
     @Autowired
-    private PersonaRepo personaRepo;
+    private UsuarioRepo usuarioRepo;
 
 
 
 
     @Override
-    public Persona loguinPersona(String correo, String password) throws Exception {
+    public Usuario loguinPersona(String correo, String password) throws Exception {
 
-        Optional<Persona> buscarPersona=personaRepo.findAllByEmailAndPassword(correo,password);
+        Optional<Usuario> buscarPersona=usuarioRepo.findAllByEmailAndPassword(correo,password);
         if(buscarPersona.isEmpty()){
             throw new Exception("Los datos de no son correctos o no pertenecen a un usuario registrado");
         }
@@ -34,8 +35,8 @@ public class LoguinImpl implements  LoguinServicio{
     }
 
     @Override
-    public Persona recuperarPassword(String correo, String codigo) throws Exception {
-        Optional<Persona>personaBuscada=personaRepo.findAllByEmailAndCodPersona(correo,codigo);
+    public Usuario recuperarPassword(String correo, String codigo) throws Exception {
+        Optional<Usuario>personaBuscada=usuarioRepo.findAllByEmailAndCodPersona(correo,codigo);
 
         if(personaBuscada.isEmpty()){
             throw new Exception("Los datos son incorrectos");
