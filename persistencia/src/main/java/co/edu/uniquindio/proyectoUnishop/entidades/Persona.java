@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyectoUnishop.entidades;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Map;
 
@@ -24,12 +25,15 @@ public class Persona implements Serializable {
     private String codPersona; //Llave primaria, codigo de Persona
 
     @Column(length = 30,nullable = false)
+    @NotBlank(message = "el nombre no puede estar vacio")
     private String nombre; //Nombre de la persona
 
     @Column(length = 100,nullable = false,unique = true)
+    @NotBlank(message = "el email no puede estar vacio")
     private String email; //email de la persona
 
     @Column(length = 10,nullable = false,unique = true)
+    @NotBlank(message = "la contraseña no puede estar vacio")
     private String password; //contraseña de persona
 
     @ElementCollection

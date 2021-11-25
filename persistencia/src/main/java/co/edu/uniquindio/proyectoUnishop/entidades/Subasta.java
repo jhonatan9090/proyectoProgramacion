@@ -33,13 +33,12 @@ public class Subasta implements Serializable {
 
     // Relacion entre subasta y producto
     @ManyToOne
-    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(nullable = false)
     private  Producto subastaProducto; //producto a subastar
 
     // Relacion inversa de lista de usarios que sabastaran
     @ToString.Exclude
-    @OneToMany(mappedBy = "subastaUsuario")
+    @OneToMany(mappedBy = "subastaUsuario",cascade = CascadeType.REMOVE)
     private List<SubastaUsuario>listaSubastaUsuarios;
 
 
@@ -58,6 +57,6 @@ public class Subasta implements Serializable {
     public Subasta(@Future LocalDate fechaLimite, Producto subastaProducto) {
         this.fechaLimite = fechaLimite;
         this.subastaProducto = subastaProducto;
-        this.listaSubastaUsuarios = listaSubastaUsuarios;
+
     }
 }

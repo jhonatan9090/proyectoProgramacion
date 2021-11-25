@@ -111,4 +111,6 @@ public class ProductoServicioImpl implements ProductoServicio {
     public List<Producto> buscarProductoFiltro(String nonbre, String[] filtro)  {
         return productoRepo.listarProductoNombre(nonbre);
     }
+
+
 }

@@ -22,11 +22,11 @@ public class Usuario extends Persona implements Serializable {
     private  Ciudad ciudadUsuario; //ciudad del usuario
 
     // Relacion inversa entre usuario y comentario
-    @OneToMany(mappedBy = "usuarioComentario")
+    @OneToMany(mappedBy = "usuarioComentario",cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<Comentario>listaComentarios;
 
-    @OneToMany(mappedBy = "usuarioSubasta")
+    @OneToMany(mappedBy = "usuarioSubasta",cascade = CascadeType.REMOVE)
     private List<SubastaUsuario>listaSubastasUsuarios;
 
     // Relacion inversa de la venta de un producto
@@ -37,7 +37,7 @@ public class Usuario extends Persona implements Serializable {
     private List<Producto>listaProductos;
 
     //  Relacion inversi de compras de un producto
-    @OneToMany(mappedBy = "UsuarioCompra")
+    @OneToMany(mappedBy = "UsuarioCompra",cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private  List<Compra>listaCompras;
 
@@ -47,7 +47,7 @@ public class Usuario extends Persona implements Serializable {
     private List<Producto>listaProductoFavorito;
 
     // Relacion inversa chat comprador
-    @OneToMany(mappedBy = "usuarioComprador")
+    @OneToMany(mappedBy = "usuarioComprador",cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<Chat>ListChatComprador;
 

@@ -34,8 +34,15 @@
                 <p:outputLabel for="telefono" value="Telefono" />
                 <p:inputText class="campo-texto" id="telefono" value="#{usuarioBean.usuario.telefono}" />
 
-                <p:outputLabel for="ciudad" value="Ciudad" />
-                <p:inputText class="campo-texto" id="ciudad" value="#{usuarioBean.usuario.ciudadUsuario}" />
+                <p:outputLabel for="ciudad_u" value="Ciudad" />
+                <p:selectOneMenu id="ciudad_u" value="#{usuarioBean.usuario.ciudadUsuario}" converter="#{ciudadConverter}" >
+
+                    <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true"/>
+                    <f:selectItems value="#{usuarioBean.listaCiudad}" var="ciudad" itemLabel="#{ciudad.nombre}"/>
+
+
+
+                </p:selectOneMenu>
 
             </h:panelGrid>
             <p:growl showDetail="true"/>

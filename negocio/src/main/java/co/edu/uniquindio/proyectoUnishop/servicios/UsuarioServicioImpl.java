@@ -15,6 +15,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     private final UsuarioRepo usuarioRepo;
 
+
     public UsuarioServicioImpl(UsuarioRepo usuarioRepo) {
         this.usuarioRepo = usuarioRepo;
     }
@@ -78,7 +79,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
             throw new Exception("El usuario no tiene productos favoritos");
         }
 
-        return null;
+        return usuarioRepo.obtenerProductosFavoritos(email);
     }
 
 

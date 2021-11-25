@@ -39,6 +39,7 @@ public class Producto implements Serializable {
     @Column(nullable = false)
     private Integer unidades; //Cantidad de productos disponibles
 
+    @Lob
     @NotBlank(message = "la descripcion no puede estar vacio")
     @Column(length = 200,nullable = false)
     private String descripcion; //Descripcion del producto
@@ -62,7 +63,6 @@ public class Producto implements Serializable {
      // Relacion de la venta de un producto
     @ManyToOne
     @JoinColumn(nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private  Usuario usuarioVendedor;
 
     //Relacion con la ciudad del producto
@@ -82,7 +82,7 @@ public class Producto implements Serializable {
     private  List<DetalleCompra>listaDetalles;
 
     // Relacion inversa del comentario de un producto
-    @OneToMany(mappedBy = "comentarioProducto")
+    @OneToMany(mappedBy = "comentarioProducto", cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<Comentario>ListaComentariosProductos;
 
@@ -92,13 +92,12 @@ public class Producto implements Serializable {
     private List<Usuario>listaUsuariosProductosFavoritos;
 
     // Relacion con la lista de chat
-    @OneToMany(mappedBy = "chatProductoCompra")
+    @OneToMany(mappedBy = "chatProductoCompra", cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<Chat>listaChatProducto;
 
     // Relacion con la lista de categorias
     @ManyToMany
-    @OnDelete(action = OnDeleteAction.CASCADE)
     @ToString.Exclude
     private List<Categoria>listaCategoria;
 

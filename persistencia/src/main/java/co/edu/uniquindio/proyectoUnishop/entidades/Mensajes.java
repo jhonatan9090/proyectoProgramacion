@@ -28,6 +28,7 @@ public class Mensajes implements Serializable {
     private Integer codMensaje; //codigo de mensaje
 
     @NotBlank(message = "el mensaje no puede estar vacio")
+    @Lob
     @Column(length = 200,nullable = false)
     private String mensaje;
 
@@ -41,7 +42,6 @@ public class Mensajes implements Serializable {
 
     // Relacion entre mensaje y el chat del usuario
     @ManyToOne
-    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(nullable = false)
     private Chat chatUsuario; //Chat del usuario que envia el mensaje
 

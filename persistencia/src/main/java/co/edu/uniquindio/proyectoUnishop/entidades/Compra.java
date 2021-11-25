@@ -9,6 +9,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.Future;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
@@ -32,19 +33,19 @@ public class Compra implements Serializable {
     private @Future LocalDate fechaPago; //fecha de pago de la compra
 
     @Column(length = 80,nullable = false)
+    @NotBlank(message = "el medio de pago no puede estar vacio")
     private String medioPago; //medio de pago de la compra
 
 
     // Relacion compra de un producto
     @ManyToOne
     @JoinColumn(nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Usuario UsuarioCompra;
 
 
     // Relacion con la lista de detalle de la compra
     @ToString.Exclude
-    @OneToMany(mappedBy = "compradetalle")
+    @OneToMany(mappedBy = "compradetalle",cascade = CascadeType.REMOVE)
     private List<DetalleCompra>listaDetalleCompra;
 
 

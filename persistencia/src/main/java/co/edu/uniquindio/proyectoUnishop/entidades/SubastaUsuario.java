@@ -37,12 +37,10 @@ public class SubastaUsuario implements Serializable {
 
     @ManyToOne
     @JoinColumn(nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Usuario usuarioSubasta; // usuario que hace la subasta del producto
 
     // Relacion de usarios que subastaran
     @ManyToOne
-    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(nullable = false)
     private Subasta subastaUsuario;
 

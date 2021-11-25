@@ -138,7 +138,7 @@ public class ProductoTest {
         }
     }*/
 
-    @Test
+   /* @Test
     @Sql("classpath:producto.sql")
     public void listarCompras(){
 
@@ -150,9 +150,9 @@ public class ProductoTest {
         for (Object[] misProductos: listaProductos) {
             System.out.println(misProductos[0]+" "+misProductos[1]+" "+misProductos[2]);
         }
-    }
+    }*/
 
-    @Test
+   /* @Test
     @Sql("classpath:producto.sql")
     public void listarVentas(){
 
@@ -164,7 +164,7 @@ public class ProductoTest {
         for (Object[] misProductos: listaProductos) {
             System.out.println(misProductos[0]+" "+misProductos[1]+" "+misProductos[2]);
         }
-    }
+    }*/
     //Metodo para eliminar un producto (sin sql)
     /* @Test
     public void eliminarProductoTest(){

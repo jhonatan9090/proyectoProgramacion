@@ -19,20 +19,27 @@
         <h:form>
             <h:panelGrid columns="2" cellpadding="5">
 
-                <p:outputLabel for="nombre" value="Nombre" />
+                <p:outputLabel for="nombre" value="Nombre:" />
                 <p:inputText class="campo-texto" id="nombre" value="#{productoBean.producto.nombre}" required="true" />
 
-                <p:outputLabel for="precio" value="Precio" />
+                <p:outputLabel for="precio" value="Precio:" />
                 <p:inputText class="campo-texto" id="precio" value="#{productoBean.producto.precio}" required="true" type="number"/>
 
-                <p:outputLabel for="descuento" value="Descuento" />
+                <p:outputLabel for="descuento" value="Descuento:" />
                 <p:inputText class="campo-texto" id="descuento" value="#{productoBean.producto.descuento}" required="true" type="number"  />
 
-                <p:outputLabel for="unidades" value="Unidades" />
+                <p:outputLabel for="unidades" value="Unidades:" />
                 <p:inputText class="campo-texto" id="unidades" value="#{productoBean.producto.unidades}" required="true" type="number"/>
 
-                <p:outputLabel for="fecha" value="Fecha Límite" />
+                <p:outputLabel for="fecha" value="Fecha Límite:" />
                 <p:datePicker  id="fecha" value="#{productoBean.producto.fechaLimite}" required="true" />
+
+                <p:outputLabel for="categorias" value="Categorias:" />
+                <p:selectManyMenu id="categorias" value="#{productoBean.producto.listaCategoria} " showCheckbox="true" converter="#{categoriaConverter}" >
+                    <f:selectItems value="#{productoBean.listaCategorias}" var="categoria"/>
+
+
+                </p:selectManyMenu>
 
                 <p:outputLabel for="descripcion" value="Descripcion" />
                 <p:textEditor  id="descripcion" value="#{productoBean.producto.descripcion}" height="100"  secure="false" />

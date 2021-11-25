@@ -31,13 +31,13 @@ public class Ciudad implements Serializable {
 
 
     // Relacion con la lista de usuarios
-    @OneToMany(mappedBy = "ciudadUsuario")
+    @OneToMany(mappedBy = "ciudadUsuario",cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<Usuario>listaUsuarios;
 
 
     //  Relacion con la lista de productos
-    @OneToMany(mappedBy = "ciudadProducto")
+    @OneToMany(mappedBy = "ciudadProducto",cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<Producto>listaProductos;
 

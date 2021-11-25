@@ -21,4 +21,5 @@ public interface ProductoServicio {
     List<Producto>buscarProductoFiltro(String nonbre,String [] filtro) ;
 
 
+
 }

@@ -30,19 +30,18 @@ public class Chat  implements Serializable {
     // Relacion usurario comprador
     @ManyToOne
     @JoinColumn(nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+
     private Usuario usuarioComprador;
 
 
     // Relación con producto a comprar
     @ManyToOne
-    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(nullable = false)
     private Producto chatProductoCompra;
 
     //Relación con lista de mensajes
     @ToString.Exclude
-    @OneToMany(mappedBy = "chatUsuario")
+    @OneToMany(mappedBy = "chatUsuario",cascade = CascadeType.REMOVE)
     private List<Mensajes>listaMensajes;
 
     /**

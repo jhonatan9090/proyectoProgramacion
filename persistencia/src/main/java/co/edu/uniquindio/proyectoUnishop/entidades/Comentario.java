@@ -30,10 +30,13 @@ public class Comentario implements Serializable {
     private Integer codComentario; //codigo del comentario
 
     @NotBlank(message = "el mensaje no puede estar vacio")
+    @Lob
     @Column(length = 200)
     private String mensaje; //mensaje del comentario
 
     @Column(length = 200)
+    @NotBlank(message = "la respuesta no puede estar vacia")
+    @Lob
     private String respuesta; //respuesta al comentario
 
     @Column(nullable = false,columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
@@ -48,13 +51,11 @@ public class Comentario implements Serializable {
     // Relacion de comentarios y usuario
     @ManyToOne
     @JoinColumn(nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Usuario usuarioComentario;
 
 
     // Relacion del comentario sobre un producto
     @ManyToOne
-    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(nullable = false)
     private Producto comentarioProducto;
 

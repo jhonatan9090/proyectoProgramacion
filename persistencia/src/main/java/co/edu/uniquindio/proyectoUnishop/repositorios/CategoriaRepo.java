@@ -20,4 +20,6 @@ public interface CategoriaRepo extends JpaRepository<Categoria,Integer> {
     Optional<Categoria>findByNombreContains(String nombreCategoria);
 
 
+
+
 }

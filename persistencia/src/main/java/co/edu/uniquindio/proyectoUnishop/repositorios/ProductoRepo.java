@@ -15,13 +15,13 @@ public interface ProductoRepo extends JpaRepository<Producto,Integer> {
     @Query("Select p from Producto p join p.listaCategoria c where c.nombre=:nombreCategoria")
     List<Producto> ListarProductosPorCategoria(String nombreCategoria);
 
-    //lista las compras del usuario
-    @Query("Select p.nombre,dc.unidades,c.medioPago from Producto p join p.listaDetalles dc join dc.compradetalle c where c.UsuarioCompra.codPersona=:idUsuario")
+   /* //lista las compras del usuario
+    @Query("Select p.nombre,dc.,c.medioPago from Producto p join p.listaDetalles dc join dc.compradetalle c where c.UsuarioCompra.codPersona=:idUsuario")
     List<Object[]> ListarComprasUsuario(String idUsuario);
 
     //listra los productos que el usuario vende
     @Query("Select p.nombre,p.unidades,p.descripcion from Producto p join p.usuarioVendedor v where v.codPersona=:idUsuario")
-    List<Object[]> ListarProductosDelUsuario(String idUsuario);
+    List<Object[]> ListarProductosDelUsuario(String idUsuario);*/
 
 
     //listar producto por nombre
