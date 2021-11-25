@@ -35,11 +35,14 @@
                 <p:datePicker  id="fecha" value="#{productoBean.producto.fechaLimite}" required="true" />
 
                 <p:outputLabel for="categorias" value="Categorias:" />
-                <p:selectManyMenu id="categorias" value="#{productoBean.producto.listaCategoria} " showCheckbox="true" converter="#{categoriaConverter}" >
+                <p:selectManyMenu id="categorias" value="#{productoBean.producto.listaCategoria}" showCheckbox="true" converter="#{categoriaConverter}" >
                     <f:selectItems value="#{productoBean.listaCategorias}" var="categoria"/>
 
 
                 </p:selectManyMenu>
+
+                <p:outputLabel value="Imágenes:" for="imagen" />
+                <p:fileUpload id="imagen" listener="#{productoBean.subirImagenes}" mode="advanced" multiple="true" sizeLimit="1000000" fileLimit="5" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true" />
 
                 <p:outputLabel for="descripcion" value="Descripcion" />
                 <p:textEditor  id="descripcion" value="#{productoBean.producto.descripcion}" height="100"  secure="false" />

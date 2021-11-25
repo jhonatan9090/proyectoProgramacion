@@ -8,13 +8,20 @@ import co.edu.uniquindio.proyectoUnishop.servicios.ProductoServicio;
 import co.edu.uniquindio.proyectoUnishop.servicios.UsuarioServicio;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.io.IOUtils;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.file.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -40,6 +47,11 @@ public class ProductoBean implements Serializable {
     @Setter
     private List<Categoria> listaCategorias;
 
+    private ArrayList<String> imagenes;
+
+    @Value("${upload.url}")
+    private String urlUploads;
+
     public ProductoBean(ProductoServicio productoServicio, UsuarioServicio usuarioServicio, CategoriaServicio categoriaServicio) {
         this.productoServicio = productoServicio;
         this.usuarioServicio = usuarioServicio;
@@ -51,18 +63,48 @@ public class ProductoBean implements Serializable {
 
         this.producto = new Producto();
         listaCategorias= categoriaServicio.listarCategorias();
+        this.imagenes = new ArrayList<>();
     }
 
     public String crearProducto(){
         try {
-            Usuario usuario = usuarioServicio.obtenerUsuario("1");
-            producto.setUsuarioVendedor(usuario);
-            productoServicio.publicarProducto(producto);
-            return "productoCreado?faces-redirect=true";
+            if (!imagenes.isEmpty()) {
+                Usuario usuario = usuarioServicio.obtenerUsuario("1");
+                producto.setUsuarioVendedor(usuario);
+                producto.setImagenes(imagenes);
+                productoServicio.publicarProducto(producto);
+                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Producto Publicado con exito");
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+            }else{
+                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "Es necesario subir al menos una imagen");
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+            }
         } catch (Exception e) {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
         return  null;
+    }
+
+    public void  subirImagenes(FileUploadEvent event){
+        UploadedFile imagen = event.getFile();
+        System.out.println(imagen.getFileName());
+        System.out.println(imagen.getContentType());
+        String nombreImagen = subirImagen(imagen);
+        if (nombreImagen != null){
+            imagenes.add(nombreImagen);
+        }
+    }
+
+    public String subirImagen(UploadedFile imagen){
+        try{
+            File archivo = new File(urlUploads+"/"+imagen.getFileName());
+            OutputStream outputStream = new FileOutputStream(archivo);
+            IOUtils.copy(imagen.getInputStream(), outputStream);
+            return imagen.getFileName();
+        }catch (Exception e){
+            e.printStackTrace();
+            }
+        return null;
     }
 }
