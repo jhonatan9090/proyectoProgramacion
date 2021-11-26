@@ -1,9 +1,11 @@
 package co.edu.uniquindio.proyectoUnishop.bean;
 
 import co.edu.uniquindio.proyectoUnishop.entidades.Categoria;
+import co.edu.uniquindio.proyectoUnishop.entidades.Ciudad;
 import co.edu.uniquindio.proyectoUnishop.entidades.Producto;
 import co.edu.uniquindio.proyectoUnishop.entidades.Usuario;
 import co.edu.uniquindio.proyectoUnishop.servicios.CategoriaServicio;
+import co.edu.uniquindio.proyectoUnishop.servicios.CiudadServicio;
 import co.edu.uniquindio.proyectoUnishop.servicios.ProductoServicio;
 import co.edu.uniquindio.proyectoUnishop.servicios.UsuarioServicio;
 import lombok.Getter;
@@ -11,7 +13,6 @@ import lombok.Setter;
 import org.apache.commons.io.IOUtils;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -43,19 +44,29 @@ public class ProductoBean implements Serializable {
 
     private final UsuarioServicio usuarioServicio;
 
+    private  final CiudadServicio ciudadServicio;
+
+
     @Getter
     @Setter
     private List<Categoria> listaCategorias;
+
+    //trae la lista de las ciudades
+    @Getter
+    @Setter
+    private List<Ciudad>listaCiudad;
+
 
     private ArrayList<String> imagenes;
 
     @Value("${upload.url}")
     private String urlUploads;
 
-    public ProductoBean(ProductoServicio productoServicio, UsuarioServicio usuarioServicio, CategoriaServicio categoriaServicio) {
+    public ProductoBean(ProductoServicio productoServicio, UsuarioServicio usuarioServicio, CategoriaServicio categoriaServicio, CiudadServicio ciudadServicio) {
         this.productoServicio = productoServicio;
         this.usuarioServicio = usuarioServicio;
         this.categoriaServicio = categoriaServicio;
+        this.ciudadServicio = ciudadServicio;
     }
 
     @PostConstruct
@@ -63,6 +74,7 @@ public class ProductoBean implements Serializable {
 
         this.producto = new Producto();
         listaCategorias= categoriaServicio.listarCategorias();
+        listaCiudad=ciudadServicio.listaCiudad();
         this.imagenes = new ArrayList<>();
     }
 
@@ -72,6 +84,7 @@ public class ProductoBean implements Serializable {
                 Usuario usuario = usuarioServicio.obtenerUsuario("1");
                 producto.setUsuarioVendedor(usuario);
                 producto.setImagenes(imagenes);
+                producto.setFechaLimite(LocalDate.now().plusMonths(1));
                 productoServicio.publicarProducto(producto);
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Producto Publicado con exito");
                 FacesContext.getCurrentInstance().addMessage(null, msg);
