@@ -15,6 +15,7 @@ public interface ProductoServicio {
     void eliminarProducto(Integer idProdcuto) throws Exception;
     Producto buscarProducto(Integer idProducto)throws Exception;
     List<Producto> listarporCategoria(Categoria categoria) throws Exception;
+    List<Producto> listarTodosporProductos();
     void comentarProducto(Comentario comentario) throws Exception;
     void guardarProductoFavorito(Usuario usuario,Producto producto) throws Exception;
     void eliminarProductoFavorito(Usuario usuario,Producto producto) throws Exception;

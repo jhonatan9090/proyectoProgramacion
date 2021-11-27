@@ -93,6 +93,11 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
+    public List<Producto> listarTodosporProductos() {
+        return productoRepo.findAll();
+    }
+
+    @Override
     public void comentarProducto(Comentario comentario) throws Exception {
 
     }

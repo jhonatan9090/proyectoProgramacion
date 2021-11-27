@@ -21,7 +21,8 @@ import java.util.List;
  * Entidad para  Producto
  */
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 public class Producto implements Serializable {
@@ -32,7 +33,7 @@ public class Producto implements Serializable {
     private Integer codProducto; //Llave primaria
 
     @NotBlank(message = "el nombre no puede estar vacio")
-    @Column(length = 80,nullable = false)
+    @Column(length = 80, nullable = false)
     private String nombre; // nombre del producto
 
     @PositiveOrZero
@@ -41,7 +42,7 @@ public class Producto implements Serializable {
 
     @Lob
     @NotBlank(message = "la descripcion no puede estar vacio")
-    @Column(length = 200,nullable = false)
+    @Column(length = 200, nullable = false)
     private String descripcion; //Descripcion del producto
 
     @Positive
@@ -60,10 +61,10 @@ public class Producto implements Serializable {
     @ElementCollection
     private List<String> imagenes; //imagenes para el producto
 
-     // Relacion de la venta de un producto
+    // Relacion de la venta de un producto
     @ManyToOne
     @JoinColumn(nullable = false)
-    private  Usuario usuarioVendedor;
+    private Usuario usuarioVendedor;
 
     //Relacion con la ciudad del producto
     @ManyToOne
@@ -74,53 +75,54 @@ public class Producto implements Serializable {
     // Relacion inversa entre subasta y producto
     @OneToMany(mappedBy = "subastaProducto")
     @ToString.Exclude
-    private List<Subasta>listaSubasta;
+    private List<Subasta> listaSubasta;
 
     // Relacion inversa de compra con detalla
     @OneToMany(mappedBy = "ProductoDetalle")
     @ToString.Exclude
-    private  List<DetalleCompra>listaDetalles;
+    private List<DetalleCompra> listaDetalles;
 
     // Relacion inversa del comentario de un producto
     @OneToMany(mappedBy = "comentarioProducto", cascade = CascadeType.REMOVE)
     @ToString.Exclude
-    private List<Comentario>ListaComentariosProductos;
+    private List<Comentario> ListaComentariosProductos;
 
     // Relacion de productos favoritos
     @ManyToMany(mappedBy = "listaProductoFavorito")
     @ToString.Exclude
-    private List<Usuario>listaUsuariosProductosFavoritos;
+    private List<Usuario> listaUsuariosProductosFavoritos;
 
     // Relacion con la lista de chat
     @OneToMany(mappedBy = "chatProductoCompra", cascade = CascadeType.REMOVE)
     @ToString.Exclude
-    private List<Chat>listaChatProducto;
+    private List<Chat> listaChatProducto;
 
     // Relacion con la lista de categorias
     @ManyToMany
     @ToString.Exclude
-    private List<Categoria>listaCategoria;
+    private List<Categoria> listaCategoria;
 
 
     /**
      * Constructor de la entidad Producto
      */
-    public Producto(){
-    super();
+    public Producto() {
+        super();
 
     }
 
     /**
      * Constructor de la entidad Producto
-     * @param nombre Nombre del producto
-     * @param unidades cantidad de unidades del producto
-     * @param descripcion descripcion del producto
-     * @param precio precio del producto
-     * @param fechaLimite Fecha limite del produto
-     * @param descuento Descuento del producto
-     * @param imagenes Imagen del producto
+     *
+     * @param nombre          Nombre del producto
+     * @param unidades        cantidad de unidades del producto
+     * @param descripcion     descripcion del producto
+     * @param precio          precio del producto
+     * @param fechaLimite     Fecha limite del produto
+     * @param descuento       Descuento del producto
+     * @param imagenes        Imagen del producto
      * @param usuarioProducto Usuario a comprar el producto
-     * @param ciudadProducto Ciudad del producto
+     * @param ciudadProducto  Ciudad del producto
      */
     public Producto(String nombre, @Positive Integer unidades, String descripcion, @Positive Double precio, @Future LocalDate fechaLimite, @Positive Double descuento, List<String> imagenes, Usuario usuarioProducto, Ciudad ciudadProducto) {
         this.nombre = nombre;
@@ -133,5 +135,17 @@ public class Producto implements Serializable {
         this.usuarioVendedor = usuarioProducto;
         this.ciudadProducto = ciudadProducto;
 
+    }
+
+
+    public String getImagenPrincipal() {
+
+        if (imagenes != null && !imagenes.isEmpty()) {
+
+            return imagenes.get(0);
+
+        }
+
+        return "default.png";
     }
 }
