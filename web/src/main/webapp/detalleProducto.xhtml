@@ -24,6 +24,7 @@
 
     <div class="container">
 
+
         <div class="row">
             <div class="col-lg-7 col-md-1">
                 <div class="box box-stretched">
@@ -37,16 +38,51 @@
                     <p:graphicImage rendered="#{detalleProductoBean.producto.imagenes.size()==0}"
                                     url="/uploads/#{detalleProductoBean.producto.imagenPrincipal}"/>
 
+
                 </div>
 
+
             </div>
+            <div class="col-lg-5 col-md-1">
+                <div class="p-grid">
+                    <div class="box">
+                        <p:rating value="#{detalleProductoBean.calificacionPromedio}" readonly="true"/>
+                        <h1 class="mt-4">#{detalleProductoBean.producto.nombre}</h1>
+                        <h1 class="mt-4">#{detalleProductoBean.producto.precio}</h1>
+
+
+                        <h:form class="mt-4">
+
+            <p:commandButton value="Añadir al carrito" icon="pi pi-shopping-cart"/>
+
+                        </h:form>
+
+                    </div>
+
+
+                </div>
+                <div class="box">
+
+
+                    <p>Ciudad: #{detalleProductoBean.producto.ciudadProducto.nombre}</p>
+
+
+                </div>
+
+                <p:dataList emptyMessage="No hay categorias para mostrar" styleClass="lista-carac"
+                            value="#{detalleProductoBean.producto.listaCategoria}">
+
+
+                </p:dataList>
+            </div>
+
 
         </div>
 
 
         <p:panel header="Descripcion" styleClass="mt-3">
 
-        <h:outputText value="#{detalleProductoBean.producto.descripcion}" escape="false"/>
+            <h:outputText value="#{detalleProductoBean.producto.descripcion}" escape="false"/>
 
         </p:panel>
 

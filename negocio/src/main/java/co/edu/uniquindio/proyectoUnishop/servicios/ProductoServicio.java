@@ -17,6 +17,7 @@ public interface ProductoServicio {
     List<Producto> listarporCategoria(Categoria categoria) throws Exception;
     List<Producto> listarTodosporProductos();
     void comentarProducto(Comentario comentario) throws Exception;
+    Float obtenerPromedioProducto(Integer codProducto);
     void guardarProductoFavorito(Usuario usuario,Producto producto) throws Exception;
     void eliminarProductoFavorito(Usuario usuario,Producto producto) throws Exception;
     List<Producto>buscarProductoFiltro(String nonbre,String [] filtro) ;

@@ -12,8 +12,9 @@ public interface ProductoRepo extends JpaRepository<Producto,Integer> {
 
 
     //lista los productos por categoria
-    @Query("Select p from Producto p join p.listaCategoria c where c.nombre=:nombreCategoria")
-    List<Producto> ListarProductosPorCategoria(String nombreCategoria);
+
+    @Query("select p from Producto p join p.listaCategoria  c where c.codCategoria=:codCategoria")
+    List<Producto>ListarProductosPorCategoria(Integer codCategoria);
 
    /* //lista las compras del usuario
     @Query("Select p.nombre,dc.,c.medioPago from Producto p join p.listaDetalles dc join dc.compradetalle c where c.UsuarioCompra.codPersona=:idUsuario")
@@ -23,10 +24,14 @@ public interface ProductoRepo extends JpaRepository<Producto,Integer> {
     @Query("Select p.nombre,p.unidades,p.descripcion from Producto p join p.usuarioVendedor v where v.codPersona=:idUsuario")
     List<Object[]> ListarProductosDelUsuario(String idUsuario);*/
 
+    @Query("select AVG (c.calificacion) from Producto p join p.ListaComentariosProductos c  where c.comentarioProducto.codProducto=:codProducto")
+    Float obtenerPromedioCalificacion(Integer codProducto);
 
     //listar producto por nombre
     @Query("select p from Producto p where p.nombre like concat('%',:nombreProducto,'%' ) ")
     List<Producto>listarProductoNombre(String nombreProducto);
+
+
 
 
 

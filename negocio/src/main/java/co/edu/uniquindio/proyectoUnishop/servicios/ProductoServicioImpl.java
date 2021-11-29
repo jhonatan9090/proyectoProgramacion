@@ -36,7 +36,7 @@ public class ProductoServicioImpl implements ProductoServicio {
 
             return productoRepo.save(p);
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
             throw new Exception(e.getMessage());
         }
@@ -49,7 +49,7 @@ public class ProductoServicioImpl implements ProductoServicio {
 
         Optional<Producto> buscado = productoRepo.findById(p.getCodProducto());
 
-        if(buscado.isEmpty()){
+        if (buscado.isEmpty()) {
 
             throw new Exception("El Producto con codigo " + p.getCodProducto() + " no está registrado.");
         }
@@ -61,9 +61,9 @@ public class ProductoServicioImpl implements ProductoServicio {
     public void eliminarProducto(Integer idProdcuto) throws Exception {
 
 
-        Optional<Producto>buscado=productoRepo.findById(idProdcuto);
+        Optional<Producto> buscado = productoRepo.findById(idProdcuto);
 
-        if(buscado.isEmpty()){
+        if (buscado.isEmpty()) {
             throw new Exception("El codigo del producto no existe");
         }
         productoRepo.deleteById(idProdcuto);
@@ -75,7 +75,7 @@ public class ProductoServicioImpl implements ProductoServicio {
 
         Optional<Producto> producto = productoRepo.findById(idProducto);
 
-        if(producto.isEmpty()){
+        if (producto.isEmpty()) {
 
             throw new Exception("No existe un usuario con el id dado");
         }
@@ -86,14 +86,14 @@ public class ProductoServicioImpl implements ProductoServicio {
     @Override
     public List<Producto> listarporCategoria(Categoria categoria) throws Exception {
 
-        Optional<Categoria> categoriaBuscada= categoriaRepo.findByNombreContains(categoria.getNombre());
+        Optional<Categoria> categoriaBuscada = categoriaRepo.findByNombreContains(categoria.getNombre());
 
-        if(categoriaBuscada.isEmpty()){
+        if (categoriaBuscada.isEmpty()) {
             throw new Exception("La categoria no existe");
         }
 
 
-        return productoRepo.ListarProductosPorCategoria(categoria.getNombre());
+        return productoRepo.ListarProductosPorCategoria(categoria.getCodCategoria());
     }
 
     @Override
@@ -109,6 +109,12 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
+    public Float obtenerPromedioProducto(Integer codProducto) {
+        return productoRepo.obtenerPromedioCalificacion(codProducto);
+    }
+
+
+    @Override
     public void guardarProductoFavorito(Usuario usuario, Producto producto) throws Exception {
 
     }
@@ -119,8 +125,8 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public List<Producto> buscarProductoFiltro(String nonbre, String[] filtro)  {
-        return productoRepo.listarProductoNombre(nonbre);
+    public List<Producto> buscarProductoFiltro(String nombre, String[] filtro) {
+        return productoRepo.listarProductoNombre(nombre);
     }
 
 
