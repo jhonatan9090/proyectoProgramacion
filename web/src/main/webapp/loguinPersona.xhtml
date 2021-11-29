@@ -8,8 +8,6 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-
-
 <h:head>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -37,34 +35,24 @@
             </h:panelGrid>
             <p:commandButton value="Ingresar" class="button" action="#{loguinBean.loguearPersona}" update="@form" />
 
+        </h:form>
+    </p:panel>
+
+    <p:panel>
+
+        <h:form>
+
+            <h:panelGrid cellpadding="2">
+
+                <h:commandLink action="usuarioRegistro.xhtml?faces-redirect=true" value="Crear nuevo usuario" />
+
+                <h:commandLink action="index.xhtml?faces-redirect=true" value="¿Olvidaste tu contraeña?" />
+
+            </h:panelGrid>
 
 
         </h:form>
 
-
-
-
     </p:panel>
-
-<p:panel>
-
-
-    <h:form>
-
-        <h:panelGrid cellpadding="2">
-
-            <h:commandLink action="usuarioRegistro.xhtml?faces-redirect=true" value="Crear nuevo usuario" />
-
-            <h:commandLink action="index.xhtml?faces-redirect=true" value="¿Olvidaste tu contraeña?" />
-
-        </h:panelGrid>
-
-
-    </h:form>
-
-</p:panel>
-
-
-
 </h:body>
 </html>

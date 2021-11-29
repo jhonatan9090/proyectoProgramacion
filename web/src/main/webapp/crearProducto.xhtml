@@ -7,14 +7,9 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-<h:head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<ui:composition template="WEB-INF/template.xhtml">
+<ui:define name="content">
 
-    <title>Crear Nuevo Producto</title>
-
-</h:head>
-<h:body>
     <p:panel header="Crear nuevo Producto">
         <h:form>
             <h:panelGrid columns="2" cellpadding="5">
@@ -68,5 +63,6 @@
             <p:commandButton value="Publicar" class="button" action="#{productoBean.crearProducto}" update="@form"/>
         </h:form>
     </p:panel>
-</h:body>
+</ui:define>
+</ui:composition>
 </html>
