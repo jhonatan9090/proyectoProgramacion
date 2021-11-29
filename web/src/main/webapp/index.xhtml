@@ -29,7 +29,18 @@
                     <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Features</a></li>
                     <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Pricing</a></li>
                     <li class="nav-item"><a href="#" class="nav-link link-dark px-2">FAQs</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link link-dark px-2">About</a></li>
+
+
+
+                   <li>
+
+                       <p:selectOneMenu id="categorias" value="#{productoBean.producto.listaCategoria}" converter="#{categoriaConverter}">
+                       <f:selectItem itemLabel="Categorias" noSelectionOption="true"/>
+                       <f:selectItems value="#{productoBean.listaCategorias}" var="categoria" itemLabel="#{categoria.nombre}"/>
+
+                       </p:selectOneMenu>
+
+                   </li>
                 </ul>
                 <ul class="nav">
 
@@ -88,7 +99,7 @@
             <h1>Lista Productos</h1>
             <h:form>
                 <p:dataView value="#{inicioBean.listaProductos}" var="producto" gridIcon="pi pi-th-large"
-                            listIcon="pi pi-bars">
+                            listIcon="pi pi-bars" >
 
                     <p:dataViewGridItem>
                         <div class="card">

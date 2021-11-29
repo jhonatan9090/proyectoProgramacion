@@ -6,9 +6,11 @@ import co.edu.uniquindio.proyectoUnishop.entidades.Comentario;
 import co.edu.uniquindio.proyectoUnishop.entidades.Producto;
 import co.edu.uniquindio.proyectoUnishop.entidades.Usuario;
 import co.edu.uniquindio.proyectoUnishop.repositorios.CategoriaRepo;
+import co.edu.uniquindio.proyectoUnishop.repositorios.ComentarioRepo;
 import co.edu.uniquindio.proyectoUnishop.repositorios.ProductoRepo;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,10 +19,12 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     private final ProductoRepo productoRepo;
     private final CategoriaRepo categoriaRepo;
+    private final ComentarioRepo comentarioRepo;
 
-    public ProductoServicioImpl(ProductoRepo productoRepo, CategoriaRepo categoriaRepo) {
+    public ProductoServicioImpl(ProductoRepo productoRepo, CategoriaRepo categoriaRepo, ComentarioRepo comentarioRepo) {
         this.productoRepo = productoRepo;
         this.categoriaRepo = categoriaRepo;
+        this.comentarioRepo = comentarioRepo;
     }
 
 
@@ -99,6 +103,8 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     @Override
     public void comentarProducto(Comentario comentario) throws Exception {
+        comentario.setFechaComentario(LocalDate.now());
+        comentarioRepo.save(comentario);
 
     }
 

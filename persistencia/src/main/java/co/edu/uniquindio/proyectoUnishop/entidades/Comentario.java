@@ -35,12 +35,10 @@ public class Comentario implements Serializable {
     private String mensaje; //mensaje del comentario
 
     @Column(length = 200)
-    @NotBlank(message = "la respuesta no puede estar vacia")
-    @Lob
     private String respuesta; //respuesta al comentario
 
     @Column(nullable = false,columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private @Future LocalDate fechaComentario; //fecha del Comentario
+    private  LocalDate fechaComentario; //fecha del Comentario
 
     @Positive
     @Max(5)

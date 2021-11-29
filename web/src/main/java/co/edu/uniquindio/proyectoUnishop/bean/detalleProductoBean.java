@@ -1,8 +1,10 @@
 package co.edu.uniquindio.proyectoUnishop.bean;
 
 
+import co.edu.uniquindio.proyectoUnishop.entidades.Comentario;
 import co.edu.uniquindio.proyectoUnishop.entidades.Producto;
 import co.edu.uniquindio.proyectoUnishop.servicios.ProductoServicio;
+import co.edu.uniquindio.proyectoUnishop.servicios.UsuarioServicio;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Component
@@ -19,8 +23,9 @@ import java.io.Serializable;
 public class detalleProductoBean implements Serializable {
 
 
-    @Autowired
-    private ProductoServicio productoServicio;
+    private final ProductoServicio productoServicio;
+    private final UsuarioServicio usuarioServicio;
+
 
 
     @Value("#{param['producto']}")
@@ -31,19 +36,55 @@ public class detalleProductoBean implements Serializable {
     @Setter
     private Producto producto;
 
+    @Getter
+    @Setter
+    private Comentario nuevoComentario;
+
+    @Getter
+    @Setter
+    private List<Comentario>listaComentarios;
+
+    public detalleProductoBean(ProductoServicio productoServicio, UsuarioServicio usuarioServicio) {
+        this.productoServicio = productoServicio;
+        this.usuarioServicio = usuarioServicio;
+    }
+
 
     @PostConstruct
     public void inicializar() {
 
+        nuevoComentario=new Comentario();
+
         if (codProducto != null && !codProducto.isEmpty()) {
+
+
+
 
             try {
                 producto = productoServicio.buscarProducto(Integer.parseInt(codProducto));
+                this.listaComentarios=producto.getListaComentariosProductos();
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
 
+        }
+
+
+    }
+
+
+    public void crearComentario(){
+
+
+        try {
+            nuevoComentario.setComentarioProducto(producto);
+            nuevoComentario.setUsuarioComentario(usuarioServicio.obtenerUsuario("1"));
+            productoServicio.comentarProducto(nuevoComentario);
+            this.listaComentarios.add(nuevoComentario);
+            nuevoComentario=new Comentario();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
 
