@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.ApplicationScope;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
 
@@ -30,11 +31,12 @@ public class SeguridadBean implements Serializable {
     public  String iniciarSesion(){
         if(!email.isEmpty() && !password.isEmpty()){
             try {
-                autenticado=true;
                 usuarioSesion= usuarioServicio.iniciarSesion(email, password);
+                autenticado=true;
                 return "index?faces-redirect=true";
             } catch (Exception e) {
-                e.printStackTrace();
+                FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+                FacesContext.getCurrentInstance().addMessage("login-bean", fm);
             }
         }
 

@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyectoUnishop.bean;
 
 import co.edu.uniquindio.proyectoUnishop.entidades.Comentario;
 import co.edu.uniquindio.proyectoUnishop.entidades.Producto;
+import co.edu.uniquindio.proyectoUnishop.entidades.Usuario;
 import co.edu.uniquindio.proyectoUnishop.servicios.ComentarioServicio;
 import co.edu.uniquindio.proyectoUnishop.servicios.ProductoServicio;
 import co.edu.uniquindio.proyectoUnishop.servicios.UsuarioServicio;
@@ -48,6 +49,9 @@ public class detalleProductoBean implements Serializable {
     @Setter
     private List<Comentario>listaComentarios;
 
+    @Value("#{seguridadBean.usuarioSesion}")
+    private Usuario usuarioSesion;
+
     public detalleProductoBean(ProductoServicio productoServicio, UsuarioServicio usuarioServicio, ComentarioServicio comentarioServicio) {
         this.productoServicio = productoServicio;
         this.usuarioServicio = usuarioServicio;
@@ -62,9 +66,6 @@ public class detalleProductoBean implements Serializable {
 
         if (codProducto != null && !codProducto.isEmpty()) {
 
-
-
-
             try {
                 producto = productoServicio.buscarProducto(Integer.parseInt(codProducto));
                 this.calificacionPromedio= 0;
@@ -72,36 +73,28 @@ public class detalleProductoBean implements Serializable {
                 Float calificacion=productoServicio.obtenerPromedioProducto(Integer.parseInt(codProducto));
                 if(calificacion!=null){
 
-                        this.calificacionPromedio=calificacion.intValue();
+                    this.calificacionPromedio=calificacion.intValue();
 
                 }
-
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-
         }
-
-
     }
 
 
     public void crearComentario(){
 
-
         try {
-            nuevoComentario.setComentarioProducto(producto);
-            nuevoComentario.setUsuarioComentario(usuarioServicio.obtenerUsuario("1"));
-            productoServicio.comentarProducto(nuevoComentario);
-            this.listaComentarios.add(nuevoComentario);
-            nuevoComentario=new Comentario();
+            if(usuarioSesion!=null) {
+                nuevoComentario.setComentarioProducto(producto);
+                nuevoComentario.setUsuarioComentario(usuarioSesion);
+                productoServicio.comentarProducto(nuevoComentario);
+                this.listaComentarios.add(nuevoComentario);
+                nuevoComentario = new Comentario();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
     }
-
 }

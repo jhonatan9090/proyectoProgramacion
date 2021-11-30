@@ -38,8 +38,8 @@
                         </a>
                     </li>
 
-                    <li>
-                        <a href="crearProducto.xhtml" class="nav-link link-dark px-2">
+                    <li jsf:rendered="#{seguridadBean.autenticado}">
+                        <a href="/usuario/crearProducto.xhtml" class="nav-link link-dark px-2" >
                             <i class="pi pi-cloud" style="font-size:1.5rem;margin-right:5px"/>
                             <p>Crear Producto</p>
                         </a>

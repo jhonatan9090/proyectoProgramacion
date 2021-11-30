@@ -62,6 +62,9 @@ public class ProductoBean implements Serializable {
     @Value("${upload.url}")
     private String urlUploads;
 
+    @Value("#{seguridadBean.usuarioSesion}")
+    private Usuario usuarioSesion;
+
     public ProductoBean(ProductoServicio productoServicio, UsuarioServicio usuarioServicio, CategoriaServicio categoriaServicio, CiudadServicio ciudadServicio) {
         this.productoServicio = productoServicio;
         this.usuarioServicio = usuarioServicio;
@@ -80,17 +83,18 @@ public class ProductoBean implements Serializable {
 
     public String crearProducto(){
         try {
-            if (!imagenes.isEmpty()) {
-                Usuario usuario = usuarioServicio.obtenerUsuario("1");
-                producto.setUsuarioVendedor(usuario);
-                producto.setImagenes(imagenes);
-                producto.setFechaLimite(LocalDate.now().plusMonths(1));
-                productoServicio.publicarProducto(producto);
-                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Producto Publicado con exito");
-                FacesContext.getCurrentInstance().addMessage("mensajeCP", msg);
-            }else{
-                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "Es necesario subir al menos una imagen");
-                FacesContext.getCurrentInstance().addMessage("mensajeCP", msg);
+            if(usuarioSesion!=null) {
+                if (!imagenes.isEmpty()) {
+                    producto.setUsuarioVendedor(usuarioSesion);
+                    producto.setImagenes(imagenes);
+                    producto.setFechaLimite(LocalDate.now().plusMonths(1));
+                    productoServicio.publicarProducto(producto);
+                    FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Producto Publicado con exito");
+                    FacesContext.getCurrentInstance().addMessage("mensajeCP", msg);
+                } else {
+                    FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "Es necesario subir al menos una imagen");
+                    FacesContext.getCurrentInstance().addMessage("mensajeCP", msg);
+                }
             }
         } catch (Exception e) {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
