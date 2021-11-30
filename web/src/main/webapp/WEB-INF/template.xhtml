@@ -6,6 +6,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -22,9 +23,21 @@
         <nav class="py-2 bg-light border-bottom">
             <div class="container d-flex flex-wrap">
                 <ul class="nav me-auto">
-                    <li class="nav-item"><a href="index.xhtml" class="nav-link link-dark px-2 active"
-                                            aria-current="page">Inicio</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Features</a></li>
+                    <a href="/" class="d-flex align-items-center mb-1 mb-lg-0 me-lg-auto text-dark text-decoration-none">
+                        <i class="pi pi-shopping-cart" style="font-size:2rem;margin-right:10px "/>
+                        <span class="fs-4">Unishop</span>
+                    </a>
+
+
+                </ul>
+                <ul class="nav">
+                    <li>
+                        <a href="index.xhtml" class="nav-link link-dark px-2">
+                            <i class="pi pi-home" style="font-size:1.5rem;margin-right:5px"/>
+                            <p>Inicio</p>
+                        </a>
+                    </li>
+
                     <li>
                         <a href="crearProducto.xhtml" class="nav-link link-dark px-2">
                             <i class="pi pi-cloud" style="font-size:1.5rem;margin-right:5px"/>
@@ -33,16 +46,11 @@
                     </li>
 
                     <li>
-
                         <p:selectOneMenu id="categorias" value="#{productoBean.producto.listaCategoria}" converter="#{categoriaConverter}">
                             <f:selectItem itemLabel="Categorias" noSelectionOption="true"/>
                             <f:selectItems value="#{productoBean.listaCategorias}" var="categoria" itemLabel="#{categoria.nombre}"/>
                         </p:selectOneMenu>
                     </li>
-                </ul>
-                <ul class="nav">
-
-
                     <li>
                         <a href="usuarioRegistro.xhtml" class="nav-link link-dark px-2">
                             <i class="pi pi-user" style="font-size:1.5rem;margin-right:5px"/>
@@ -57,28 +65,58 @@
                             <p>Inicio sesion</p>
                         </a>
                     </li>
+
                 </ul>
             </div>
         </nav>
-        <header class="py-3 mb-4 border-bottom">
+        <div class="px-3 py-2 border-bottom mb-3">
+
             <div class="container d-flex flex-wrap justify-content-center">
-                <a href="/" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
-                    <i class="pi pi-shopping-cart" style="font-size:2rem;margin-right:10px "/>
-                    <span class="fs-4">Unishop</span>
-                </a>
 
-                <h:form>
-                    <div class="col-12 col-lg-auto mb-3 mb-lg-0 input-search ui-inputgroup" style="margin-right:500px">
-
+                <div class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto">
+                    <h:form>
                         <p:inputText style="width: 600px" placeholder="¿que producto desea buscar?" required="true"
                                      value="#{busquedaBean.busqueda}"/>
                         <p:commandButton icon="pi pi-search" action="#{busquedaBean.buscar}" update="@form"/>
+                    </h:form>
+                </div>
 
+                <div class="text-end">
+                    <h:form rendered="#{!seguridadBean.autenticado}">
+                        <p:commandButton styleClass="btn btn-light  text-dark me-3" icon="pi pi-sign-in"
+                                         iconPos="left" value="Login" onclick="PF('login').show()"
+                                         rendered="#{!seguridadBean.autenticado}" />
+                        <p:commandButton styleClass=" btn btn-light  text-dark" icon="pi pi-user-plus"
+                                         value="Registrarse" action="usuarioRegistro?faces-redirect=true" />
+                    </h:form>
+                    <div id="info-sesion" jsf:rendered="#{seguridadBean.autenticado}">
+                        <h5>#{seguridadBean.usuarioSesion.nombre}</h5>
+                        <h:form>
+                            <p:commandButton value="Cerrar sesión" styleClass="btn btn-light  text-dark" action="#{seguridadBean.cerrarSesion}" />
+                        </h:form>
                     </div>
-                </h:form>
+                </div>
             </div>
-        </header>
+        </div>
     </div>
+
+    <p:dialog header="Iniciar sesión" showEffect="fade" widgetVar="login" modal="true"
+              rendered="#{!seguridadBean.autenticado}" >
+        <h:form >
+            <h:panelGrid columns="3" cellpadding="5">
+                <p:outputLabel for="email_login" value="Email:" />
+                <p:inputText id="email_login" value="#{seguridadBean.email}" required="true" />
+                <p:message for="email_login" />
+                <p:outputLabel for="password_login" value="Password:" />
+                <p:password id="password_login" value="#{seguridadBean.password}" required="true"
+                />
+                <p:message for="password_login" />
+            </h:panelGrid>
+            <p:commandButton value="Iniciar Sesión" action="#{seguridadBean.iniciarSesion}"
+                             styleClass="mt-4" update="@form" icon="pi pi-sign-in" iconPos="left" />
+            <p:growl for="login-bean" showDetail="true" />
+        </h:form>
+    </p:dialog>
 
     <div id="content">
         <div class="container">

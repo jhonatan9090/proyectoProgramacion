@@ -68,6 +68,11 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
+    public Usuario iniciarSesion(String email, String password) throws Exception {
+        return usuarioRepo.findAllByEmailAndPassword(email,password).orElseThrow(() -> new Exception("los datos de autenticación son incorrectos"));
+    }
+
+    @Override
     public List<Producto> listarProductosFavoritos(String email) throws Exception {
 
 
