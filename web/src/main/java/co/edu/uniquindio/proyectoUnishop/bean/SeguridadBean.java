@@ -1,6 +1,9 @@
 package co.edu.uniquindio.proyectoUnishop.bean;
 
+import co.edu.uniquindio.proyectoUnishop.entidades.Administrador;
+import co.edu.uniquindio.proyectoUnishop.entidades.Persona;
 import co.edu.uniquindio.proyectoUnishop.entidades.Usuario;
+import co.edu.uniquindio.proyectoUnishop.servicios.PersonaServicio;
 import co.edu.uniquindio.proyectoUnishop.servicios.UsuarioServicio;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,22 +20,35 @@ import java.io.Serializable;
 @Component
 public class SeguridadBean implements Serializable {
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private boolean autenticado;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private String email, password;
     @Getter
     @Setter
-    private Usuario usuarioSesion;
-    @Autowired
-    private UsuarioServicio usuarioServicio;
+    private Persona persona;
+    @Getter
+    @Setter
+    String rol;
 
-    public  String iniciarSesion(){
-        if(!email.isEmpty() && !password.isEmpty()){
+    @Autowired
+    private PersonaServicio personaServicio;
+
+
+    public String iniciarSesion() {
+        if (!email.isEmpty() && !password.isEmpty()) {
             try {
-                usuarioSesion= usuarioServicio.iniciarSesion(email, password);
-                autenticado=true;
+                persona = personaServicio.iniciarSesion(email, password);
+                if(persona instanceof Usuario){
+                    rol = "usuario";
+                } else if(persona instanceof Administrador){
+                    rol = "administrador";
+                }
+
+                autenticado = true;
                 return "index?faces-redirect=true";
             } catch (Exception e) {
                 FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
@@ -48,7 +64,7 @@ public class SeguridadBean implements Serializable {
         return "/index?faces-redirect=true";
     }
 
-    public String recuperar(){
+    public String recuperar() {
         return "/recuperarContrasenia.xhtml?faces-redirect=true";
     }
 }

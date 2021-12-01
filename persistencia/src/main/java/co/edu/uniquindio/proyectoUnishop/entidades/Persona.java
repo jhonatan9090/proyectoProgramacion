@@ -19,7 +19,7 @@ import java.util.Map;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Getter
 @Setter
-@MappedSuperclass
+@Entity
 public class Persona implements Serializable {
 
     @Id

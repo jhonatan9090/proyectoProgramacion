@@ -5,6 +5,7 @@ import co.edu.uniquindio.proyectoUnishop.entidades.Comentario;
 import co.edu.uniquindio.proyectoUnishop.entidades.Producto;
 import co.edu.uniquindio.proyectoUnishop.entidades.Usuario;
 import co.edu.uniquindio.proyectoUnishop.servicios.ComentarioServicio;
+import co.edu.uniquindio.proyectoUnishop.servicios.PersonaServicio;
 import co.edu.uniquindio.proyectoUnishop.servicios.ProductoServicio;
 import co.edu.uniquindio.proyectoUnishop.servicios.UsuarioServicio;
 import lombok.Getter;
@@ -24,7 +25,7 @@ public class detalleProductoBean implements Serializable {
 
 
     private final ProductoServicio productoServicio;
-    private final UsuarioServicio usuarioServicio;
+    private final PersonaServicio personaServicio;
     private final ComentarioServicio comentarioServicio;
 
 
@@ -49,12 +50,13 @@ public class detalleProductoBean implements Serializable {
     @Setter
     private List<Comentario>listaComentarios;
 
-    @Value("#{seguridadBean.usuarioSesion}")
+    @Value("#{seguridadBean.persona}")
     private Usuario usuarioSesion;
 
-    public detalleProductoBean(ProductoServicio productoServicio, UsuarioServicio usuarioServicio, ComentarioServicio comentarioServicio) {
+    public detalleProductoBean(ProductoServicio productoServicio, PersonaServicio personaServicio, ComentarioServicio comentarioServicio) {
         this.productoServicio = productoServicio;
-        this.usuarioServicio = usuarioServicio;
+        this.personaServicio = personaServicio;
+
         this.comentarioServicio = comentarioServicio;
     }
 

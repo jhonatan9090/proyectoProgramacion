@@ -1,7 +1,8 @@
 package co.edu.uniquindio.proyectoUnishop.bean;
 
+import co.edu.uniquindio.proyectoUnishop.entidades.Persona;
 import co.edu.uniquindio.proyectoUnishop.entidades.Usuario;
-import co.edu.uniquindio.proyectoUnishop.servicios.LoguinServicio;
+import co.edu.uniquindio.proyectoUnishop.servicios.PersonaServicio;
 import co.edu.uniquindio.proyectoUnishop.servicios.ServicioEmail;
 
 import co.edu.uniquindio.proyectoUnishop.servicios.UsuarioServicio;
@@ -11,10 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import java.io.Serializable;
 
 @Component
@@ -26,11 +25,11 @@ public class EmailBean implements Serializable {
     private ServicioEmail emailServico;
 
     @Autowired
-    private UsuarioServicio usuarioServicio;
+    private PersonaServicio usuarioServicio;
 
     @Getter
     @Setter
-    private Usuario persona;
+    private Persona persona;
 
     @Getter
     @Setter

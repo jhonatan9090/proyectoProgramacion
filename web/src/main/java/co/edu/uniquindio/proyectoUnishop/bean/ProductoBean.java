@@ -1,9 +1,6 @@
 package co.edu.uniquindio.proyectoUnishop.bean;
 
-import co.edu.uniquindio.proyectoUnishop.entidades.Categoria;
-import co.edu.uniquindio.proyectoUnishop.entidades.Ciudad;
-import co.edu.uniquindio.proyectoUnishop.entidades.Producto;
-import co.edu.uniquindio.proyectoUnishop.entidades.Usuario;
+import co.edu.uniquindio.proyectoUnishop.entidades.*;
 import co.edu.uniquindio.proyectoUnishop.servicios.CategoriaServicio;
 import co.edu.uniquindio.proyectoUnishop.servicios.CiudadServicio;
 import co.edu.uniquindio.proyectoUnishop.servicios.ProductoServicio;
@@ -62,8 +59,9 @@ public class ProductoBean implements Serializable {
     @Value("${upload.url}")
     private String urlUploads;
 
-    @Value("#{seguridadBean.usuarioSesion}")
-    private Usuario usuarioSesion;
+    @Value("#{seguridadBean.persona}")
+    private Persona personaSesion;
+
 
     public ProductoBean(ProductoServicio productoServicio, UsuarioServicio usuarioServicio, CategoriaServicio categoriaServicio, CiudadServicio ciudadServicio) {
         this.productoServicio = productoServicio;
@@ -83,9 +81,9 @@ public class ProductoBean implements Serializable {
 
     public String crearProducto(){
         try {
-            if(usuarioSesion!=null) {
+            if(personaSesion!=null) {
                 if (!imagenes.isEmpty()) {
-                    producto.setUsuarioVendedor(usuarioSesion);
+                    producto.setUsuarioVendedor((Usuario) personaSesion);
                     producto.setImagenes(imagenes);
                     producto.setFechaLimite(LocalDate.now().plusMonths(1));
                     productoServicio.publicarProducto(producto);

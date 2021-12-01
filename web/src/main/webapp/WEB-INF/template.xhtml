@@ -20,48 +20,40 @@
 <h:body>
     <div id="header">
 
-        <nav class="py-2 bg-light border-bottom">
-            <div class="container d-flex flex-wrap">
-                <ul class="nav me-auto">
-                    <a href="/" class="d-flex align-items-center mb-1 mb-lg-0 me-lg-auto text-dark text-decoration-none">
-                        <i class="pi pi-shopping-cart" style="font-size:2rem;margin-right:10px "/>
-                        <span class="fs-4">Unishop</span>
-                    </a>
+        <nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="/"><i class="pi pi-shopping-cart"></i> UniShop</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarColor02"
+                        aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarColor02">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+                        </li>
+                        <li class="nav-item" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol == 'usuario'}">
+                            <a class="nav-link" href="/usuario/crearProducto.xhtml">Registrar Producto</a>
 
 
-                </ul>
-                <ul class="nav">
-                    <li>
-                        <a href="index.xhtml" class="nav-link link-dark px-2">
-                            <i class="pi pi-home" style="font-size:1.5rem;margin-right:5px"/>
-                            <p>Inicio</p>
-                        </a>
-                    </li>
+                        </li>
 
-                    <li jsf:rendered="#{seguridadBean.autenticado}">
-                        <a href="/usuario/crearProducto.xhtml" class="nav-link link-dark px-2" >
-                            <i class="pi pi-cloud" style="font-size:1.5rem;margin-right:5px"/>
-                            <p>Crear Producto</p>
-                        </a>
-                    </li>
+                        <li class="nav-item" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol == 'administrador'}">
+                            <a class="j" href="loguinPersona.xhtml">Esto es una prueba</a>
+                            <i class="pi pi-file-o"></i>
+                        </li>
+                        <div class="d-flex">
 
+                            <p:commandButton styleClass="ui-button-raised ui-button-warning" value="Iniciar Sesión"
+                                             icon="pi pi-user" iconPos="righ" onclick="PF('login').show()"
+                                             rendered="#{!seguridadBean.autenticado}"/>
 
-                    <li>
-                        <a href="usuarioRegistro.xhtml" class="nav-link link-dark px-2">
-                            <i class="pi pi-user" style="font-size:1.5rem;margin-right:5px"/>
-                            <p>Registrar Usuario</p>
-                        </a>
-                    </li>
+                        </div>
 
+                    </ul>
 
-                    <li>
-                        <a href="loguinPersona.xhtml" class="nav-link link-dark px-2">
-                            <i class="pi pi-sign-in " style="font-size:1.5rem;margin-right:5px"/>
-                            <p>Inicio sesion</p>
-                        </a>
-                    </li>
-
-                </ul>
+                </div>
             </div>
         </nav>
         <div class="px-3 py-2 border-bottom mb-3">
@@ -85,7 +77,7 @@
                                          value="Registrarse" action="usuarioRegistro?faces-redirect=true" />
                     </h:form>
                     <div id="info-sesion" jsf:rendered="#{seguridadBean.autenticado}">
-                        <h5>#{seguridadBean.usuarioSesion.nombre}</h5>
+                        <h5>#{seguridadBean.persona.nombre}</h5>
                         <h:form>
                             <p:commandButton value="Cerrar sesión" styleClass="btn btn-light  text-dark" action="#{seguridadBean.cerrarSesion}" />
                         </h:form>
