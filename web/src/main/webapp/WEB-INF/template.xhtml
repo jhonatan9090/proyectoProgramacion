@@ -40,14 +40,11 @@
                         </li>
 
                         <li class="nav-item" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol == 'administrador'}">
-                            <a class="j" href="loguinPersona.xhtml">Esto es una prueba</a>
-                            <i class="pi pi-file-o"></i>
+                            <a class="nav-link" href="loguinPersona.xhtml">Esto es una prueba</a>
+
                         </li>
                         <div class="d-flex">
 
-                            <p:commandButton styleClass="ui-button-raised ui-button-warning" value="Iniciar Sesión"
-                                             icon="pi pi-user" iconPos="righ" onclick="PF('login').show()"
-                                             rendered="#{!seguridadBean.autenticado}"/>
 
                         </div>
 
