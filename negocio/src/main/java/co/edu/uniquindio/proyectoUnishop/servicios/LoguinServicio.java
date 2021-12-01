@@ -8,7 +8,7 @@ public interface LoguinServicio {
 
 Usuario loguinPersona(String correo, String password) throws Exception;
 
-Usuario recuperarPassword(String correo,String codigo)throws Exception;
+
 
 
 

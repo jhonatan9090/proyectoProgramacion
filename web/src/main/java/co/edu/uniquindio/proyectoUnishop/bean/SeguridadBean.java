@@ -48,4 +48,7 @@ public class SeguridadBean implements Serializable {
         return "/index?faces-redirect=true";
     }
 
+    public String recuperar(){
+        return "/recuperarContrasenia.xhtml?faces-redirect=true";
+    }
 }

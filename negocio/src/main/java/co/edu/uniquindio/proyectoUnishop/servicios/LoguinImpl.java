@@ -33,16 +33,5 @@ public class LoguinImpl implements  LoguinServicio{
         return buscarPersona.get();
     }
 
-    @Override
-    public Usuario recuperarPassword(String correo, String codigo) throws Exception {
-        Optional<Usuario>personaBuscada=usuarioRepo.findAllByEmailAndCodPersona(correo,codigo);
 
-        if(personaBuscada.isEmpty()){
-            throw new Exception("Los datos son incorrectos");
-
-        }
-
-
-        return personaBuscada.get();
-    }
 }

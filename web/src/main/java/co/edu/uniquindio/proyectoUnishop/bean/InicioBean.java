@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.RequestScope;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -13,7 +14,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Component
-@ViewScoped
+@RequestScope
 public class InicioBean implements Serializable {
 
 

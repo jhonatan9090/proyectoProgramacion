@@ -45,12 +45,7 @@
                         </a>
                     </li>
 
-                    <li>
-                        <p:selectOneMenu id="categorias" value="#{productoBean.producto.listaCategoria}" converter="#{categoriaConverter}">
-                            <f:selectItem itemLabel="Categorias" noSelectionOption="true"/>
-                            <f:selectItems value="#{productoBean.listaCategorias}" var="categoria" itemLabel="#{categoria.nombre}"/>
-                        </p:selectOneMenu>
-                    </li>
+
                     <li>
                         <a href="usuarioRegistro.xhtml" class="nav-link link-dark px-2">
                             <i class="pi pi-user" style="font-size:1.5rem;margin-right:5px"/>
@@ -114,6 +109,10 @@
             </h:panelGrid>
             <p:commandButton value="Iniciar Sesión" action="#{seguridadBean.iniciarSesion}"
                              styleClass="mt-4" update="@form" icon="pi pi-sign-in" iconPos="left" />
+
+
+            <p:commandButton value="Recuperar contraseña" action="#{seguridadBean.recuperar}" style="margin-left: 30px"
+                             icon="pi pi-key" iconPos="left" styleClass="mt-4" update="@form"/>
             <p:growl for="login-bean" showDetail="true" />
         </h:form>
     </p:dialog>

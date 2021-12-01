@@ -26,6 +26,6 @@ public interface UsuarioRepo extends JpaRepository<Usuario,String> {
 
     Optional<Usuario> findAllByEmailAndPassword(String email,String password);
 
-    Optional<Usuario>findAllByEmailAndCodPersona(String email,String codPersona);
+    Optional<Usuario>findAllByCodPersonaAndEmail(String idPersona,String email);
 
 }

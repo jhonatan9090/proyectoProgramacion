@@ -20,7 +20,8 @@ import javax.faces.view.ViewScoped;
 @ViewScoped
 public class LoguinBean {
 
-    private final LoguinServicio loguinServicio;
+
+    private final UsuarioServicio usuarioServicio;
 
     @Getter
     @Setter
@@ -34,11 +35,8 @@ public class LoguinBean {
     @Setter
     private String password;
 
-
-
-
-    public LoguinBean(LoguinServicio loguinServicio) {
-        this.loguinServicio = loguinServicio;
+    public LoguinBean(UsuarioServicio usuarioServicio) {
+        this.usuarioServicio = usuarioServicio;
     }
 
 
@@ -48,7 +46,7 @@ public class LoguinBean {
 
             try {
 
-                persona = loguinServicio.loguinPersona(correo, password);
+                persona = usuarioServicio.recuperarPassword(correo, password);
 
 
                 return "/index.xhtml?faces-redirect=true";
