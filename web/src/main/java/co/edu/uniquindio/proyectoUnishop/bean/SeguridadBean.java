@@ -5,6 +5,7 @@ import co.edu.uniquindio.proyectoUnishop.entidades.Administrador;
 import co.edu.uniquindio.proyectoUnishop.entidades.Persona;
 import co.edu.uniquindio.proyectoUnishop.entidades.Usuario;
 import co.edu.uniquindio.proyectoUnishop.servicios.PersonaServicio;
+import co.edu.uniquindio.proyectoUnishop.servicios.ProductoServicio;
 import co.edu.uniquindio.proyectoUnishop.servicios.UsuarioServicio;
 import lombok.Getter;
 import lombok.Setter;
@@ -47,6 +48,9 @@ public class SeguridadBean implements Serializable {
 
     @Autowired
     private PersonaServicio personaServicio;
+
+    @Autowired
+    private ProductoServicio productoServicio;
 
     @PostConstruct
     public void inicializar(){
@@ -115,5 +119,25 @@ public class SeguridadBean implements Serializable {
 
         subtotal-=productosCarrito.get(indice).getPrecio();
         productosCarrito.remove(indice);
+    }
+
+
+    public void comprar(){
+
+
+        if(persona!=null&&!productosCarrito.isEmpty()) {
+            try {
+                productoServicio.compraProductos((Usuario) persona,productosCarrito,"PSE");
+                productosCarrito.clear();
+                subtotal=0.0;
+
+                FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "La compra se realizo satisfactoriamente");
+                FacesContext.getCurrentInstance().addMessage("compra-msj", fm);
+            } catch (Exception e) {
+                FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+                FacesContext.getCurrentInstance().addMessage("compra-msj", fm);
+            }
+
+        }
     }
 }

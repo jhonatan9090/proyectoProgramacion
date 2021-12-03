@@ -1,10 +1,9 @@
 package co.edu.uniquindio.proyectoUnishop.servicios;
 
-import co.edu.uniquindio.proyectoUnishop.entidades.Categoria;
-import co.edu.uniquindio.proyectoUnishop.entidades.Comentario;
-import co.edu.uniquindio.proyectoUnishop.entidades.Producto;
-import co.edu.uniquindio.proyectoUnishop.entidades.Usuario;
+import co.edu.uniquindio.proyectoUnishop.dto.ProductoCarrito;
+import co.edu.uniquindio.proyectoUnishop.entidades.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface ProductoServicio {
@@ -21,7 +20,7 @@ public interface ProductoServicio {
     void guardarProductoFavorito(Usuario usuario,Producto producto) throws Exception;
     void eliminarProductoFavorito(Usuario usuario,Producto producto) throws Exception;
     List<Producto>buscarProductoFiltro(String nonbre,String [] filtro) ;
-
+    Compra compraProductos(Usuario usuarioCompra, ArrayList<ProductoCarrito>productoCarritos,String medioPago) throws Exception;
 
 
 }

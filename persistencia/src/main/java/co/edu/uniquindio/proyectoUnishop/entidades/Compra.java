@@ -30,7 +30,7 @@ public class Compra implements Serializable {
     private Integer codCompra; //codigo de la compra
 
     @Column(nullable = false,columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private @Future LocalDate fechaPago; //fecha de pago de la compra
+    private  LocalDate fechaPago; //fecha de pago de la compra
 
     @Column(length = 80,nullable = false)
     @NotBlank(message = "el medio de pago no puede estar vacio")

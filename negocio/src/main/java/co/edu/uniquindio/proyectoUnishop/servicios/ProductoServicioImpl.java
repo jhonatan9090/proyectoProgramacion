@@ -1,16 +1,14 @@
 package co.edu.uniquindio.proyectoUnishop.servicios;
 
 
-import co.edu.uniquindio.proyectoUnishop.entidades.Categoria;
-import co.edu.uniquindio.proyectoUnishop.entidades.Comentario;
-import co.edu.uniquindio.proyectoUnishop.entidades.Producto;
-import co.edu.uniquindio.proyectoUnishop.entidades.Usuario;
-import co.edu.uniquindio.proyectoUnishop.repositorios.CategoriaRepo;
-import co.edu.uniquindio.proyectoUnishop.repositorios.ComentarioRepo;
-import co.edu.uniquindio.proyectoUnishop.repositorios.ProductoRepo;
+import co.edu.uniquindio.proyectoUnishop.dto.ProductoCarrito;
+import co.edu.uniquindio.proyectoUnishop.entidades.*;
+import co.edu.uniquindio.proyectoUnishop.repositorios.*;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,11 +18,16 @@ public class ProductoServicioImpl implements ProductoServicio {
     private final ProductoRepo productoRepo;
     private final CategoriaRepo categoriaRepo;
     private final ComentarioRepo comentarioRepo;
+    private final DetalleCompraRepo detalleCompraRepo;
+    private final CompraRepo compraRepo;
 
-    public ProductoServicioImpl(ProductoRepo productoRepo, CategoriaRepo categoriaRepo, ComentarioRepo comentarioRepo) {
+    public ProductoServicioImpl(ProductoRepo productoRepo, CategoriaRepo categoriaRepo, ComentarioRepo comentarioRepo, DetalleCompraRepo detalleCompraRepo, CompraRepo compraRepo) {
         this.productoRepo = productoRepo;
         this.categoriaRepo = categoriaRepo;
         this.comentarioRepo = comentarioRepo;
+        this.detalleCompraRepo = detalleCompraRepo;
+
+        this.compraRepo = compraRepo;
     }
 
 
@@ -127,6 +130,39 @@ public class ProductoServicioImpl implements ProductoServicio {
     @Override
     public List<Producto> buscarProductoFiltro(String nombre, String[] filtro) {
         return productoRepo.listarProductoNombre(nombre);
+    }
+
+    @Override
+    public Compra compraProductos(Usuario usuarioCompra, ArrayList<ProductoCarrito> productoCarritos, String medioPago) throws Exception {
+
+
+        try {
+
+            Compra compra = new Compra();
+            compra.setFechaPago(LocalDate.now(ZoneId.of("America/Bogota")));
+            compra.setUsuarioCompra(usuarioCompra);
+            compra.setMedioPago(medioPago);
+
+            Compra compraGuardada = compraRepo.save(compra);
+
+
+            DetalleCompra dc;
+            for (ProductoCarrito p : productoCarritos){
+
+
+                dc=new DetalleCompra();
+                dc.setCompradetalle(compraGuardada);
+                dc.setPrecioProducto(p.getPrecio());
+                dc.setUnidades(p.getUnidades());
+                dc.setProductoDetalle(productoRepo.findById(p.getIdProducto()).get());
+                detalleCompraRepo.save(dc);
+            }
+            return compraGuardada;
+        }catch (Exception e){
+
+            throw new Exception(e.getMessage());
+        }
+
     }
 
 
