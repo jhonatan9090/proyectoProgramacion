@@ -15,7 +15,10 @@ import java.util.Map;
 @Entity
 @Getter @Setter
 @ToString
-public class Administrador extends Persona implements Serializable {
+
+public class Administrador extends Persona {
+
+
 
     /**
      * Metodo constructor sin parámetros de la entidad Administrador
@@ -36,4 +39,6 @@ public class Administrador extends Persona implements Serializable {
     public Administrador(String codPersona, String nombre, String email, String password, Map<String, String> telefono) {
         super(codPersona, nombre, email, password, telefono);
     }
+
+
 }

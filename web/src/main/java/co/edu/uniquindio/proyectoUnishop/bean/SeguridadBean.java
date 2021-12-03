@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyectoUnishop.bean;
 
+import co.edu.uniquindio.proyectoUnishop.dto.ProductoCarrito;
 import co.edu.uniquindio.proyectoUnishop.entidades.Administrador;
 import co.edu.uniquindio.proyectoUnishop.entidades.Persona;
 import co.edu.uniquindio.proyectoUnishop.entidades.Usuario;
@@ -12,9 +13,11 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.ApplicationScope;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 @Scope("session")
 @Component
@@ -34,9 +37,25 @@ public class SeguridadBean implements Serializable {
     @Setter
     String rol;
 
+    @Getter
+    @Setter
+    private ArrayList<ProductoCarrito>productosCarrito;
+
+    @Getter
+    @Setter
+    private Double subtotal;
+
     @Autowired
     private PersonaServicio personaServicio;
 
+    @PostConstruct
+    public void inicializar(){
+
+        this.subtotal=0.0;
+        this.productosCarrito=new ArrayList<>();
+
+
+    }
 
     public String iniciarSesion() {
         if (!email.isEmpty() && !password.isEmpty()) {
@@ -66,5 +85,35 @@ public class SeguridadBean implements Serializable {
 
     public String recuperar() {
         return "/recuperarContrasenia.xhtml?faces-redirect=true";
+    }
+
+
+    public void agragarCarrito(Integer id,Double precio,String nombre,String imagen){
+
+           ProductoCarrito pc= new ProductoCarrito(id,nombre,imagen,1,precio);
+
+           if(!productosCarrito.contains(pc)) {
+               productosCarrito.add(pc);
+               subtotal+=precio;
+
+               FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Producto agregado al carrito");
+               FacesContext.getCurrentInstance().addMessage("add-cart", fm);
+           }
+    }
+
+    public void actualizarSubtotal(){
+
+        subtotal=0.0;
+        for(ProductoCarrito p :productosCarrito){
+
+            subtotal+=p.getPrecio()*p.getUnidades();
+
+        }
+    }
+
+    public void eliminarCarrito(int indice){
+
+        subtotal-=productosCarrito.get(indice).getPrecio();
+        productosCarrito.remove(indice);
     }
 }

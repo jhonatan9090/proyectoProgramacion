@@ -15,7 +15,7 @@ import java.util.Map;
 @Entity
 @Getter @Setter
 @ToString
-public class Usuario extends Persona implements Serializable {
+public class Usuario extends Persona  {
 
     @ManyToOne
     @JoinColumn(nullable = true)

@@ -18,8 +18,8 @@ public class configMail {
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
 
-        mailSender.setUsername("jcuribep@uqvirtual.edu.co");
-        mailSender.setPassword("camilo1402216");
+        mailSender.setUsername("0");
+        mailSender.setPassword("0");
 
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");
