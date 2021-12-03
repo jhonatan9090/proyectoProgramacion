@@ -83,5 +83,12 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return usuarioRepo.obtenerProductosFavoritos(email);
     }
 
+    @Override
+    public List<Producto> listarProductoUsuario(String email) {
+
+
+       return usuarioRepo.listarProductosUsuario(email);
+    }
+
 
 }

@@ -1,11 +1,11 @@
 package co.edu.uniquindio.proyectoUnishop.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -44,19 +44,13 @@ public class Usuario extends Persona  {
     // relacion inversa producto favorito
     @ManyToMany
     @ToString.Exclude
+    @JsonIgnore
     private List<Producto>listaProductoFavorito;
 
     // Relacion inversa chat comprador
     @OneToMany(mappedBy = "usuarioComprador",cascade = CascadeType.REMOVE)
     @ToString.Exclude
     private List<Chat>ListChatComprador;
-
-    /**
-     * Metodo constructor sin parámetros de la entidad Usuario
-     */
-    public Usuario() {
-    super();
-    }
 
     /**
      * Metodo constructor de la entidad Usuario
@@ -70,6 +64,10 @@ public class Usuario extends Persona  {
     public Usuario(String codPersona, String nombre, String email, String password, Map<String, String> telefono, Ciudad ciudadUsuario) {
         super(codPersona, nombre, email, password, telefono);
         this.ciudadUsuario = ciudadUsuario;
+    }
+
+    public Usuario() {
+
     }
 
     @Override

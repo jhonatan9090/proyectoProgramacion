@@ -62,7 +62,7 @@ public class Compra implements Serializable {
      * @param medioPago medio de pago de la compra
      * @param usuarioCompra usuario a realizar la compra
      */
-    public Compra(@Future LocalDate fechaPago, String medioPago, Usuario usuarioCompra) {
+    public Compra( LocalDate fechaPago, String medioPago, Usuario usuarioCompra) {
 
         this.fechaPago = fechaPago;
         this.medioPago = medioPago;

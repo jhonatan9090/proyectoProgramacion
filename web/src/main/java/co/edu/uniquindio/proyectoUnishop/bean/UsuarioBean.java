@@ -1,11 +1,15 @@
 package co.edu.uniquindio.proyectoUnishop.bean;
 
 import co.edu.uniquindio.proyectoUnishop.entidades.Ciudad;
+import co.edu.uniquindio.proyectoUnishop.entidades.Persona;
+import co.edu.uniquindio.proyectoUnishop.entidades.Producto;
 import co.edu.uniquindio.proyectoUnishop.servicios.CiudadServicio;
+import co.edu.uniquindio.proyectoUnishop.servicios.ProductoServicio;
 import co.edu.uniquindio.proyectoUnishop.servicios.UsuarioServicio;
 import co.edu.uniquindio.proyectoUnishop.entidades.Usuario;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
@@ -25,23 +29,35 @@ public class UsuarioBean {
     @Setter
     private Usuario usuario;
 
+
+
     private final UsuarioServicio usuarioServicio;
     private  final CiudadServicio ciudadServicio;
+    private final ProductoServicio productoServicio;
 
     //trae la lista de las ciudades
     @Getter
     @Setter
     private List<Ciudad>listaCiudad;
 
-    public UsuarioBean(UsuarioServicio usuarioServicio, CiudadServicio ciudadServicio) {
+
+    @Getter
+    @Setter
+    private List<Producto>listaProductosUsuario;
+
+    public UsuarioBean(UsuarioServicio usuarioServicio, CiudadServicio ciudadServicio, ProductoServicio productoServicio) {
         this.usuarioServicio = usuarioServicio;
         this.ciudadServicio = ciudadServicio;
+        this.productoServicio = productoServicio;
     }
 
     @PostConstruct
     public void inicializar() {
+
         usuario = new Usuario();
         listaCiudad=ciudadServicio.listaCiudad();
+
+
     }
 
 

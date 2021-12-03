@@ -3,10 +3,8 @@ package co.edu.uniquindio.proyectoUnishop.entidades;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Entity;
-import java.io.Serializable;
 import java.util.Map;
 
 /**
@@ -17,15 +15,6 @@ import java.util.Map;
 @ToString
 
 public class Administrador extends Persona {
-
-
-
-    /**
-     * Metodo constructor sin parámetros de la entidad Administrador
-     */
-    public Administrador() {
-    super();
-    }
 
 
     /**
@@ -41,4 +30,7 @@ public class Administrador extends Persona {
     }
 
 
+    public Administrador() {
+
+    }
 }

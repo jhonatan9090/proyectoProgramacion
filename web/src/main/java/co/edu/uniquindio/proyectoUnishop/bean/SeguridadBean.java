@@ -20,8 +20,9 @@ import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-@Scope("session")
+
 @Component
+@Scope("session")
 public class SeguridadBean implements Serializable {
 
     @Getter
