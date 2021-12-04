@@ -85,7 +85,7 @@
                                          value="Registrarse" action="usuarioRegistro?faces-redirect=true" />
                     </h:form>
                     <div id="info-sesion" jsf:rendered="#{seguridadBean.autenticado}">
-                        <h5>#{seguridadBean.persona.nombre}</h5>
+                        <h5>Hola, #{seguridadBean.persona.nombre}</h5>
                         <h:form>
                             <p:commandButton value="Cerrar sesión" styleClass="btn btn-light  text-dark" action="#{seguridadBean.cerrarSesion}" />
                         </h:form>
