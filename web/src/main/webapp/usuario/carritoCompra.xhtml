@@ -81,6 +81,7 @@
             <h:form styleClass="text-center">
 
                 <p:commandButton value="Comprar" action="#{seguridadBean.comprar}" update="@form" icon="pi pi-check"/>
+                <p:commandButton value="Comprar" action="#{emailBean.enviarCorreoCompra}" update="@form" icon="pi pi-check"/>
                 <p:growl for="compra-msj" showDetail="true"/>
             </h:form>
 

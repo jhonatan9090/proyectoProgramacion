@@ -145,7 +145,19 @@ public class Producto implements Serializable {
             return imagenes.get(0);
 
         }
-
         return "default.png";
+    }
+
+    public String getCategoria(List<Categoria> listaCategoria) {
+
+        String salida = "";
+
+        for (Categoria c : listaCategoria) {
+
+            salida = c.getNombre() + "," + salida;
+
+        }
+        return salida;
+
     }
 }

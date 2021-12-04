@@ -46,7 +46,7 @@
                                     <h:outputText value="Precio:"/>
                                     <h:outputText value="$#{producto.precio}"/>
                                     <h:outputText value="Categorías:"/>
-                                    <h:outputText value="#{producto.listaCategoria}"/>
+                                    <h:outputText value="#{producto.getCategoria(producto.listaCategoria)}"/>
 
                                 </h:panelGrid>
                             </p:outputPanel>

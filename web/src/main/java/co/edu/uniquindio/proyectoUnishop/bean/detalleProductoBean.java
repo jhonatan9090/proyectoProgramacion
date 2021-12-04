@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyectoUnishop.bean;
 
 
+import co.edu.uniquindio.proyectoUnishop.entidades.Categoria;
 import co.edu.uniquindio.proyectoUnishop.entidades.Comentario;
 import co.edu.uniquindio.proyectoUnishop.entidades.Producto;
 import co.edu.uniquindio.proyectoUnishop.entidades.Usuario;
@@ -12,6 +13,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.RequestScope;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -37,7 +39,6 @@ public class detalleProductoBean implements Serializable {
     @Setter
     private Producto producto;
 
-
     @Getter
     @Setter
     private Integer calificacionPromedio;
@@ -50,13 +51,16 @@ public class detalleProductoBean implements Serializable {
     @Setter
     private List<Comentario>listaComentarios;
 
+    @Getter
+    @Setter
+    private List<Categoria>listaCategorias;
+
     @Value("#{seguridadBean.persona}")
     private Usuario usuarioSesion;
 
     public detalleProductoBean(ProductoServicio productoServicio, PersonaServicio personaServicio, ComentarioServicio comentarioServicio) {
         this.productoServicio = productoServicio;
         this.personaServicio = personaServicio;
-
         this.comentarioServicio = comentarioServicio;
     }
 

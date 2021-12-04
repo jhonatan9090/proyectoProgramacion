@@ -2,7 +2,6 @@ package co.edu.uniquindio.proyectoUnishop.bean;
 
 import co.edu.uniquindio.proyectoUnishop.entidades.DetalleCompra;
 import co.edu.uniquindio.proyectoUnishop.entidades.Persona;
-import co.edu.uniquindio.proyectoUnishop.entidades.Usuario;
 import co.edu.uniquindio.proyectoUnishop.servicios.DetalleCompraServicio;
 import co.edu.uniquindio.proyectoUnishop.servicios.PersonaServicio;
 import co.edu.uniquindio.proyectoUnishop.servicios.ServicioEmail;
@@ -17,6 +16,7 @@ import org.springframework.web.context.annotation.RequestScope;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
+import java.util.List;
 
 @Component
 @RequestScope
@@ -27,7 +27,10 @@ public class EmailBean implements Serializable {
     private ServicioEmail emailServico;
 
     @Autowired
-    private PersonaServicio usuarioServicio;
+    private PersonaServicio personaServicio;
+
+    @Autowired
+    private UsuarioServicio usuarioServicio;
 
     @Autowired
     private DetalleCompraServicio detalleCompraServicio;
@@ -42,7 +45,7 @@ public class EmailBean implements Serializable {
 
     @Getter
     @Setter
-    private DetalleCompra detalleCompra;
+    private List<DetalleCompra> detalleCompras;
 
 
     @Getter
@@ -60,10 +63,10 @@ public class EmailBean implements Serializable {
 
         if (idPersona != null && email != null) {
             try{
-                persona = usuarioServicio.recuperarPassword(idPersona, email);
+                persona = personaServicio.recuperarPassword(idPersona, email);
                 asunto = "Recuperar contraseña";
 
-                mensaje = "Estos son sus datos de login en Unishop. No comparta la información con ningún tercero\n\n"
+                mensaje = "Hemos recibido una solicitud tuya para recuperar tu contraeña. No compartas tu informacion \n\n"
                         + "Email: " + email + "\nContraseña: " + persona.getPassword() + "\n\nHasta luego.";
 
                 emailServico.SendSimpleMessage(email, asunto, mensaje);
@@ -81,13 +84,13 @@ public class EmailBean implements Serializable {
         //detalleCompra=detalleCompraServicio.buscarDetalleId()
 
 
-        if (idPersona != null && email != null) {
+
             try{
-                persona = usuarioServicio.recuperarPassword(idPersona, email);
+               detalleCompras=usuarioServicio.listarComprasUsuario(email);
                 asunto = "Recuperar contraseña";
 
                 mensaje = "Estos son sus datos de login en Unishop. No comparta la información con ningún tercero\n\n"
-                        + "Email: " + email + "\nContraseña: " + persona.getPassword() + "\n\nHasta luego.";
+                        + "Email: " + email + "\nContraseña: " + detalleCompras.toString() + "\n\nHasta luego.";
 
                 emailServico.SendSimpleMessage(email, asunto, mensaje);
                 return "/index.xhtml?faces-redirect=true";
@@ -95,7 +98,7 @@ public class EmailBean implements Serializable {
                 FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
                 FacesContext.getCurrentInstance().addMessage("mensaje-recuperar", m);
             }
-        }
+
         return null;
     }
 

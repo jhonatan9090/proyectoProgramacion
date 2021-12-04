@@ -59,11 +59,12 @@
 
                 </div>
 
-                <p:dataList emptyMessage="No hay categorias para mostrar" styleClass="lista-carac"
-                            value="#{detalleProductoBean.producto.listaCategoria}">
 
+                <p:dataList emptyMessage="No hay categorias para mostrar" styleClass="lista-carac"
+                            value="#{detalleProductoBean.producto.getCategoria(detalleProductoBean.producto.listaCategoria)}">
 
                 </p:dataList>
+
             </div>
 
 
