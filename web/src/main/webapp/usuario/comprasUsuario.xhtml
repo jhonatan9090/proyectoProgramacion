@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+<ui:composition template="../WEB-INF/template.xhtml">
+    <ui:define name="Tus Compras">Inicio</ui:define>
+    <ui:define name="content">
+        <h1>Tus Compras</h1>
+        <div class="row">
+            <div class="col-7">
+                <p:panel header="Lista de Compras">
+                    <div class="card">
+                        <h:form>
+                            <p:dataTable var="detalle" value="#{usuarioPrBean.detalleCompras}">
+                                <f:facet name="header">
+                                    Expanda para más información
+                                </f:facet>
+                                <p:column style="width:1rem">
+                                    <p:rowToggler/>
+                                </p:column>
+
+                                <p:column headerText="nombre">
+                                    <h:outputText value="#{detalle.productoDetalle.nombre}"/>
+                                </p:column>
+
+                                <p:column headerText="Precio">
+                                    <h:outputText value="#{detalle.precioProducto}"/>
+                                </p:column>
+
+                                <p:column headerText="Unidades Compradas">
+                                    <h:outputText value="#{detalle.unidades}"/>
+                                </p:column>
+
+                                <p:rowExpansion>
+                                    <div class="row">
+                                        <div class="col">
+                                            <img src="/uploads/#{detalle.productoDetalle.imagenPrincipal}" alt="img"
+                                                 style="width: 150px; height: 150px"/>
+
+
+                                        </div>
+
+
+                                    </div>
+                                </p:rowExpansion>
+                            </p:dataTable>
+                        </h:form>
+                    </div>
+                </p:panel>
+            </div>
+
+
+        </div>
+    </ui:define>
+</ui:composition>
+</html>

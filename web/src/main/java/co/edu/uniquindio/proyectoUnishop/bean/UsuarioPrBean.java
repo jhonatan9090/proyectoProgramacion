@@ -1,9 +1,6 @@
 package co.edu.uniquindio.proyectoUnishop.bean;
 
-import co.edu.uniquindio.proyectoUnishop.entidades.Ciudad;
-import co.edu.uniquindio.proyectoUnishop.entidades.Persona;
-import co.edu.uniquindio.proyectoUnishop.entidades.Producto;
-import co.edu.uniquindio.proyectoUnishop.entidades.Usuario;
+import co.edu.uniquindio.proyectoUnishop.entidades.*;
 import co.edu.uniquindio.proyectoUnishop.servicios.CiudadServicio;
 import co.edu.uniquindio.proyectoUnishop.servicios.ProductoServicio;
 import co.edu.uniquindio.proyectoUnishop.servicios.UsuarioServicio;
@@ -52,6 +49,10 @@ public class UsuarioPrBean implements Serializable {
     @Setter
     private List<Producto> productoList;
 
+    @Getter
+    @Setter
+    private  List<DetalleCompra>detalleCompras;
+
 
 
 
@@ -72,6 +73,7 @@ public class UsuarioPrBean implements Serializable {
 
 
        productoList = usuServicio.listarProductoUsuario(email);
+       detalleCompras=usuServicio.listarComprasUsuario(email);
     }
 
     /*public void modificarUsuario() {

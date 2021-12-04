@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyectoUnishop.servicios;
 
+import co.edu.uniquindio.proyectoUnishop.entidades.DetalleCompra;
 import co.edu.uniquindio.proyectoUnishop.entidades.Producto;
 import co.edu.uniquindio.proyectoUnishop.entidades.Usuario;
 
@@ -14,6 +15,7 @@ public interface UsuarioServicio {
     Usuario obtenerUsuario(String codigo) throws Exception;
     List<Producto>listarProductosFavoritos(String email) throws Exception;
     List<Producto>listarProductoUsuario(String email);
+    List<DetalleCompra>listarComprasUsuario(String email);
 
 
 }

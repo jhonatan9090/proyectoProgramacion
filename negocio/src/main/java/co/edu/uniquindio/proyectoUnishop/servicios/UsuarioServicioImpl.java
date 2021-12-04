@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyectoUnishop.servicios;
 
+import co.edu.uniquindio.proyectoUnishop.entidades.DetalleCompra;
 import co.edu.uniquindio.proyectoUnishop.entidades.Producto;
 import co.edu.uniquindio.proyectoUnishop.entidades.Usuario;
 import co.edu.uniquindio.proyectoUnishop.repositorios.UsuarioRepo;
@@ -88,6 +89,11 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
 
        return usuarioRepo.listarProductosUsuario(email);
+    }
+
+    @Override
+    public List<DetalleCompra> listarComprasUsuario(String email) {
+        return usuarioRepo.listarComprasUsuario(email);
     }
 
 

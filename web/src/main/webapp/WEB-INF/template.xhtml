@@ -44,6 +44,9 @@
                         </li>
 
                         <li class="nav-item" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol == 'usuario'}">
+                            <a class="nav-link" href="/usuario/comprasUsuario.xhtml">Mis Compras</a>
+                        </li>
+                        <li class="nav-item" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol == 'usuario'}">
                             <a class="nav-link" href="/usuario/productosUsuario.xhtml">Mis productos</a>
                         </li>
 
