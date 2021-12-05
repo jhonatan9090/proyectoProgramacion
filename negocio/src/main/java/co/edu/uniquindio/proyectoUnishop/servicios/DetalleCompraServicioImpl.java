@@ -15,8 +15,12 @@ public class DetalleCompraServicioImpl implements  DetalleCompraServicio{
     @Autowired
     private DetalleCompraRepo detalleCompraRepo;
 
-
-
+    /**
+     *
+     * @param idDetalle este parametro es el identificador por el cual se va a buscar el detalle de la compra
+     * @return este retorna el detalle de la compra buscado
+     * @throws Exception
+     */
     @Override
     public DetalleCompra buscarDetalleId(Integer idDetalle) throws Exception {
 

@@ -9,11 +9,11 @@ import java.util.List;
 import java.util.Optional;
 
 
-
+/**
+ * este metodo es para lbuscar los detalles de la compra
+ */
 public interface DetalleCompraServicio {
 
 DetalleCompra buscarDetalleId(Integer idDetalle) throws Exception;
-
-
 
 }

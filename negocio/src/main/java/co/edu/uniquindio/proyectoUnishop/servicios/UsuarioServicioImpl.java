@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ *
+ */
 @Service
 public class UsuarioServicioImpl implements UsuarioServicio {
 
@@ -21,7 +24,12 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         this.usuarioRepo = usuarioRepo;
     }
 
-
+    /**
+     *
+     * @param u este paramaetro es para guardar el usuario registrado y compararlo con el codigo de los demas usuarios
+     * @return
+     * @throws Exception
+     */
     @Override
     public Usuario registrarUsuario(Usuario u) throws Exception {
         Optional<Usuario> buscado = usuarioRepo.findById(u.getCodPersona());
@@ -35,6 +43,12 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return usuarioRepo.save(u);
     }
 
+    /**
+     *
+     * @param u este paramaetro es para guardar el usuario registrado y compararlo con el codigo de los demas usuarios
+     * @return
+     * @throws Exception
+     */
     @Override
     public Usuario actualizarUsuario(Usuario u) throws Exception {
         Optional<Usuario> buscado = usuarioRepo.findById(u.getCodPersona());
@@ -45,6 +59,11 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return usuarioRepo.save(u);
     }
 
+    /**
+     *
+     * @param codigo se utiliza para buscar el codigo del usuario registrado y poder eliminarlo
+     * @throws Exception
+     */
     @Override
     public void eliminarUsuario(String codigo) throws Exception {
         Optional<Usuario> buscado = usuarioRepo.findById(codigo);
@@ -54,11 +73,21 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         usuarioRepo.deleteById(codigo);
     }
 
+    /**
+     * Este metodo sirve para listar los usuarios
+     * @return
+     */
     @Override
     public List<Usuario> listarUsuarios() {
         return usuarioRepo.findAll();
     }
 
+    /**
+     *
+     * @param codigo sirve para buscar al usuario buscado por su codigo
+     * @return
+     * @throws Exception
+     */
     @Override
     public Usuario obtenerUsuario(String codigo) throws Exception {
         Optional<Usuario> usuario = usuarioRepo.findById(codigo);
@@ -68,7 +97,12 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return usuario.get();
     }
 
-
+    /**
+     *
+     * @param email se utuliza para buscar los productos favoritos  del usuario
+     * @return
+     * @throws Exception
+     */
     @Override
     public List<Producto> listarProductosFavoritos(String email) throws Exception {
 
@@ -84,6 +118,11 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return usuarioRepo.obtenerProductosFavoritos(email);
     }
 
+    /**
+     *
+     * @param email sirve para listar los productos escogidos por el usuario
+     * @return
+     */
     @Override
     public List<Producto> listarProductoUsuario(String email) {
 

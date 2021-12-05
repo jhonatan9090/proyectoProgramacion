@@ -6,6 +6,9 @@ import co.edu.uniquindio.proyectoUnishop.entidades.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * este metodo se conecta con el crud de los produtos para trabajar con sus datos
+ */
 public interface ProductoServicio {
 
 

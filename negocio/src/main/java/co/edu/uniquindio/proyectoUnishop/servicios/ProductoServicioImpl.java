@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * este metodo imprime los datos de los productos guardados
+ *
+ */
 @Service
 public class ProductoServicioImpl implements ProductoServicio {
 

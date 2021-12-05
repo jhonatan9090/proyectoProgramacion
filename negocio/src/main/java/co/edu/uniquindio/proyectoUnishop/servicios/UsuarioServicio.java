@@ -6,6 +6,9 @@ import co.edu.uniquindio.proyectoUnishop.entidades.Usuario;
 
 import java.util.List;
 
+/**
+ * este metodo se encarga de listar los usuarios registrados
+ */
 public interface UsuarioServicio {
 
     Usuario registrarUsuario(Usuario u) throws Exception;

@@ -6,7 +6,9 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
-
+/**
+ * Este metodo se encarga de regular los servicios de email
+ */
 @Component
 public class servicioEmailImpl implements ServicioEmail {
 

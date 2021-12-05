@@ -32,7 +32,7 @@ public class CategoriaConverter implements Converter<Categoria>, Serializable {
 
         return categoria;
     }
-
+//categoria
     @Override
     public String getAsString(FacesContext facesContext, UIComponent uiComponent, Categoria categoria) {
 
