@@ -57,8 +57,10 @@ public class EmailBean implements Serializable {
     private String mensaje;
 
 
-
-
+    /**
+     * este metodo sirve para enviar el correo al usuario que a perdido su contraseña u puedda recuperar su contraseña
+     * @return
+     */
     public String enviarCorreo() {
 
         if (idPersona != null && email != null) {
@@ -79,6 +81,10 @@ public class EmailBean implements Serializable {
         return null;
     }
 
+    /**
+     * este metodo sirve para recuperar la contraseña y los datos del usuario
+     * @return
+     */
     public String enviarCorreoCompra() {
 
         //detalleCompra=detalleCompraServicio.buscarDetalleId()

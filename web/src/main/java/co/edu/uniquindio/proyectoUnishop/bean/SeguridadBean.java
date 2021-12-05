@@ -62,6 +62,10 @@ public class SeguridadBean implements Serializable {
 
     }
 
+    /**
+     * este metodo se encarga de recibir el correo y la contraseña para inciar la sescion de un usuario
+     * @return
+     */
     public String iniciarSesion() {
         if (!email.isEmpty() && !password.isEmpty()) {
             try {
@@ -83,16 +87,30 @@ public class SeguridadBean implements Serializable {
         return null;
     }
 
+    /**
+     * este metodo sirve para cerrar la secion de un usuario que la haya abierto
+     * @return
+     */
     public String cerrarSesion() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "/index?faces-redirect=true";
     }
 
+    /**
+     * este metodo sirve para recuperar la constraseña
+     * @return
+     */
     public String recuperar() {
         return "/recuperarContrasenia.xhtml?faces-redirect=true";
     }
 
-
+    /**
+     * este metodo se encarga de agregar al carrito los porductos seleccionados por el usuario
+     * @param id es el parametro para la id del prodcuto
+     * @param precio es el parametro para el precio del prodcuto seleccionado
+     * @param nombre es el parametro para el nombre del prodcuto seleccionado
+     * @param imagen es el parametro para la imagen del prodcuto seleccionado
+     */
     public void agragarCarrito(Integer id,Double precio,String nombre,String imagen){
 
            ProductoCarrito pc= new ProductoCarrito(id,nombre,imagen,1,precio);
@@ -106,6 +124,9 @@ public class SeguridadBean implements Serializable {
            }
     }
 
+    /**
+     * este metodo sirve para actualziar el subtotal del carrito
+     */
     public void actualizarSubtotal(){
 
         subtotal=0.0;
@@ -116,13 +137,19 @@ public class SeguridadBean implements Serializable {
         }
     }
 
+    /**
+     * estemetodo elimina todos los articulos agregados al carrito y limpia la lista
+     * @param indice
+     */
     public void eliminarCarrito(int indice){
 
         subtotal-=productosCarrito.get(indice).getPrecio();
         productosCarrito.remove(indice);
     }
 
-
+    /**
+     * este emtodo e encarga de que comprar los productos que se han agregado al carrito
+     */
     public void comprar(){
 
 

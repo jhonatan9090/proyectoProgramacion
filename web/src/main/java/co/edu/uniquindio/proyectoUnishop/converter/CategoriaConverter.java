@@ -32,14 +32,18 @@ public class CategoriaConverter implements Converter<Categoria>, Serializable {
 
         return categoria;
     }
-//categoria
+
+    /**
+     * esge metodo se encarga de listar las categorias
+     * @param facesContext
+     * @param uiComponent
+     * @param categoria
+     * @return
+     */
     @Override
     public String getAsString(FacesContext facesContext, UIComponent uiComponent, Categoria categoria) {
 
-
-
         if(categoria!=null){
-
 
             return categoria.getCodCategoria().toString();
         }

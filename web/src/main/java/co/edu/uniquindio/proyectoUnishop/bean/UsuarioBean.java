@@ -45,6 +45,7 @@ public class UsuarioBean {
     @Setter
     private List<Producto>listaProductosUsuario;
 
+
     public UsuarioBean(UsuarioServicio usuarioServicio, CiudadServicio ciudadServicio, ProductoServicio productoServicio) {
         this.usuarioServicio = usuarioServicio;
         this.ciudadServicio = ciudadServicio;
@@ -60,7 +61,9 @@ public class UsuarioBean {
 
     }
 
-
+    /**
+     * este metodo sirve para registrar usuario y conectar la informacion registrado con la parte logica del programa
+     */
     public void registrarUsuario() {
         try {
             usuarioServicio.registrarUsuario(usuario);
