@@ -24,21 +24,23 @@ public class Usuario extends Persona  {
     // Relacion inversa entre usuario y comentario
     @OneToMany(mappedBy = "usuarioComentario",cascade = CascadeType.REMOVE)
     @ToString.Exclude
+    @JsonIgnore
     private List<Comentario>listaComentarios;
 
     @OneToMany(mappedBy = "usuarioSubasta",cascade = CascadeType.REMOVE)
+    @JsonIgnore
     private List<SubastaUsuario>listaSubastasUsuarios;
 
     // Relacion inversa de la venta de un producto
     @OneToMany(mappedBy = "usuarioVendedor")
     @ToString.Exclude
-
-    // lista de productos del usuario
+    @JsonIgnore
     private List<Producto>listaProductos;
 
     //  Relacion inversi de compras de un producto
     @OneToMany(mappedBy = "UsuarioCompra",cascade = CascadeType.REMOVE)
     @ToString.Exclude
+    @JsonIgnore
     private  List<Compra>listaCompras;
 
     // relacion inversa producto favorito
@@ -50,6 +52,7 @@ public class Usuario extends Persona  {
     // Relacion inversa chat comprador
     @OneToMany(mappedBy = "usuarioComprador",cascade = CascadeType.REMOVE)
     @ToString.Exclude
+    @JsonIgnore
     private List<Chat>ListChatComprador;
 
     /**

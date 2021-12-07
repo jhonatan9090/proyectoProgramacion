@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyectoUnishop.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -41,6 +42,7 @@ public class Chat  implements Serializable {
 
     //Relación con lista de mensajes
     @ToString.Exclude
+    @JsonIgnore
     @OneToMany(mappedBy = "chatUsuario",cascade = CascadeType.REMOVE)
     private List<Mensajes>listaMensajes;
 

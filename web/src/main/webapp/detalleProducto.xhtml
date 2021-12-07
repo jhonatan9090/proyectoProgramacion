@@ -45,6 +45,19 @@
                                              action="#{seguridadBean.agragarCarrito(detalleProductoBean.producto.codProducto,detalleProductoBean.producto.precio,detalleProductoBean.producto.nombre,detalleProductoBean.producto.imagenPrincipal)}"/>
                             <p:growl for="add-cart" showDetail="true"/>
 
+
+
+                        </h:form>
+
+
+                        <h:form class="mt-4" rendered="#{seguridadBean.autenticado}">
+
+                            <p:commandButton value="Añadir a favorito" icon="pi pi-shopping-cart" update="@form"
+                                             action="#{seguridadBean.agragarCarrito(detalleProductoBean.producto.codProducto,detalleProductoBean.producto.precio,detalleProductoBean.producto.nombre,detalleProductoBean.producto.imagenPrincipal)}"/>
+                            <p:growl for="add-cart" showDetail="true"/>
+
+
+
                         </h:form>
 
                     </div>

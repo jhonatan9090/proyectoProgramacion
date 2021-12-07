@@ -1,6 +1,8 @@
 package co.edu.uniquindio.proyectoUnishop.bean;
 
+import co.edu.uniquindio.proyectoUnishop.entidades.Categoria;
 import co.edu.uniquindio.proyectoUnishop.entidades.Producto;
+import co.edu.uniquindio.proyectoUnishop.servicios.CategoriaServicio;
 import co.edu.uniquindio.proyectoUnishop.servicios.ProductoServicio;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,9 +24,20 @@ public class InicioBean implements Serializable {
     @Autowired
     private ProductoServicio productoServicio;
 
+    @Autowired
+    private CategoriaServicio categoriaServicio;
+
     @Getter
     @Setter
     private List<Producto> listaProductos;
+
+    @Getter
+    @Setter
+    private Categoria categoria;
+
+    @Getter
+    @Setter
+    private List<Categoria>listaCategorias;
 
 
     @PostConstruct
@@ -32,6 +45,9 @@ public class InicioBean implements Serializable {
 
 
         this.listaProductos=productoServicio.listarTodosporProductos();
+        this.listaCategorias=categoriaServicio.listarCategorias();
+        //this.listaProductos=productoServicio.listarporCategoria();
+
     }
 
     /**

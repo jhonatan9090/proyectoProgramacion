@@ -12,8 +12,14 @@
     <ui:define name="content">
         <h1>Lista Productos</h1>
         <h:form>
+
+
+
             <p:dataView value="#{inicioBean.listaProductos}" var="producto" gridIcon="pi pi-th-large"
                         listIcon="pi pi-bars" >
+
+
+
 
                 <p:dataViewGridItem>
                     <div class="card">
@@ -36,6 +42,7 @@
                         <div class="col-lg-2 col-md-1" style="text-align: center">
                             <p:graphicImage url="/uploads/#{producto.imagenPrincipal}"
                                             styleClass="imagen-producto"/>
+
 
                         </div>
                         <div class="col-lg-8 col-md-1 align-self-center">

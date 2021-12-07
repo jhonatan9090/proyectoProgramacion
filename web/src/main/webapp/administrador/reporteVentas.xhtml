@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="../WEB-INF/template.xhtml">
+    <ui:define name="title">Unilocal | Recuperar contraseña</ui:define>
+    <ui:define name="content">
+
+
+<h:body>
+        <h:form>
+
+            <p:commandButton value="Graficar" actionListener="#{administadorBean.listar}" icon="pi pi-sign-in" iconPos="left" styleClass="mt-4" update="panel"/>
+
+              <h:panelGroup id="panel" layout="block">
+                  
+                  <p:chart type="pie" model="#{administadorBean.pieChartModel}" style="width: 400px;height: 300px" rendered="#{administadorBean.pieChartModel!=null}" />
+
+
+
+
+
+              </h:panelGroup>
+
+
+        </h:form>
+
+</h:body>
+
+    </ui:define>
+</ui:composition>
+</html>

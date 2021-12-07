@@ -39,8 +39,13 @@
                         <li class="nav-item" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol == 'usuario'}">
                             <a class="nav-link" href="/usuario/crearProducto.xhtml">Registrar Producto</a>
                         </li>
+
                         <li class="nav-item" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol == 'usuario'}">
                             <a class="nav-link" href="/usuario/carritoCompra.xhtml">Carrito</a>
+                        </li>
+
+                        <li class="nav-item" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol == 'usuario'}">
+                            <a class="nav-link" href="/usuario/perfilUsuario.xhtml">Mi Perfil</a>
                         </li>
 
                         <li class="nav-item" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol == 'usuario'}">
@@ -51,9 +56,13 @@
                         </li>
 
                         <li class="nav-item" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol == 'administrador'}">
-                            <a class="nav-link" href="loguinPersona.xhtml">Esto es una prueba</a>
+                            <a class="nav-link" href="/administrador/reporteVentas.xhtml">Reportes de ventas</a>
 
                         </li>
+
+
+
+
                         <div class="d-flex">
 
 
@@ -64,6 +73,11 @@
                 </div>
             </div>
         </nav>
+
+
+
+
+
         <div class="px-3 py-2 border-bottom mb-3">
 
             <div class="container d-flex flex-wrap justify-content-center">
@@ -73,9 +87,21 @@
                         <p:inputText style="width: 600px" placeholder="¿que producto desea buscar?" required="true"
                                      value="#{busquedaBean.busqueda}"/>
                         <p:commandButton icon="pi pi-search" action="#{busquedaBean.buscar}" update="@form"/>
+
+
+
+
                     </h:form>
+
+
                 </div>
 
+                <div class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto">
+                <h:form>
+
+
+                </h:form>
+                </div>
                 <div class="text-end">
                     <h:form rendered="#{!seguridadBean.autenticado}">
                         <p:commandButton styleClass="btn btn-light  text-dark me-3" icon="pi pi-sign-in"

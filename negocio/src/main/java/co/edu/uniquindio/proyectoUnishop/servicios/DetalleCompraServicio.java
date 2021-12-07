@@ -14,6 +14,6 @@ public interface DetalleCompraServicio {
 
 DetalleCompra buscarDetalleId(Integer idDetalle) throws Exception;
 
-
+List<DetalleCompra>listarcompras();
 
 }

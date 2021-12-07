@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyectoUnishop.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,6 +33,7 @@ public class Ciudad implements Serializable {
 
     // Relacion con la lista de usuarios
     @OneToMany(mappedBy = "ciudadUsuario",cascade = CascadeType.REMOVE)
+    @JsonIgnore
     @ToString.Exclude
     private List<Usuario>listaUsuarios;
 
@@ -39,6 +41,7 @@ public class Ciudad implements Serializable {
     //  Relacion con la lista de productos
     @OneToMany(mappedBy = "ciudadProducto",cascade = CascadeType.REMOVE)
     @ToString.Exclude
+    @JsonIgnore
     private List<Producto>listaProductos;
 
     /**

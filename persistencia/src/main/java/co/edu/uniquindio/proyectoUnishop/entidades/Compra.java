@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyectoUnishop.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -46,6 +47,7 @@ public class Compra implements Serializable {
     // Relacion con la lista de detalle de la compra
     @ToString.Exclude
     @OneToMany(mappedBy = "compradetalle",cascade = CascadeType.REMOVE)
+    @JsonIgnore
     private List<DetalleCompra>listaDetalleCompra;
 
 

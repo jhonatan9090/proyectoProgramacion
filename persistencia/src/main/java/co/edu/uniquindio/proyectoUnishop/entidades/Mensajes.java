@@ -60,7 +60,7 @@ public class Mensajes implements Serializable {
      * @param fechaMensaje fecxha del envio del mensaje
      * @param chatUsuario Chat del usuario que envia el mensaje
      */
-    public Mensajes(String mensaje, String emisor, @Future LocalDateTime fechaMensaje, Chat chatUsuario) {
+    public Mensajes(String mensaje, String emisor, LocalDateTime fechaMensaje, Chat chatUsuario) {
         this.mensaje = mensaje;
         this.emisor = emisor;
         this.fechaMensaje = fechaMensaje;

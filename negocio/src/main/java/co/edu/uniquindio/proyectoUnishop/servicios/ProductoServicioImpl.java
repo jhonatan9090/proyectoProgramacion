@@ -16,13 +16,15 @@ import java.util.Optional;
 public class ProductoServicioImpl implements ProductoServicio {
 
     private final ProductoRepo productoRepo;
+    private final UsuarioRepo usuarioRepo;
     private final CategoriaRepo categoriaRepo;
     private final ComentarioRepo comentarioRepo;
     private final DetalleCompraRepo detalleCompraRepo;
     private final CompraRepo compraRepo;
 
-    public ProductoServicioImpl(ProductoRepo productoRepo, CategoriaRepo categoriaRepo, ComentarioRepo comentarioRepo, DetalleCompraRepo detalleCompraRepo, CompraRepo compraRepo) {
+    public ProductoServicioImpl(ProductoRepo productoRepo, UsuarioRepo usuarioRepo, CategoriaRepo categoriaRepo, ComentarioRepo comentarioRepo, DetalleCompraRepo detalleCompraRepo, CompraRepo compraRepo) {
         this.productoRepo = productoRepo;
+        this.usuarioRepo = usuarioRepo;
         this.categoriaRepo = categoriaRepo;
         this.comentarioRepo = comentarioRepo;
         this.detalleCompraRepo = detalleCompraRepo;
@@ -87,16 +89,16 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public List<Producto> listarporCategoria(Categoria categoria) throws Exception {
+    public List<Producto> listarporCategoria(String categoriaNombre) throws Exception {
 
-        Optional<Categoria> categoriaBuscada = categoriaRepo.findByNombreContains(categoria.getNombre());
+        Optional<Categoria> categoriaBuscada = categoriaRepo.findByNombreContains(categoriaNombre);
 
         if (categoriaBuscada.isEmpty()) {
             throw new Exception("La categoria no existe");
         }
 
 
-        return productoRepo.ListarProductosPorCategoria(categoria.getCodCategoria());
+        return productoRepo.ListarProductosPorCategoria(categoriaNombre);
     }
 
     @Override
@@ -119,6 +121,17 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     @Override
     public void guardarProductoFavorito(Usuario usuario, Producto producto) throws Exception {
+
+        Optional<Producto> buscado = productoRepo.findById(producto.getCodProducto());
+        if (buscado.isEmpty()) {
+            throw new Exception("El codigo del producto a añadir no esta registrado en la base de datos.");
+        }
+        Producto aux = productoRepo.getById(producto.getCodProducto());
+        Usuario aux2 = usuarioRepo.getById(usuario.getCodPersona());
+        aux2.getListaProductoFavorito().add(aux);
+        productoRepo.save(aux);
+        usuarioRepo.save(aux2);
+
 
     }
 

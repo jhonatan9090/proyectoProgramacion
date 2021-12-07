@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyectoUnishop.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -39,6 +40,7 @@ public class Subasta implements Serializable {
     // Relacion inversa de lista de usarios que sabastaran
     @ToString.Exclude
     @OneToMany(mappedBy = "subastaUsuario",cascade = CascadeType.REMOVE)
+    @JsonIgnore
     private List<SubastaUsuario>listaSubastaUsuarios;
 
 

@@ -13,7 +13,7 @@ public interface ProductoServicio {
     Producto actualizarProducto(Producto p) throws Exception;
     void eliminarProducto(Integer idProdcuto) throws Exception;
     Producto buscarProducto(Integer idProducto)throws Exception;
-    List<Producto> listarporCategoria(Categoria categoria) throws Exception;
+    List<Producto> listarporCategoria(String categoriaNombre) throws Exception;
     List<Producto> listarTodosporProductos();
     void comentarProducto(Comentario comentario) throws Exception;
     Float obtenerPromedioProducto(Integer codProducto);
@@ -21,6 +21,7 @@ public interface ProductoServicio {
     void eliminarProductoFavorito(Usuario usuario,Producto producto) throws Exception;
     List<Producto>buscarProductoFiltro(String nonbre,String [] filtro) ;
     Compra compraProductos(Usuario usuarioCompra, ArrayList<ProductoCarrito>productoCarritos,String medioPago) throws Exception;
+
 
 
 }

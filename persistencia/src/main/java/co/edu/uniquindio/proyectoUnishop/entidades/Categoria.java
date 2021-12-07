@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyectoUnishop.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,6 +32,7 @@ public class Categoria implements Serializable {
     // Relacion con lista de productos
     @ManyToMany(mappedBy = "listaCategoria")
     @ToString.Exclude
+    @JsonIgnore
     private List<Producto>listaProductosCategorias;
 
     /**

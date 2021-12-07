@@ -106,6 +106,20 @@ public class SeguridadBean implements Serializable {
            }
     }
 
+
+    public void agragarFavorito(Integer id,Double precio,String nombre,String imagen){
+
+        ProductoCarrito pc= new ProductoCarrito(id,nombre,imagen,1,precio);
+
+        if(!productosCarrito.contains(pc)) {
+            productosCarrito.add(pc);
+            subtotal+=precio;
+
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Producto agregado al carrito");
+            FacesContext.getCurrentInstance().addMessage("add-cart", fm);
+        }
+    }
+
     public void actualizarSubtotal(){
 
         subtotal=0.0;

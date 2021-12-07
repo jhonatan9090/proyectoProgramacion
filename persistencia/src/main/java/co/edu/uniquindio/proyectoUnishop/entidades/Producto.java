@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyectoUnishop.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -53,7 +54,7 @@ public class Producto implements Serializable {
     @Column(nullable = false)
     private LocalDate fechaLimite; //Fecha limite del producto
 
-    @Positive
+    @PositiveOrZero
     @Column(nullable = false)
     private Double descuento; //Descuento del producto
 
@@ -75,31 +76,37 @@ public class Producto implements Serializable {
     // Relacion inversa entre subasta y producto
     @OneToMany(mappedBy = "subastaProducto")
     @ToString.Exclude
+    @JsonIgnore
     private List<Subasta> listaSubasta;
 
     // Relacion inversa de compra con detalla
     @OneToMany(mappedBy = "ProductoDetalle")
     @ToString.Exclude
+    @JsonIgnore
     private List<DetalleCompra> listaDetalles;
 
     // Relacion inversa del comentario de un producto
     @OneToMany(mappedBy = "comentarioProducto", cascade = CascadeType.REMOVE)
     @ToString.Exclude
+    @JsonIgnore
     private List<Comentario> ListaComentariosProductos;
 
     // Relacion de productos favoritos
     @ManyToMany(mappedBy = "listaProductoFavorito")
     @ToString.Exclude
+    @JsonIgnore
     private List<Usuario> listaUsuariosProductosFavoritos;
 
     // Relacion con la lista de chat
     @OneToMany(mappedBy = "chatProductoCompra", cascade = CascadeType.REMOVE)
     @ToString.Exclude
+    @JsonIgnore
     private List<Chat> listaChatProducto;
 
     // Relacion con la lista de categorias
     @ManyToMany
     @ToString.Exclude
+    @JsonIgnore
     private List<Categoria> listaCategoria;
 
 
