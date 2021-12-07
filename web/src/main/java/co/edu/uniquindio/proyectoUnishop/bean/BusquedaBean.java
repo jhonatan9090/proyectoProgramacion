@@ -54,7 +54,7 @@ public class BusquedaBean implements Serializable {
 
     }
     public String buscar(){
-
+// esto es una prueba
         return "resultadoBusqueda?faces-redirect=true&amp;busqueda="+busqueda;
     }
 }
