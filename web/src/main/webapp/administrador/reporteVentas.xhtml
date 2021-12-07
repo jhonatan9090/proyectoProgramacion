@@ -12,25 +12,51 @@
     <ui:define name="content">
 
 
-<h:body>
+    <h:body>
+
         <h:form>
 
-            <p:commandButton value="Graficar" actionListener="#{administadorBean.listar}" icon="pi pi-sign-in" iconPos="left" styleClass="mt-4" update="panel"/>
-
-              <h:panelGroup id="panel" layout="block">
-                  
-                  <p:chart type="pie" model="#{administadorBean.pieChartModel}" style="width: 400px;height: 300px" rendered="#{administadorBean.pieChartModel!=null}" />
+            <p:commandButton id="prueba1" value="Mostrar Grafico de Ventas" actionListener="#{administadorBean.listar}" icon="pi pi-sign-in"
+                             iconPos="left" styleClass="ui-button-raised" update="panel"/>
 
 
+            <h:panelGroup id="panel" layout="block">
+
+                <p:chart type="pie" model="#{administadorBean.pieChartModel}" style="width: 400px;height: 300px"
+                         rendered="#{administadorBean.pieChartModel!=null}"/>
 
 
-
-              </h:panelGroup>
+            </h:panelGroup>
 
 
         </h:form>
 
-</h:body>
+
+
+
+        <div style="margin-inside: 900px">
+            <h:form>
+                <p:commandButton id="prueba2" value="Mostrar Grafico de Precios" actionListener="#{administadorBean.listar2}" icon="pi pi-sign-in"
+                                 iconPos="left" styleClass="mt-4"  update="panel2"/>
+
+                <h:panelGroup id="panel2" layout="block">
+
+                    <p:chart type="pie" model="#{administadorBean.pieChartModel}" style="width: 400px;height: 300px"
+                             rendered="#{administadorBean.pieChartModel!=null}"/>
+
+
+                </h:panelGroup>
+
+
+            </h:form>
+
+
+        </div>
+
+
+    </h:body>
+
+
 
     </ui:define>
 </ui:composition>
