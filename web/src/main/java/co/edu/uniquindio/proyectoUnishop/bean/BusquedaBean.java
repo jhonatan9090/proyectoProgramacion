@@ -29,6 +29,9 @@ public class BusquedaBean implements Serializable {
     @Value("#{ param['busqueda']}")
     private String busquedaParam;
 
+    /**
+     * lista de productos
+     */
     @Getter
     @Setter
     private List<Producto>productosBuscados;
@@ -37,6 +40,9 @@ public class BusquedaBean implements Serializable {
     ProductoServicio productoServicio;
 
 
+    /**
+     * este metodo sirve para inicializar la busqueda de productos
+     */
     @PostConstruct
     public  void inicializar(){
 
@@ -48,8 +54,7 @@ public class BusquedaBean implements Serializable {
 
     }
     public String buscar(){
-
-
+// esto es una prueba
         return "resultadoBusqueda?faces-redirect=true&amp;busqueda="+busqueda;
     }
 }

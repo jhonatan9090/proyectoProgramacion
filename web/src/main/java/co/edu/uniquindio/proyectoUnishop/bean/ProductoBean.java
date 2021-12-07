@@ -62,7 +62,13 @@ public class ProductoBean implements Serializable {
     @Value("#{seguridadBean.persona}")
     private Persona personaSesion;
 
-
+    /**
+     *
+     * @param productoServicio recibe por parametro el producto
+     * @param usuarioServicio recibe por parametro usuario
+     * @param categoriaServicio recibe por parametros las categorias de los productos
+     * @param ciudadServicio recibe por parametros las ciudades
+     */
     public ProductoBean(ProductoServicio productoServicio, UsuarioServicio usuarioServicio, CategoriaServicio categoriaServicio, CiudadServicio ciudadServicio) {
         this.productoServicio = productoServicio;
         this.usuarioServicio = usuarioServicio;
@@ -70,6 +76,9 @@ public class ProductoBean implements Serializable {
         this.ciudadServicio = ciudadServicio;
     }
 
+    /**
+     * est4e metodo sirve para inicializar
+     */
     @PostConstruct
     public void inicializar(){
 
@@ -79,6 +88,10 @@ public class ProductoBean implements Serializable {
         this.imagenes = new ArrayList<>();
     }
 
+    /**
+     * este metodo sirve para crear los produtos y guardarlos
+     * @return
+     */
     public String crearProducto(){
         try {
             if(personaSesion!=null) {
@@ -101,6 +114,10 @@ public class ProductoBean implements Serializable {
         return  null;
     }
 
+    /**
+     * este metodo sirve para subir y guardar la imagen del producto registrado
+     * @param event
+     */
     public void  subirImagenes(FileUploadEvent event){
         UploadedFile imagen = event.getFile();
         System.out.println(imagen.getFileName());
@@ -111,6 +128,11 @@ public class ProductoBean implements Serializable {
         }
     }
 
+    /**
+     * este metodo sirve para subir la imgen y guardarla
+     * @param imagen aqui se recie la imagen que se desea cargar
+     * @return
+     */
     public String subirImagen(UploadedFile imagen){
         try{
             File archivo = new File(urlUploads+"/"+imagen.getFileName());

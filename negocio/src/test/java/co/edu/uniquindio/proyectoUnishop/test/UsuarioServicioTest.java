@@ -17,10 +17,13 @@ import java.util.Map;
 @Transactional
 public class UsuarioServicioTest {
 
+
     @Autowired
     private UsuarioServicio usuarioServicio;
 
-
+    /**
+     * este metodo lista a los usuario para el test de registro de usuario
+     */
     @Test
     public void ListarUsuariosTest(){
 
@@ -43,7 +46,9 @@ public class UsuarioServicioTest {
         }
     }
 
-
+    /**
+     * Este modo es para testear el resgristrar un usuario
+     */
     @Test
     public void RegistrarUsuarioTest(){
 

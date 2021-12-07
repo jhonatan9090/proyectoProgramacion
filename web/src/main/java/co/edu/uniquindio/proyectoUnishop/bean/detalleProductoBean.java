@@ -64,7 +64,9 @@ public class detalleProductoBean implements Serializable {
         this.comentarioServicio = comentarioServicio;
     }
 
-
+    /**
+     * este metodo sirve para inicializar la calificacion de comentarios
+     */
     @PostConstruct
     public void inicializar() {
 
@@ -88,7 +90,9 @@ public class detalleProductoBean implements Serializable {
         }
     }
 
-
+    /**
+     * Este metodo crea y envia los comentarios a la logica para registrarlos
+     */
     public void crearComentario(){
 
         try {

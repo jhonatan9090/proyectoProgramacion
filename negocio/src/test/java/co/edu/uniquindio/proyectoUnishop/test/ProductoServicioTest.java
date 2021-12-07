@@ -27,10 +27,12 @@ public class ProductoServicioTest {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
-
+    /**
+     * este metodo lista los productos por categoria
+     * y se lista los datos de un usuario
+     */
     @Test
     public void listarPorCategoria(){
-
 
         try {
 
@@ -48,15 +50,7 @@ public class ProductoServicioTest {
 
         }catch (Exception e){
 
-
-
-
-
         }
-
-
-
-
 
     }
 

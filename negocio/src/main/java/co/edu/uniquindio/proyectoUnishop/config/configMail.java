@@ -12,12 +12,17 @@ public class configMail {
 
 
     @Bean
+    /**
+     * aqui se almacena la informacion para enviar el correo para restaurar la contraseña de usuario
+     */
     public JavaMailSender getJavaMailSender() {
 
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
-
+/**
+ * este es el correo y la contraseña del correo para la r4estauracion
+ */
         mailSender.setUsername("alfredogodofredopruebam@gmail.com");
         mailSender.setPassword("LaCosa12345");
 
