@@ -17,6 +17,11 @@ public interface ProductoRepo extends JpaRepository<Producto,Integer> {
     @Query("select p from Producto p join p.listaCategoria  c where c.nombre=:nombre")
     List<Producto>ListarProductosPorCategoria(String nombre);
 
+    Optional<Producto>findByDescripcionContains(String descripcion);
+
+    @Query("select p from Producto p where p.descripcion like concat('%',:descripcion,'%' ) ")
+    List<Producto> ListarProductosPorDescripcion(Optional<Producto> descripcion);
+
    /* //lista las compras del usuario
     @Query("Select p.nombre,dc.,c.medioPago from Producto p join p.listaDetalles dc join dc.compradetalle c where c.UsuarioCompra.codPersona=:idUsuario")
     List<Object[]> ListarComprasUsuario(String idUsuario);

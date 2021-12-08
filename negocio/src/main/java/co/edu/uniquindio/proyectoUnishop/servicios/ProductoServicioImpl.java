@@ -106,6 +106,16 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
+    public List<Producto> listarporDescripcion(String descripcion) throws Exception {
+        Optional<Producto> descripcionBuscado = productoRepo.findByDescripcionContains(descripcion);
+
+        if (descripcionBuscado.isEmpty()) {
+            throw new Exception("No hay ningun producto con ese precio");
+        }
+        return productoRepo.ListarProductosPorDescripcion(descripcionBuscado);
+    }
+
+    @Override
     public List<Producto> listarTodosporProductos() {
         return productoRepo.findAll();
     }
