@@ -18,7 +18,7 @@ public interface UsuarioServicio {
     Usuario obtenerUsuario(String codigo) throws Exception;
     List<Producto>listarProductosFavoritos(String email) throws Exception;
     List<Producto>listarProductoUsuario(String email);
-    List<DetalleCompra>listarComprasUsuario(String email);
+  List<DetalleCompra> listarComprasUsuario(String email);
 
 
 }

@@ -73,7 +73,7 @@ public class UsuarioPrBean implements Serializable {
 
 
        productoList = usuServicio.listarProductoUsuario(email);
-       detalleCompras=usuServicio.listarComprasUsuario(email);
+    ;
     }
 
     /*public void modificarUsuario() {

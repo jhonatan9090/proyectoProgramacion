@@ -10,6 +10,7 @@ import co.edu.uniquindio.proyectoUnishop.servicios.UsuarioServicio;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
@@ -41,6 +42,7 @@ public class EmailBean implements Serializable {
 
     @Getter
     @Setter
+    @Value("#{seguridadBean.email}")
     private String email;
 
     @Getter
@@ -59,12 +61,13 @@ public class EmailBean implements Serializable {
 
     /**
      * este metodo sirve para enviar el correo al usuario que a perdido su contraseña u puedda recuperar su contraseña
+     *
      * @return
      */
     public String enviarCorreo() {
 
         if (idPersona != null && email != null) {
-            try{
+            try {
                 persona = personaServicio.recuperarPassword(idPersona, email);
                 asunto = "Recuperar contraseña";
 
@@ -73,7 +76,7 @@ public class EmailBean implements Serializable {
 
                 emailServico.SendSimpleMessage(email, asunto, mensaje);
                 return "/index.xhtml?faces-redirect=true";
-            } catch (Exception e){
+            } catch (Exception e) {
                 FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
                 FacesContext.getCurrentInstance().addMessage("mensaje-recuperar", m);
             }
@@ -83,6 +86,7 @@ public class EmailBean implements Serializable {
 
     /**
      * este metodo sirve para recuperar la contraseña y los datos del usuario
+     *
      * @return
      */
     public String enviarCorreoCompra() {
@@ -90,20 +94,30 @@ public class EmailBean implements Serializable {
         //detalleCompra=detalleCompraServicio.buscarDetalleId()
 
 
+        try {
+            detalleCompras = usuarioServicio.listarComprasUsuario(email);
 
-            try{
-               detalleCompras=usuarioServicio.listarComprasUsuario(email);
-                asunto = "Recuperar contraseña";
+            String salida=" ";
+            asunto = "Registro de compras";
+            for (DetalleCompra dc : detalleCompras) {
 
-                mensaje = "Estos son sus datos de login en Unishop. No comparta la información con ningún tercero\n\n"
-                        + "Email: " + email + "\nContraseña: " + detalleCompras.toString() + "\n\nHasta luego.";
 
-                emailServico.SendSimpleMessage(email, asunto, mensaje);
-                return "/index.xhtml?faces-redirect=true";
-            } catch (Exception e){
-                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
-                FacesContext.getCurrentInstance().addMessage("mensaje-recuperar", m);
+                salida+=("Su producto:"+dc.getProductoDetalle().getNombre()+"           "+"Unidades:"+dc.getUnidades())+"           "+"Precio: "+dc.getProductoDetalle().getPrecio()+"\n";
+
+                mensaje = "Lista de productos\n\n"
+                            +salida;
             }
+
+
+            emailServico.SendSimpleMessage(email, asunto, mensaje);
+            return "/index.xhtml?faces-redirect=true";
+
+        } catch (Exception e) {
+            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+            FacesContext.getCurrentInstance().addMessage("mensaje-recuperar", m);
+
+        }
+
 
         return null;
     }

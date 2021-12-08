@@ -28,8 +28,8 @@ public interface UsuarioRepo extends JpaRepository<Usuario,String> {
     List<Producto>listarProductosUsuario(String email);
 
 
-    @Query("select dc from Usuario u, in (u.listaCompras) l,in(l.listaDetalleCompra) dc where l.UsuarioCompra.email=:email")
-    List<DetalleCompra> listarComprasUsuario(String email);
+    @Query("select dc from DetalleCompra dc,IN(dc.compradetalle) c  where c.UsuarioCompra.email=:email")
+   List<DetalleCompra> listarComprasUsuario(String email);
 
 
 }

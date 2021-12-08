@@ -4,7 +4,6 @@ import co.edu.uniquindio.proyectoUnishop.entidades.DetalleCompra;
 import co.edu.uniquindio.proyectoUnishop.entidades.Producto;
 import co.edu.uniquindio.proyectoUnishop.entidades.Usuario;
 import co.edu.uniquindio.proyectoUnishop.repositorios.UsuarioRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
