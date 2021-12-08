@@ -104,14 +104,16 @@ public class UsuarioServicioImpl implements UsuarioServicio {
      */
     @Override
     public List<Producto> listarProductosFavoritos(String email) throws Exception {
+          Optional<Usuario> buscado = usuarioRepo.findByEmail(email);
 
+       // List<Producto> productoListFav = usuarioRepo.obtenerProductosFavoritos(email);
 
-        List<Producto> productoListFav = usuarioRepo.obtenerProductosFavoritos(email);
+        //if (productoListFav.isEmpty()) {
+           // throw new Exception("El usuario no tiene productos favoritos");
+        //}
 
-        if (productoListFav.isEmpty()) {
-
-
-            throw new Exception("El usuario no tiene productos favoritos");
+        if (buscado.isEmpty()) {
+            throw new Exception("El correo no existe");
         }
 
         return usuarioRepo.obtenerProductosFavoritos(email);

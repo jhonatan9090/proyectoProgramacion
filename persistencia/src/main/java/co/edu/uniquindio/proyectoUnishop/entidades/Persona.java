@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyectoUnishop.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -38,6 +39,7 @@ public class Persona implements Serializable {
 
     @Column(length = 10,nullable = false,unique = true)
     @NotBlank(message = "la contraseña no puede estar vacia")
+    //@JsonIgnore
     private String password; //contraseña de persona
 
     @ElementCollection
