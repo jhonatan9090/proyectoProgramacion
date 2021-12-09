@@ -18,6 +18,11 @@
                 src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&amp;version=v9.8&amp;appId=406506983855391&amp;autoLogAppEvents=1"
                 nonce="ylDHl59T"></script>
 
+        <div id="fb-root"></div>
+        <script async="true" defer="true" crossorigin="anonymous"
+                src="https://connect.facebook.net/es_ES/sdk.js#xfbml=1&amp;version=v12.0&amp;appId=406506983855391&amp;autoLogAppEvents=1"
+                nonce="eyMIsPTN"></script>
+
         <div class="row">
             <div class="col-lg-7 col-md-1">
                 <div class="box box-stretched">
@@ -52,51 +57,57 @@
                         </h:form>
 
 
-                        <h:form class="mt-4" rendered="#{seguridadBean.autenticado}">
-
-                            <p:commandButton value="Añadir a favorito" icon="pi pi-shopping-cart" update="@form"
-                                             action="#{seguridadBean.agragarCarrito(detalleProductoBean.producto.codProducto,detalleProductoBean.producto.precio,detalleProductoBean.producto.nombre,detalleProductoBean.producto.imagenPrincipal)}"/>
-                            <p:growl for="add-cart" showDetail="true"/>
 
 
 
-                        </h:form>
 
-                        <script>
-                            window.twttr = (function (d, s, id){
-                                var js, fjs = d.getElementsByClassName(s)[0], t= window.twttr
-                                    || {};
-                                if (d.getElementsById(id))
+
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <div class="p-grid">
+                        <div class="box">
+
+
+                            <script>
+                                window.twttr = (function (d, s, id) {
+                                    var js, fjs = d.getElementsByClassName(s)[0], t = window.twttr
+                                        || {};
+                                    if (d.getElementsById(id))
+                                        return t;
+                                    js = d.createElement(s);
+                                    js.id = id;
+                                    js.src = "https://platform.twitter.com/widgets.js";
+                                    fjs.parentNodo.insertBefore(js, fjs);
+
+                                    t._e = [];
+                                    t.ready = function (f) {
+                                        t._e.push(f);
+                                    };
                                     return t;
-                                js = d.createElement(s);
-                                js.id= id;
-                                js.src = "https://platform.twitter.com/widgets.js";
-                                fjs.parentNodo.insertBefore(js, fjs);
+                                }(document, "script", "twitter-wjs"));
+                            </script>
 
-                                t._e = [];
-                                t.ready = function (f){
-                                    t._e.push(f);
-                                };
-                                return t;
-                            }(document, "script", "twitter-wjs"));
-                        </script>
+                            <div class="btn-redes">
+                                <div class="fb-share-button"
+                                     data-href="https://www.uniquindio.edu.co/"
+                                     data-layout="button_count" data-size="large"></div>
 
-                        <div class="btn-redes">
-                            <div class="fb-share-button"
-                                 data-href="https://www.uniquindio.edu.co/"
-                                 data-layout="button_count" data-size="large"></div>
+                                <a class="twitter-shate-button"
+                                   href="https://twitter.com/intent/tweet?text=hello%20world"
+                                   data-size="large"
+                                   data-url="http://localhost:8080/detalleProducto.xhtml?product=#{detalleProductoBean.producto.codProducto}">
+                                    Tweet
+                                </a>
 
-                            <a class="twitter-shate-button"
-                               href="https://twitter.com/intent/tweet?text=hello%20world"
-                               data-size="large"
-                               data-url="http://localhost:8080/detalleProducto.xhtml?product=#{detalleProductoBean.producto.codProducto}">
-                                Tweet
-                            </a>
-
+                            </div>
                         </div>
+
                     </div>
 
                 </div>
+
                 <div class="box">
 
 
@@ -114,7 +125,6 @@
             </div>
 
         </div>
-
 
 
         <p:panel header="Descripcion" styleClass="mt-3">

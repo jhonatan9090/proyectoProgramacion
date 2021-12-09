@@ -46,7 +46,6 @@
                                         </div>
 
 
-
                                     </div>
                                 </td>
                                 <td>#{producto.precio}</td>
@@ -78,22 +77,42 @@
 
         </div>
 
-        <div class="row mt-4 d-flex ">
+
+        <div class="text-center">
+            <div class="p-grid">
+                <div class="box">
 
 
-            <h:form styleClass="text-center">
+                    <h:form styleClass="text-center">
 
-                <p:commandButton value="Comprar" action="#{seguridadBean.comprar}" update="@form" icon="pi pi-check"/>
-                <p:growl for="compra-msj" showDetail="true"/>
-            </h:form>
+                        <p:commandButton value="Comprar" action="#{seguridadBean.comprar}" update="@form"
+                                         icon="pi pi-check"/>
+                        <p:growl for="compra-msj" showDetail="true"/>
+                    </h:form>
 
-            <h:form styleClass="text-center">
+                </div>
 
-                <p:commandButton value="Recibo" action="#{emailBean.enviarCorreoCompra}" update="@form" icon="pi pi-check"/>
-                <p:growl for="compra-msj" showDetail="true"/>
-            </h:form>
-
+            </div>
         </div>
+
+        <div class="text-center">
+            <div class="p-grid">
+                <div class="box">
+                    <h:form styleClass="text-center">
+
+
+                        <p:commandButton value="Recibo" action="#{emailBean.enviarCorreoCompra}" update="@form"
+                                         icon="pi pi-check"/>
+                        <p:growl for="compra-msj" showDetail="true"/>
+                    </h:form>
+
+
+                </div>
+
+            </div>
+        </div>
+
+
     </ui:define>
 </ui:composition>
 <body>
