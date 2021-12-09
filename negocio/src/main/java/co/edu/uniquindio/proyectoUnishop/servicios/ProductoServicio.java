@@ -18,6 +18,7 @@ public interface ProductoServicio {
     Producto buscarProducto(Integer idProducto)throws Exception;
     List<Producto> listarporCategoria(String categoriaNombre) throws Exception;
     List<Producto> listarporDescripcion(String descripcion) throws Exception;
+    List<Producto> listarporCiudad(String ciudad) throws Exception;
     List<Producto> listarTodosporProductos();
     void comentarProducto(Comentario comentario) throws Exception;
     Float obtenerPromedioProducto(Integer codProducto);

@@ -73,6 +73,16 @@ public class ProductoRestController {
         }
     }
 
+    @GetMapping("/ciudad/{ciudad}")
+    public ResponseEntity<?> buscarPorCiudad(@PathVariable("ciudad") String ciudad){
+        try {
+            List<Producto> lista = productoServicio.listarporCiudad(ciudad);
+            return ResponseEntity.status(200).body(lista);
+        }catch (Exception e){
+            return ResponseEntity.status(500).body(new Mensaje(e.getMessage()));
+        }
+    }
+
     @GetMapping("/descripcion/{descripcion}")
     public ResponseEntity<?> buscarPorDescripcion(@PathVariable("descripcion") String descripcion){
         try {

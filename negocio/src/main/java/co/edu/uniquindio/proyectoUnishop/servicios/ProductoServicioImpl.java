@@ -22,14 +22,16 @@ public class ProductoServicioImpl implements ProductoServicio {
     private final ProductoRepo productoRepo;
     private final UsuarioRepo usuarioRepo;
     private final CategoriaRepo categoriaRepo;
+    private final CiudadRepo ciudadRepo;
     private final ComentarioRepo comentarioRepo;
     private final DetalleCompraRepo detalleCompraRepo;
     private final CompraRepo compraRepo;
 
-    public ProductoServicioImpl(ProductoRepo productoRepo, UsuarioRepo usuarioRepo, CategoriaRepo categoriaRepo, ComentarioRepo comentarioRepo, DetalleCompraRepo detalleCompraRepo, CompraRepo compraRepo) {
+    public ProductoServicioImpl(ProductoRepo productoRepo, UsuarioRepo usuarioRepo, CategoriaRepo categoriaRepo, CiudadRepo ciudadRepo, ComentarioRepo comentarioRepo, DetalleCompraRepo detalleCompraRepo, CompraRepo compraRepo) {
         this.productoRepo = productoRepo;
         this.usuarioRepo = usuarioRepo;
         this.categoriaRepo = categoriaRepo;
+        this.ciudadRepo = ciudadRepo;
         this.comentarioRepo = comentarioRepo;
         this.detalleCompraRepo = detalleCompraRepo;
 
@@ -103,6 +105,18 @@ public class ProductoServicioImpl implements ProductoServicio {
 
 
         return productoRepo.ListarProductosPorCategoria(categoriaNombre);
+    }
+
+    @Override
+    public List<Producto> listarporCiudad(String ciudadNombre) throws Exception {
+
+        Optional<Ciudad> ciudadBuscada = ciudadRepo.findByNombre(ciudadNombre);
+
+        if (ciudadBuscada.isEmpty()) {
+            throw new Exception("La ciudad no existe");
+        }
+
+        return productoRepo.ListarProductosPorCiudad(ciudadNombre);
     }
 
     @Override
